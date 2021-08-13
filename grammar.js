@@ -6,6 +6,10 @@ module.exports = grammar({
     [$._atom, $.column_name],
   ],
 
+  externals: ($) => [
+    $.code_block
+  ],
+
   rules: {
     help_file: ($) => repeat1(choice($.line, '\n', $.column_heading)),
 
@@ -13,7 +17,7 @@ module.exports = grammar({
 
     line: ($) => prec.right(seq(repeat1($._atom), optional('\n'))),
 
-    _atom: ($) => choice($.word, $.tag),
+    _atom: ($) => choice($.word, $.tag, $.code_block),
 
     uppercase_name: ($) => repeat1(/[A-Z]+/),
     column_name: ($) => repeat1($.word),

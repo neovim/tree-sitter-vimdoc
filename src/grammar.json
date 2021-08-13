@@ -68,6 +68,10 @@
         {
           "type": "SYMBOL",
           "name": "tag"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "code_block"
         }
       ]
     },
@@ -222,7 +226,12 @@
     ]
   ],
   "precedences": [],
-  "externals": [],
+  "externals": [
+    {
+      "type": "SYMBOL",
+      "name": "code_block"
+    }
+  ],
   "inline": [],
   "supertypes": []
 }

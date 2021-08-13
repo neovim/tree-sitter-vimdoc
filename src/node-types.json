@@ -72,6 +72,10 @@
       "required": true,
       "types": [
         {
+          "type": "code_block",
+          "named": true
+        },
+        {
           "type": "tag",
           "named": true
         },
@@ -114,6 +118,10 @@
   {
     "type": "*",
     "named": false
+  },
+  {
+    "type": "code_block",
+    "named": true
   },
   {
     "type": "word",
