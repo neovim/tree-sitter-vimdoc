@@ -5,18 +5,18 @@ module.exports = grammar({
 
   rules: {
     // TODO: add the actual grammar rules
-    help_file: ($) => seq($.line, repeat(seq('\n', $.line))),
+    help_file: ($) => repeat1($.line),
 
     header: ($) => seq($.tag),
 
-    line: ($) => repeat1($._atom),
+    line: ($) => prec.right(seq(repeat1($._atom), optional('\n'))),
 
     _atom: ($) => choice($.word, $.tag),
 
-    word: ($) => /[^*'|\n]\S*[^*'|\n]/,
+    word: ($) => /[^*|'\n \t]+/,
     tag: ($) => wrapped_word($, '*', 'name'),
-    option: ($) => /'[a-z]+'/,
-    hotlink: ($) => /|[a-z-]+|/,
+    option: ($) => wrapped_word($, "'", 'name'),
+    hotlink: ($) => wrapped_word($, '|', 'destination'),
   },
 });
 

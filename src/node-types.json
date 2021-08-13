@@ -54,11 +54,19 @@
     "named": false
   },
   {
+    "type": "'",
+    "named": false
+  },
+  {
     "type": "*",
     "named": false
   },
   {
     "type": "word",
     "named": true
+  },
+  {
+    "type": "|",
+    "named": false
   }
 ]
