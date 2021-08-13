@@ -113,6 +113,18 @@
         {
           "type": "SYMBOL",
           "name": "code_block"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "tag"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "option"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "hotlink"
         }
       ]
     },

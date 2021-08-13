@@ -18,7 +18,7 @@ module.exports = grammar({
       ),
     line: ($) => prec.right(seq(repeat1($._atom), optional('\n'))),
 
-    _atom: ($) => choice($.word, $.tag, $.code_block),
+    _atom: ($) => choice($.word, $.tag, $.code_block, $.tag, $.option, $.hotlink),
 
     uppercase_name: ($) => repeat1(/[A-Z]+/),
     column_name: ($) => repeat1($.word),

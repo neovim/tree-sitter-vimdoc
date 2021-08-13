@@ -87,6 +87,22 @@
     }
   },
   {
+    "type": "hotlink",
+    "named": true,
+    "fields": {
+      "destination": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "word",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
     "type": "line",
     "named": true,
     "fields": {},
@@ -99,6 +115,14 @@
           "named": true
         },
         {
+          "type": "hotlink",
+          "named": true
+        },
+        {
+          "type": "option",
+          "named": true
+        },
+        {
           "type": "tag",
           "named": true
         },
@@ -107,6 +131,22 @@
           "named": true
         }
       ]
+    }
+  },
+  {
+    "type": "option",
+    "named": true,
+    "fields": {
+      "name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "word",
+            "named": true
+          }
+        ]
+      }
     }
   },
   {
