@@ -17,16 +17,57 @@
           {
             "type": "SYMBOL",
             "name": "column_heading"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "headline"
           }
         ]
       }
     },
-    "header": {
+    "headline": {
       "type": "SEQ",
       "members": [
         {
-          "type": "SYMBOL",
-          "name": "tag"
+          "type": "FIELD",
+          "name": "delimiter",
+          "content": {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "PATTERN",
+                "value": "===.*==="
+              },
+              {
+                "type": "PATTERN",
+                "value": "---.*---"
+              }
+            ]
+          }
+        },
+        {
+          "type": "STRING",
+          "value": "\n"
+        },
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "REPEAT1",
+              "content": {
+                "type": "SYMBOL",
+                "name": "word"
+              }
+            },
+            {
+              "type": "SYMBOL",
+              "name": "tag"
+            }
+          ]
+        },
+        {
+          "type": "STRING",
+          "value": "\n"
         }
       ]
     },

@@ -45,6 +45,25 @@
     }
   },
   {
+    "type": "headline",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "tag",
+          "named": true
+        },
+        {
+          "type": "word",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "help_file",
     "named": true,
     "fields": {},
@@ -54,6 +73,10 @@
       "types": [
         {
           "type": "column_heading",
+          "named": true
+        },
+        {
+          "type": "headline",
           "named": true
         },
         {

@@ -2,19 +2,20 @@ module.exports = grammar({
   name: 'help', // The actual language name is help
 
   extras: ($) => [/[\t ]/],
-  conflicts: ($) => [
-    [$._atom, $.column_name],
-  ],
+  conflicts: ($) => [[$._atom, $.column_name]],
 
-  externals: ($) => [
-    $.code_block
-  ],
+  externals: ($) => [$.code_block],
 
   rules: {
-    help_file: ($) => repeat1(choice($.line, '\n', $.column_heading)),
+    help_file: ($) => repeat1(choice($.line, '\n', $.column_heading, $.headline)),
 
-    header: ($) => seq($.tag),
-
+    headline: ($) =>
+      seq(
+        field('delimiter', choice(/===.*===/, /---.*---/)),
+        '\n',
+        seq(repeat1($.word), $.tag),
+        '\n',
+      ),
     line: ($) => prec.right(seq(repeat1($._atom), optional('\n'))),
 
     _atom: ($) => choice($.word, $.tag, $.code_block),
