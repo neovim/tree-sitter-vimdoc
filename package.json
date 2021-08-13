@@ -1,0 +1,30 @@
+{
+  "name": "tree-sitter-vimdoc",
+  "version": "0.1.0",
+  "description": "A tree-sitter parser for Vim help files",
+  "main": "bindings/node",
+  "scripts": {
+    "test": "tree-sitter test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vigoux/tree-sitter-vimdoc.git"
+  },
+  "keywords": [
+    "tree-sitter",
+    "vim",
+    "vimdoc"
+  ],
+  "author": "Thomas Vigouroux <tomvig38@gmail.com>",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/vigoux/tree-sitter-vimdoc/issues"
+  },
+  "homepage": "https://github.com/vigoux/tree-sitter-vimdoc#readme",
+  "dependencies": {
+    "nan": "^2.15.0"
+  },
+  "devDependencies": {
+    "tree-sitter-cli": "^0.20.0"
+  }
+}
