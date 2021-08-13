@@ -4,7 +4,6 @@ module.exports = grammar({
   extras: ($) => [/[\t ]/],
 
   rules: {
-    // TODO: add the actual grammar rules
     help_file: ($) => repeat1($.line),
 
     header: ($) => seq($.tag),
