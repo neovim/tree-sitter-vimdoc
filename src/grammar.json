@@ -4,8 +4,21 @@
     "help_file": {
       "type": "REPEAT1",
       "content": {
-        "type": "SYMBOL",
-        "name": "line"
+        "type": "CHOICE",
+        "members": [
+          {
+            "type": "SYMBOL",
+            "name": "line"
+          },
+          {
+            "type": "STRING",
+            "value": "\n"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "column_heading"
+          }
+        ]
       }
     },
     "header": {
@@ -58,9 +71,79 @@
         }
       ]
     },
+    "uppercase_name": {
+      "type": "REPEAT1",
+      "content": {
+        "type": "PATTERN",
+        "value": "[A-Z]+"
+      }
+    },
+    "column_name": {
+      "type": "REPEAT1",
+      "content": {
+        "type": "SYMBOL",
+        "name": "word"
+      }
+    },
+    "column_heading": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SEQ",
+              "members": [
+                {
+                  "type": "FIELD",
+                  "name": "name",
+                  "content": {
+                    "type": "SYMBOL",
+                    "name": "uppercase_name"
+                  }
+                },
+                {
+                  "type": "CHOICE",
+                  "members": [
+                    {
+                      "type": "SYMBOL",
+                      "name": "tag"
+                    },
+                    {
+                      "type": "BLANK"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "SEQ",
+              "members": [
+                {
+                  "type": "FIELD",
+                  "name": "name",
+                  "content": {
+                    "type": "SYMBOL",
+                    "name": "column_name"
+                  }
+                },
+                {
+                  "type": "STRING",
+                  "value": "~"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "STRING",
+          "value": "\n"
+        }
+      ]
+    },
     "word": {
       "type": "PATTERN",
-      "value": "[^*|'\\n \\t]+"
+      "value": "[^*|'\\n \\t]*[^*|'\\n \\t~]"
     },
     "tag": {
       "type": "SEQ",
@@ -132,7 +215,12 @@
       "value": "[\\t ]"
     }
   ],
-  "conflicts": [],
+  "conflicts": [
+    [
+      "_atom",
+      "column_name"
+    ]
+  ],
   "precedences": [],
   "externals": [],
   "inline": [],
