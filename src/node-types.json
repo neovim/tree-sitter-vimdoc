@@ -1,5 +1,21 @@
 [
   {
+    "type": "backtick",
+    "named": true,
+    "fields": {
+      "content": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "word",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
     "type": "column_heading",
     "named": true,
     "fields": {
@@ -24,21 +40,6 @@
       "types": [
         {
           "type": "tag",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "column_name",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "word",
           "named": true
         }
       ]
@@ -111,6 +112,10 @@
       "required": true,
       "types": [
         {
+          "type": "backtick",
+          "named": true
+        },
+        {
           "type": "code_block",
           "named": true
         },
@@ -166,11 +171,6 @@
     }
   },
   {
-    "type": "uppercase_name",
-    "named": true,
-    "fields": {}
-  },
-  {
     "type": "\n",
     "named": false
   },
@@ -183,7 +183,19 @@
     "named": false
   },
   {
+    "type": "`",
+    "named": false
+  },
+  {
     "type": "code_block",
+    "named": true
+  },
+  {
+    "type": "column_name",
+    "named": true
+  },
+  {
+    "type": "uppercase_name",
     "named": true
   },
   {
@@ -192,10 +204,6 @@
   },
   {
     "type": "|",
-    "named": false
-  },
-  {
-    "type": "~",
     "named": false
   }
 ]

@@ -52,8 +52,7 @@ Below
 
 (help_file
   (column_heading
-    (column_name
-      (word)))
+    (column_name))
   (line
     (word)))
 
@@ -67,8 +66,6 @@ Bleh
 
 (help_file
   (column_heading
-    (column_name
-      (word)
-      (word)))
+    (column_name))
   (line
     (word)))

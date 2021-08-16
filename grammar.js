@@ -2,12 +2,17 @@ module.exports = grammar({
   name: 'help', // The actual language name is help
 
   extras: ($) => [/[\t ]/],
-  conflicts: ($) => [[$._atom, $.column_name]],
 
-  externals: ($) => [$.code_block],
+  externals: ($) => [
+    $.word,
+    $.column_name,
+    $.uppercase_name,
+    $.code_block
+  ],
 
   rules: {
-    help_file: ($) => repeat1(choice($.line, '\n', $.column_heading, $.headline)),
+    help_file: ($) =>
+      repeat1(choice($.line, '\n', $.column_heading, $.headline)),
 
     headline: ($) =>
       seq(
@@ -16,25 +21,33 @@ module.exports = grammar({
         seq(repeat1($.word), $.tag),
         '\n',
       ),
+
     line: ($) => prec.right(seq(repeat1($._atom), optional('\n'))),
 
-    _atom: ($) => choice($.word, $.tag, $.code_block, $.tag, $.option, $.hotlink),
+    _atom: ($) =>
+      choice(
+        $.word,
+        $.tag,
+        $.code_block,
+        $.tag,
+        $.option,
+        $.hotlink,
+        $.backtick,
+      ),
 
-    uppercase_name: ($) => repeat1(/[A-Z]+/),
-    column_name: ($) => repeat1($.word),
     column_heading: ($) =>
       seq(
         choice(
           seq(field('name', $.uppercase_name), optional($.tag)),
-          seq(field('name', $.column_name), '~'),
+          field('name', $.column_name),
         ),
         '\n',
       ),
 
-    word: ($) => /[^*|'\n \t]*[^*|'\n \t~]/,
     tag: ($) => wrapped_word($, '*', 'name'),
     option: ($) => wrapped_word($, "'", 'name'),
     hotlink: ($) => wrapped_word($, '|', 'destination'),
+    backtick: ($) => wrapped_word($, '`', 'content'),
   },
 });
 

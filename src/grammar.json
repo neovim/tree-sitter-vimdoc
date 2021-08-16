@@ -125,22 +125,12 @@
         {
           "type": "SYMBOL",
           "name": "hotlink"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "backtick"
         }
       ]
-    },
-    "uppercase_name": {
-      "type": "REPEAT1",
-      "content": {
-        "type": "PATTERN",
-        "value": "[A-Z]+"
-      }
-    },
-    "column_name": {
-      "type": "REPEAT1",
-      "content": {
-        "type": "SYMBOL",
-        "name": "word"
-      }
     },
     "column_heading": {
       "type": "SEQ",
@@ -174,21 +164,12 @@
               ]
             },
             {
-              "type": "SEQ",
-              "members": [
-                {
-                  "type": "FIELD",
-                  "name": "name",
-                  "content": {
-                    "type": "SYMBOL",
-                    "name": "column_name"
-                  }
-                },
-                {
-                  "type": "STRING",
-                  "value": "~"
-                }
-              ]
+              "type": "FIELD",
+              "name": "name",
+              "content": {
+                "type": "SYMBOL",
+                "name": "column_name"
+              }
             }
           ]
         },
@@ -197,10 +178,6 @@
           "value": "\n"
         }
       ]
-    },
-    "word": {
-      "type": "PATTERN",
-      "value": "[^*|'\\n \\t]*[^*|'\\n \\t~]"
     },
     "tag": {
       "type": "SEQ",
@@ -264,6 +241,27 @@
           "value": "|"
         }
       ]
+    },
+    "backtick": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "`"
+        },
+        {
+          "type": "FIELD",
+          "name": "content",
+          "content": {
+            "type": "SYMBOL",
+            "name": "word"
+          }
+        },
+        {
+          "type": "STRING",
+          "value": "`"
+        }
+      ]
     }
   },
   "extras": [
@@ -272,14 +270,21 @@
       "value": "[\\t ]"
     }
   ],
-  "conflicts": [
-    [
-      "_atom",
-      "column_name"
-    ]
-  ],
+  "conflicts": [],
   "precedences": [],
   "externals": [
+    {
+      "type": "SYMBOL",
+      "name": "word"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "column_name"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "uppercase_name"
+    },
     {
       "type": "SYMBOL",
       "name": "code_block"
