@@ -37,7 +37,7 @@ void skip_space_tabs(TSLexer *lexer) {
 }
 
 #define IS_SPECIAL(c) \
-  ((c) == '*' || (c) == '|' || (c) == '`' || (c) == '\'')
+  ((c) == '*' || (c) == '|' || (c) == '`' || (c) == '\'' || (c) == '{' || (c) == '}')
 
 bool tree_sitter_help_external_scanner_scan(void *payload, TSLexer *lexer,
                                            const bool *valid_symbols) {

@@ -1,5 +1,21 @@
 [
   {
+    "type": "argument",
+    "named": true,
+    "fields": {
+      "name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "word",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
     "type": "backtick",
     "named": true,
     "fields": {
@@ -112,6 +128,10 @@
       "required": true,
       "types": [
         {
+          "type": "argument",
+          "named": true
+        },
+        {
           "type": "backtick",
           "named": true
         },
@@ -203,7 +223,15 @@
     "named": true
   },
   {
+    "type": "{",
+    "named": false
+  },
+  {
     "type": "|",
+    "named": false
+  },
+  {
+    "type": "}",
     "named": false
   }
 ]

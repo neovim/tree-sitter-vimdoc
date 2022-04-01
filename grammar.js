@@ -33,6 +33,7 @@ module.exports = grammar({
         $.option,
         $.hotlink,
         $.backtick,
+        $.argument,
       ),
 
     column_heading: ($) =>
@@ -48,9 +49,10 @@ module.exports = grammar({
     option: ($) => wrapped_word($, "'", 'name'),
     hotlink: ($) => wrapped_word($, '|', 'destination'),
     backtick: ($) => wrapped_word($, '`', 'content'),
+    argument: ($) => seq("{", field('name', $.word), token.immediate('}'))
   },
 });
 
 function wrapped_word($, char, fname) {
-  return seq(char, field(fname, $.word), char);
+  return seq(char, field(fname, $.word), token.immediate(char));
 }

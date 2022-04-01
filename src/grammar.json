@@ -129,6 +129,10 @@
         {
           "type": "SYMBOL",
           "name": "backtick"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "argument"
         }
       ]
     },
@@ -195,8 +199,11 @@
           }
         },
         {
-          "type": "STRING",
-          "value": "*"
+          "type": "IMMEDIATE_TOKEN",
+          "content": {
+            "type": "STRING",
+            "value": "*"
+          }
         }
       ]
     },
@@ -216,8 +223,11 @@
           }
         },
         {
-          "type": "STRING",
-          "value": "'"
+          "type": "IMMEDIATE_TOKEN",
+          "content": {
+            "type": "STRING",
+            "value": "'"
+          }
         }
       ]
     },
@@ -237,8 +247,11 @@
           }
         },
         {
-          "type": "STRING",
-          "value": "|"
+          "type": "IMMEDIATE_TOKEN",
+          "content": {
+            "type": "STRING",
+            "value": "|"
+          }
         }
       ]
     },
@@ -258,8 +271,35 @@
           }
         },
         {
+          "type": "IMMEDIATE_TOKEN",
+          "content": {
+            "type": "STRING",
+            "value": "`"
+          }
+        }
+      ]
+    },
+    "argument": {
+      "type": "SEQ",
+      "members": [
+        {
           "type": "STRING",
-          "value": "`"
+          "value": "{"
+        },
+        {
+          "type": "FIELD",
+          "name": "name",
+          "content": {
+            "type": "SYMBOL",
+            "name": "word"
+          }
+        },
+        {
+          "type": "IMMEDIATE_TOKEN",
+          "content": {
+            "type": "STRING",
+            "value": "}"
+          }
         }
       ]
     }
