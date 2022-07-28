@@ -45,7 +45,7 @@ module.exports = grammar({
         '\n',
       ),
 
-    tag: ($) => seq('*', $._atom, token.immediate('*')),
+    tag: ($) => seq('*', field('name', $._atom), token.immediate('*')),
     option: ($) => wrapped_word($, "'", 'name'),
     hotlink: ($) => wrapped_word($, '|', 'destination'),
     backtick: ($) => wrapped_word($, '`', 'content'),

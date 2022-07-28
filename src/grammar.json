@@ -194,8 +194,12 @@
           "value": "*"
         },
         {
-          "type": "SYMBOL",
-          "name": "_atom"
+          "type": "FIELD",
+          "name": "name",
+          "content": {
+            "type": "SYMBOL",
+            "name": "_atom"
+          }
         },
         {
           "type": "IMMEDIATE_TOKEN",

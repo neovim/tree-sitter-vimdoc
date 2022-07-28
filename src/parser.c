@@ -1319,7 +1319,7 @@ static const TSParseActionEntry ts_parse_actions[] = {
   [117] = {.entry = {.count = 1, .reusable = true}}, SHIFT(6),
   [119] = {.entry = {.count = 1, .reusable = true}}, SHIFT(7),
   [121] = {.entry = {.count = 1, .reusable = true}}, REDUCE(sym_backtick, 3, .production_id = 4),
-  [123] = {.entry = {.count = 1, .reusable = true}}, REDUCE(sym_tag, 3),
+  [123] = {.entry = {.count = 1, .reusable = true}}, REDUCE(sym_tag, 3, .production_id = 2),
   [125] = {.entry = {.count = 1, .reusable = true}}, REDUCE(sym_column_heading, 3, .production_id = 1),
   [127] = {.entry = {.count = 1, .reusable = true}}, REDUCE(sym_column_heading, 2, .production_id = 1),
   [129] = {.entry = {.count = 1, .reusable = true}}, REDUCE(sym_option, 3, .production_id = 2),
