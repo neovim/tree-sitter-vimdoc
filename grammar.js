@@ -5,6 +5,7 @@ module.exports = grammar({
 
   externals: ($) => [
     $.word,
+    $._imm_word,
     $.column_name,
     $.uppercase_name,
     $.code_block
@@ -53,5 +54,5 @@ module.exports = grammar({
 });
 
 function wrapped_word($, char, fname) {
-  return seq(char, field(fname, $.word), token.immediate(char));
+  return seq(char, field(fname, alias($._imm_word, $.word)), token.immediate(char));
 }

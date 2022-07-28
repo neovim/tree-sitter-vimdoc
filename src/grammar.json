@@ -226,8 +226,13 @@
           "type": "FIELD",
           "name": "name",
           "content": {
-            "type": "SYMBOL",
-            "name": "word"
+            "type": "ALIAS",
+            "content": {
+              "type": "SYMBOL",
+              "name": "_imm_word"
+            },
+            "named": true,
+            "value": "word"
           }
         },
         {
@@ -250,8 +255,13 @@
           "type": "FIELD",
           "name": "destination",
           "content": {
-            "type": "SYMBOL",
-            "name": "word"
+            "type": "ALIAS",
+            "content": {
+              "type": "SYMBOL",
+              "name": "_imm_word"
+            },
+            "named": true,
+            "value": "word"
           }
         },
         {
@@ -274,8 +284,13 @@
           "type": "FIELD",
           "name": "content",
           "content": {
-            "type": "SYMBOL",
-            "name": "word"
+            "type": "ALIAS",
+            "content": {
+              "type": "SYMBOL",
+              "name": "_imm_word"
+            },
+            "named": true,
+            "value": "word"
           }
         },
         {
@@ -324,6 +339,10 @@
     {
       "type": "SYMBOL",
       "name": "word"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "_imm_word"
     },
     {
       "type": "SYMBOL",

@@ -1,32 +1,31 @@
 #include "stdio.h"
 #include "stdlib.h"
-#include <tree_sitter/parser.h>
+#include <assert.h>
 #include <stdbool.h>
 #include <string.h>
+#include <tree_sitter/parser.h>
 #include <wctype.h>
-#include <assert.h>
 
 enum TokenType {
   WORD,
+  IMM_WORD,
   COLUMN_HEADING,
   UPPERCASE_NAME,
   CODE_BLOCK,
   TOKENTYPE_NR
 };
 
-void *tree_sitter_help_external_scanner_create() {
-  return NULL;
-}
+void *tree_sitter_help_external_scanner_create() { return NULL; }
 
 unsigned int tree_sitter_help_external_scanner_serialize(void *payload,
-                                                        char *buffer) {
+                                                         char *buffer) {
   return 0;
 }
 
 void tree_sitter_help_external_scanner_destroy(void *payload) {}
 void tree_sitter_help_external_scanner_deserialize(void *payload,
-                                                  const char *buffer,
-                                                  unsigned length) {}
+                                                   const char *buffer,
+                                                   unsigned length) {}
 
 static void advance(TSLexer *lexer, bool skip) { lexer->advance(lexer, skip); }
 
@@ -36,13 +35,21 @@ void skip_space_tabs(TSLexer *lexer) {
   }
 }
 
-#define IS_SPECIAL(c) \
-  ((c) == '*' || (c) == '|' || (c) == '`' || (c) == '\'' || (c) == '{' || (c) == '}')
+#define IS_SPECIAL(c)                                                          \
+  ((c) == '*' || (c) == '|' || (c) == '`' || (c) == '\'' || (c) == '{' ||      \
+   (c) == '}')
 
 bool tree_sitter_help_external_scanner_scan(void *payload, TSLexer *lexer,
-                                           const bool *valid_symbols) {
-  skip_space_tabs(lexer);
-  if (lexer->lookahead == '\0' || lexer->lookahead == EOF || lexer->lookahead == '\n') {
+                                            const bool *valid_symbols) {
+  if (!valid_symbols[IMM_WORD]) {
+    skip_space_tabs(lexer);
+  } else {
+    if (iswspace(lexer->lookahead)) {
+      return false;
+    }
+  }
+  if (lexer->lookahead == '\0' || lexer->lookahead == EOF ||
+      lexer->lookahead == '\n') {
     return false;
   }
 
@@ -51,16 +58,16 @@ bool tree_sitter_help_external_scanner_scan(void *payload, TSLexer *lexer,
     return false;
   }
 
-  if (valid_symbols[COLUMN_HEADING] && iswalpha(lexer->lookahead) && lexer->get_column(lexer) == 0) {
+  if (valid_symbols[COLUMN_HEADING] && iswalpha(lexer->lookahead) &&
+      lexer->get_column(lexer) == 0) {
     assert(valid_symbols[WORD] && valid_symbols[UPPERCASE_NAME]);
     advance(lexer, false);
 
     bool all_uppercase = true;
 
     // Now consume a word, without the ending ~ if any
-    while (iswalpha(lexer->lookahead)
-        && lexer->lookahead != '\0'
-        && lexer->lookahead != '~') {
+    while (iswalpha(lexer->lookahead) && lexer->lookahead != '\0' &&
+           lexer->lookahead != '~') {
       if (all_uppercase && iswlower(lexer->lookahead)) {
         all_uppercase = false;
       }
@@ -73,10 +80,8 @@ bool tree_sitter_help_external_scanner_scan(void *payload, TSLexer *lexer,
     //         Otherwise it's either a word or an UPPERCASE column heading
     lexer->mark_end(lexer);
 
-    while (lexer->lookahead != '*'
-           && lexer->lookahead != '~'
-           && lexer->lookahead != '\n'
-           && lexer->lookahead != '\0') {
+    while (lexer->lookahead != '*' && lexer->lookahead != '~' &&
+           lexer->lookahead != '\n' && lexer->lookahead != '\0') {
       if (all_uppercase && iswlower(lexer->lookahead)) {
         all_uppercase = false;
       }
@@ -126,18 +131,19 @@ bool tree_sitter_help_external_scanner_scan(void *payload, TSLexer *lexer,
       }
       advance(lexer, false);
     }
-  } else if (valid_symbols[WORD] && !IS_SPECIAL(lexer->lookahead)) {
+  } else if ((valid_symbols[WORD] || valid_symbols[IMM_WORD]) &&
+             !IS_SPECIAL(lexer->lookahead)) {
+    TSSymbol result = valid_symbols[IMM_WORD] ? IMM_WORD : WORD;
     advance(lexer, false); // We are sure this is part of the word
     while (lexer->lookahead && !iswspace(lexer->lookahead)) {
       if (IS_SPECIAL(lexer->lookahead)) {
         lexer->mark_end(lexer);
         advance(lexer, false);
 
-        if (iswspace(lexer->lookahead)
-            || iswpunct(lexer->lookahead)
-            || !lexer->lookahead) {
+        if (iswspace(lexer->lookahead) || iswpunct(lexer->lookahead) ||
+            !lexer->lookahead) {
           // Indeed this is an end marker, lex the word and return
-          lexer->result_symbol = WORD;
+          lexer->result_symbol = result;
           return true;
         }
         // Otherwise continue searching, this is not an end marker
@@ -147,7 +153,7 @@ bool tree_sitter_help_external_scanner_scan(void *payload, TSLexer *lexer,
       advance(lexer, false);
     }
     lexer->mark_end(lexer);
-    lexer->result_symbol = WORD;
+    lexer->result_symbol = result;
     return true;
   }
   return false;
