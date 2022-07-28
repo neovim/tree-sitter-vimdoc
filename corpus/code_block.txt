@@ -7,8 +7,7 @@ Simple code block
 --------------------------------------------------------------------------------
 
 (help_file
-  (line
-    (code_block)))
+  (code_block))
 
 ================================================================================
 Code block with text before
@@ -34,6 +33,65 @@ Blehke
 --------------------------------------------------------------------------------
 
 (help_file
+  (code_block)
   (line
-    (code_block)
     (word)))
+
+================================================================================
+Strange codeblock
+================================================================================
+
+Note that in the command: >
+	:if "foo"
+	:" NOT executed
+"foo" is converted to 0, which means FALSE.  If the string starts with a
+non-zero number it means TRUE: >
+	:if "8foo"
+	:" executed
+To test for a non-empty string, use empty(): >
+	:if !empty("foo")
+<
+
+--------------------------------------------------------------------------------
+
+(help_file
+  (line
+    (word)
+    (word)
+    (word)
+    (word)
+    (word)
+    (code_block))
+  (line
+    (word)
+    (word)
+    (word)
+    (word)
+    (word)
+    (word)
+    (word)
+    (word)
+    (word)
+    (word)
+    (word)
+    (word)
+    (word)
+    (word))
+  (line
+    (word)
+    (word)
+    (word)
+    (word)
+    (word)
+    (word)
+    (code_block))
+  (line
+    (word)
+    (word)
+    (word)
+    (word)
+    (word)
+    (word)
+    (word)
+    (word)
+    (code_block)))

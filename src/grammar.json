@@ -21,6 +21,10 @@
           {
             "type": "SYMBOL",
             "name": "headline"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "code_block"
           }
         ]
       }
@@ -88,6 +92,18 @@
             "type": "CHOICE",
             "members": [
               {
+                "type": "SYMBOL",
+                "name": "code_block"
+              },
+              {
+                "type": "BLANK"
+              }
+            ]
+          },
+          {
+            "type": "CHOICE",
+            "members": [
+              {
                 "type": "STRING",
                 "value": "\n"
               },
@@ -109,10 +125,6 @@
         {
           "type": "SYMBOL",
           "name": "tag"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "code_block"
         },
         {
           "type": "SYMBOL",

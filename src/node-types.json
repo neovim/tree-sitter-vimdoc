@@ -89,6 +89,10 @@
       "required": false,
       "types": [
         {
+          "type": "code_block",
+          "named": true
+        },
+        {
           "type": "column_heading",
           "named": true
         },

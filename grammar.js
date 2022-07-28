@@ -12,7 +12,7 @@ module.exports = grammar({
 
   rules: {
     help_file: ($) =>
-      repeat1(choice($.line, '\n', $.column_heading, $.headline)),
+      repeat1(choice($.line, '\n', $.column_heading, $.headline, $.code_block)),
 
     headline: ($) =>
       seq(
@@ -22,13 +22,12 @@ module.exports = grammar({
         '\n',
       ),
 
-    line: ($) => prec.right(seq(repeat1($._atom), optional('\n'))),
+    line: ($) => prec.right(seq(repeat1($._atom), optional($.code_block), optional('\n'))),
 
     _atom: ($) =>
       choice(
         $.word,
         $.tag,
-        $.code_block,
         $.tag,
         $.option,
         $.hotlink,

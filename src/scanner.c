@@ -51,14 +51,14 @@ bool tree_sitter_help_external_scanner_scan(void *payload, TSLexer *lexer,
     return false;
   }
 
-  if (valid_symbols[COLUMN_HEADING] && iswalpha(lexer->lookahead)) {
+  if (valid_symbols[COLUMN_HEADING] && iswalpha(lexer->lookahead) && lexer->get_column(lexer) == 0) {
     assert(valid_symbols[WORD] && valid_symbols[UPPERCASE_NAME]);
     advance(lexer, false);
 
     bool all_uppercase = true;
 
     // Now consume a word, without the ending ~ if any
-    while (!iswspace(lexer->lookahead)
+    while (iswalpha(lexer->lookahead)
         && lexer->lookahead != '\0'
         && lexer->lookahead != '~') {
       if (all_uppercase && iswlower(lexer->lookahead)) {
