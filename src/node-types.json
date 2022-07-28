@@ -70,6 +70,22 @@
       "required": true,
       "types": [
         {
+          "type": "argument",
+          "named": true
+        },
+        {
+          "type": "backtick",
+          "named": true
+        },
+        {
+          "type": "hotlink",
+          "named": true
+        },
+        {
+          "type": "option",
+          "named": true
+        },
+        {
           "type": "tag",
           "named": true
         },

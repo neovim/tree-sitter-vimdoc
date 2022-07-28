@@ -19,7 +19,7 @@ module.exports = grammar({
       seq(
         field('delimiter', choice(/===.*===/, /---.*---/)),
         '\n',
-        seq(repeat1($.word), $.tag),
+        repeat1($._atom),
         '\n',
       ),
 

@@ -54,20 +54,11 @@
           "value": "\n"
         },
         {
-          "type": "SEQ",
-          "members": [
-            {
-              "type": "REPEAT1",
-              "content": {
-                "type": "SYMBOL",
-                "name": "word"
-              }
-            },
-            {
-              "type": "SYMBOL",
-              "name": "tag"
-            }
-          ]
+          "type": "REPEAT1",
+          "content": {
+            "type": "SYMBOL",
+            "name": "_atom"
+          }
         },
         {
           "type": "STRING",
