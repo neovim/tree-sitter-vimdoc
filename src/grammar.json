@@ -203,12 +203,8 @@
           "value": "*"
         },
         {
-          "type": "FIELD",
-          "name": "name",
-          "content": {
-            "type": "SYMBOL",
-            "name": "word"
-          }
+          "type": "SYMBOL",
+          "name": "_atom"
         },
         {
           "type": "IMMEDIATE_TOKEN",
