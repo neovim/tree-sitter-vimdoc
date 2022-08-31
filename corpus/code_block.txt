@@ -83,7 +83,6 @@ To test for a non-empty string, use empty(): >
     (word)
     (word)
     (word)
-    (word)
     (code_block))
   (line
     (word)

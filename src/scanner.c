@@ -66,7 +66,7 @@ bool tree_sitter_help_external_scanner_scan(void *payload, TSLexer *lexer,
     bool all_uppercase = true;
 
     // Now consume a word, without the ending ~ if any
-    while (iswalpha(lexer->lookahead) && lexer->lookahead != '\0' &&
+    while (!iswspace(lexer->lookahead) && lexer->lookahead != '\0' &&
            lexer->lookahead != '~') {
       if (all_uppercase && iswlower(lexer->lookahead)) {
         all_uppercase = false;
