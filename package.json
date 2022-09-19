@@ -4,6 +4,7 @@
   "description": "A tree-sitter parser for Vim help files",
   "main": "bindings/node",
   "scripts": {
+    "build": "tree-sitter generate",
     "test": "tree-sitter test"
   },
   "repository": {
@@ -25,6 +26,6 @@
     "nan": "^2.15.0"
   },
   "devDependencies": {
-    "tree-sitter-cli": "^0.20.0"
+    "tree-sitter-cli": "^0.20.7"
   }
 }

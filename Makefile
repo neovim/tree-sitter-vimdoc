@@ -1,3 +1,3 @@
 all:
-	tree-sitter generate --abi=13
-	tree-sitter test
+	npm run build
+	npm run test

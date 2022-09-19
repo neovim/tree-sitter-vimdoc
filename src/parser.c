@@ -5,7 +5,7 @@
 #pragma GCC diagnostic ignored "-Wmissing-field-initializers"
 #endif
 
-#define LANGUAGE_VERSION 13
+#define LANGUAGE_VERSION 14
 #define STATE_COUNT 65
 #define LARGE_STATE_COUNT 6
 #define SYMBOL_COUNT 31
@@ -286,6 +286,74 @@ static const TSSymbol ts_alias_sequences[PRODUCTION_ID_COUNT][MAX_ALIAS_SEQUENCE
 
 static const uint16_t ts_non_terminal_alias_map[] = {
   0,
+};
+
+static const TSStateId ts_primary_state_ids[STATE_COUNT] = {
+  [0] = 0,
+  [1] = 1,
+  [2] = 2,
+  [3] = 3,
+  [4] = 4,
+  [5] = 5,
+  [6] = 4,
+  [7] = 7,
+  [8] = 8,
+  [9] = 9,
+  [10] = 10,
+  [11] = 11,
+  [12] = 12,
+  [13] = 13,
+  [14] = 14,
+  [15] = 15,
+  [16] = 16,
+  [17] = 17,
+  [18] = 18,
+  [19] = 19,
+  [20] = 20,
+  [21] = 20,
+  [22] = 20,
+  [23] = 9,
+  [24] = 10,
+  [25] = 13,
+  [26] = 18,
+  [27] = 17,
+  [28] = 28,
+  [29] = 10,
+  [30] = 30,
+  [31] = 31,
+  [32] = 32,
+  [33] = 33,
+  [34] = 31,
+  [35] = 35,
+  [36] = 13,
+  [37] = 18,
+  [38] = 9,
+  [39] = 17,
+  [40] = 40,
+  [41] = 41,
+  [42] = 42,
+  [43] = 43,
+  [44] = 44,
+  [45] = 30,
+  [46] = 35,
+  [47] = 47,
+  [48] = 33,
+  [49] = 32,
+  [50] = 30,
+  [51] = 35,
+  [52] = 31,
+  [53] = 33,
+  [54] = 32,
+  [55] = 55,
+  [56] = 55,
+  [57] = 44,
+  [58] = 43,
+  [59] = 42,
+  [60] = 60,
+  [61] = 55,
+  [62] = 44,
+  [63] = 43,
+  [64] = 42,
 };
 
 static bool ts_lex(TSLexer *lexer, TSStateId state) {
@@ -1350,6 +1418,7 @@ extern const TSLanguage *tree_sitter_help(void) {
       tree_sitter_help_external_scanner_serialize,
       tree_sitter_help_external_scanner_deserialize,
     },
+    .primary_state_ids = ts_primary_state_ids,
   };
   return &language;
 }
