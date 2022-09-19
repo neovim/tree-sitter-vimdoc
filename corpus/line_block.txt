@@ -1,107 +1,116 @@
 ================================================================================
-simple uppercase heading
+line: basic
 ================================================================================
-HELLO
 
-Test
+     a foo bar
+
 --------------------------------------------------------------------------------
 
 (help_file
-  (column_heading
-    (uppercase_name))
   (block
     (line
+      (word)
+      (word)
       (word))))
 
 ================================================================================
-multiple words uppercase heading
+blocks: no blank line (EOL) at end of document
 ================================================================================
-HELLO WORLD
+block1 text text
+text text
 
-  LEADING-SPACE-NOT-A-HEADING
+block2 text
+
+block3 text text
+text text
+text text text text
 --------------------------------------------------------------------------------
 
 (help_file
-  (column_heading
-    (uppercase_name))
   (block
     (line
+      (word)
+      (word)
+      (word))
+    (line
+      (word)
+      (word)))
+  (block
+    (line
+      (word)
+      (word)))
+  (block
+    (line
+      (word)
+      (word)
+      (word))
+    (line
+      (word)
+      (word))
+    (line
+      (word)
+      (word)
+      (word)
       (word))))
 
 ================================================================================
-heading with tag
+blocks: with blank line at end of document
 ================================================================================
-HELLO WORLD        *abc*
+block1 text text
 
-Test
+block2 text text
+
 --------------------------------------------------------------------------------
 
 (help_file
-  (column_heading
-    (uppercase_name)
-    (tag
+  (block
+    (line
+      (word)
+      (word)
       (word)))
   (block
     (line
+      (word)
+      (word)
       (word))))
 
 ================================================================================
-heading lowercase
+list block, listitems
 ================================================================================
-Test~
+* list1.a item1
+  * list1.b item1
+  * list1.b item2
+    item2 line2
+* list1.a item2 ~/foo/bar.txt
 
-Below
+* list2 item 1
+* list2 item 1
 --------------------------------------------------------------------------------
 
 (help_file
-  (column_heading
-    (column_name
-      (word)))
   (block
+    (line_li
+      (word)
+      (word))
+    (line_li
+      (word)
+      (word))
+    (line_li
+      (word)
+      (word))
     (line
-      (word))))
-
-================================================================================
-heading with multiple words
-================================================================================
-Multiple words~
-
-text
-
-nvim_ui_try_resize({width}, {height})                   *nvim_ui_try_resize()*
-    TODO: Documentation
-
-    Attributes: ~
-        |RPC| only
---------------------------------------------------------------------------------
-
-(help_file
-  (column_heading
-    (column_name
+      (word)
+      (word))
+    (line_li
+      (word)
       (word)
       (word)))
   (block
-    (line
-      (word)))
-  (block
-    (line
+    (line_li
       (word)
-      (argument
-        (word))
       (word)
-      (argument
-        (word))
+      (word))
+    (line_li
       (word)
-      (tag
-        (word)))
-    (line
       (word)
-      (word)))
-  (column_heading
-    (column_name
-      (word)))
-  (block
-    (line
-      (hotlink
-        (word))
       (word))))

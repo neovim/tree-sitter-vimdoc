@@ -1,45 +1,92 @@
 ================================================================================
-Simple backtick
+simple backtick
 ================================================================================
 
-`foobar`
+a `foobar` b `:echo`
 
 --------------------------------------------------------------------------------
 
 (help_file
-  (line
-    (backtick
+  (block
+    (line
+      (word)
+      (backtick
+        (word))
+      (word)
+      (backtick
+        (word)))))
+
+================================================================================
+backtick in text
+================================================================================
+
+Hello `world`, I am `markup language`. But `this is
+an error`.
+
+--------------------------------------------------------------------------------
+
+(help_file
+  (block
+    (line
+      (word)
+      (backtick
+        (word))
+      (word)
+      (word)
+      (word)
+      (backtick
+        (word))
+      (word)
+      (word)
+      (backtick
+        (word)
+        (MISSING "`")))
+    (line
+      (word)
       (word))))
 
 ================================================================================
-Backtick in text
+NOT a codespan / backtick
 ================================================================================
-
-Hello `world`, I am a markup language
+						*'* *'a* *`* *`a*
+'{a-z}  `{a-z}		Jump to the mark.
+						*g'* *g'a* *g`* *g`a*
+g'{mark}  g`{mark}
 
 --------------------------------------------------------------------------------
 
 (help_file
-  (line
-    (word)
-    (backtick
+  (block
+    (line
+      (tag
+        (word))
+      (tag
+        (word))
+      (tag
+        (word))
+      (tag
+        (word)))
+    (ERROR)
+    (line
+      (argument
+        (word))
+      (word)
+      (word)
+      (word)
       (word))
-    (word)
-    (word)
-    (word)
-    (word)
-    (word)
-    (word)))
-
-================================================================================
-Backtick with command inside
-================================================================================
-
-`:echo`
-
---------------------------------------------------------------------------------
-
-(help_file
-  (line
-    (backtick
-      (word))))
+    (line
+      (tag
+        (word))
+      (tag
+        (word))
+      (tag
+        (word))
+      (tag
+        (word)))
+    (line
+      (word)
+      (argument
+        (word))
+      (word)
+      (argument
+        (word)))))

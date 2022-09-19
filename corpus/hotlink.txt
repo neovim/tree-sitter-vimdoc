@@ -1,27 +1,80 @@
 ================================================================================
-Hotlink alone
+hotlink alone
 ================================================================================
-
 |world|
 
 --------------------------------------------------------------------------------
 
 (help_file
-  (line
-    (hotlink
-      (word))))
+  (block
+    (line
+      (hotlink
+        (word)))))
 
 ================================================================================
-Hotlink in text
+hotlink in text
 ================================================================================
-
 Hello |world| hello
 
 --------------------------------------------------------------------------------
 
 (help_file
-  (line
-    (word)
-    (hotlink
+  (block
+    (line
+      (word)
+      (hotlink
+        (word))
+      (word))))
+
+================================================================================
+NOT a hotlink
+================================================================================
+
+whitespace |world foo bar|
+table-borders |=========| |---------|
+
+- {event}  (String|Array) event
+
+Note: ":autocmd" can...
+'|' works:
+	:augroup mine | au! BufRead | augroup END
+
+--------------------------------------------------------------------------------
+
+(help_file
+  (block
+    (line
+      (word)
+      (hotlink
+        (word)
+        (MISSING "|"))
+      (word)
       (word))
-    (word)))
+    (line
+      (word)
+      (word)
+      (word)))
+  (block
+    (line
+      (word)
+      (argument
+        (word))
+      (word)
+      (word)))
+  (block
+    (line
+      (word)
+      (word)
+      (word))
+    (line
+      (word)
+      (word))
+    (line
+      (word)
+      (word)
+      (word)
+      (word)
+      (word)
+      (word)
+      (word)
+      (word))))

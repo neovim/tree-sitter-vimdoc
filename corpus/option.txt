@@ -1,5 +1,5 @@
 ================================================================================
-Option alone
+option alone
 ================================================================================
 
 'hello'
@@ -7,12 +7,13 @@ Option alone
 --------------------------------------------------------------------------------
 
 (help_file
-  (line
-    (option
-      (word))))
+  (block
+    (line
+      (option
+        (word)))))
 
 ================================================================================
-Option in text
+option in text
 ================================================================================
 
 world 'hello' world
@@ -20,24 +21,67 @@ world 'hello' world
 --------------------------------------------------------------------------------
 
 (help_file
-  (line
-    (word)
-    (option
-      (word))
-    (word)))
+  (block
+    (line
+      (word)
+      (option
+        (word))
+      (word))))
 
 ================================================================================
-Near-option
+NOT an option #7 #14
 ================================================================================
 
 Let's see if that works.
+no! ','sqlKeyword'
+single-char '-' 'g' '보'
+non-ascii: '\"' '%)' '-bang' '.*\\.log' '.gitignore' '@{${\"foo\"}}'
+number: '04' 'ISO-10646-1' 'python3'
+
+	Option	  '	:help 'textwidth'
+	Regular	  /	:help /[
 
 --------------------------------------------------------------------------------
 
 (help_file
-  (line
-    (word)
-    (word)
-    (word)
-    (word)
-    (word)))
+  (block
+    (line
+      (word)
+      (word)
+      (word)
+      (word)
+      (word))
+    (line
+      (word)
+      (word)
+      (word))
+    (line
+      (word)
+      (word)
+      (word)
+      (word))
+    (line
+      (word)
+      (word)
+      (word)
+      (word)
+      (word)
+      (word)
+      (word))
+    (line
+      (word)
+      (word)
+      (word)
+      (word)))
+  (block
+    (line
+      (word)
+      (word)
+      (word)
+      (option
+        (word)))
+    (line
+      (word)
+      (word)
+      (word)
+      (word))))

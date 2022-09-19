@@ -1,44 +1,174 @@
 ================================================================================
-Simple code block
+simple codeblock
 ================================================================================
 >
-  abcabcabc
+  1.1
+<   
+
+block2:
+>
+  2.1
+<   foo
+
+block3:
+>
+  3.1
 <
+
+  text
 --------------------------------------------------------------------------------
 
 (help_file
-  (code_block))
+  (block
+    (line
+      (code_block
+        (line))))
+  (block
+    (line
+      (word))
+    (line
+      (code_block
+        (line)))
+    (line
+      (word)))
+  (block
+    (line
+      (word))
+    (line
+      (code_block
+        (line))))
+  (block
+    (line
+      (word))))
 
 ================================================================================
-Code block with text before
+codeblock with text before
 ================================================================================
 This code: >
-  abc
+  code-line1
+  code-line2
+  code-line3
 <
+
+From luaref.txt:
+
+        (see |luaref-luaL_newstate|).
+>
+            static void *l_alloc (void *ud, void *ptr) {
+              return NULL;
+            }
+<
+
+text
+
 --------------------------------------------------------------------------------
 
 (help_file
-  (line
-    (word)
-    (word)
-    (code_block)))
+  (block
+    (line
+      (word)
+      (word)
+      (code_block
+        (line)
+        (line)
+        (line))))
+  (block
+    (line
+      (word)
+      (word)))
+  (block
+    (line
+      (word)
+      (hotlink
+        (word))
+      (word))
+    (line
+      (code_block
+        (line)
+        (line)
+        (line))))
+  (block
+    (line
+      (word))))
 
 ================================================================================
-Code block with implicit stop
+codeblock with implicit stop
 ================================================================================
 >
-  abc
+  line1
+  line2
 
 Blehke
 --------------------------------------------------------------------------------
 
 (help_file
-  (code_block)
-  (line
-    (word)))
+  (block
+    (line
+      (code_block
+        (line)
+        (line)
+        (line)))
+    (line
+      (word))))
 
 ================================================================================
-Strange codeblock
+codeblock with empty lines
+================================================================================
+
+Example: >
+
+    let buf = nvim_create_buf(v:false, v:true)
+    call nvim_buf_set_lines(buf, 0, -1, v:true, ["test", "text"])
+
+    let opts = {'relative': 'cursor', 'width': 10, 'height': 2, 'col': 0,
+        \ 'row': 1, 'anchor': 'NW', 'style': 'minimal'}
+
+    let win = nvim_open_win(buf, 0, opts)
+    call nvim_win_set_option(win, 'winhl', 'Normal:MyHighlight')
+x
+
+--------------------------------------------------------------------------------
+
+(help_file
+  (block
+    (line
+      (word)
+      (code_block
+        (line)
+        (line)
+        (line)
+        (line)
+        (line)
+        (line)
+        (line)
+        (line)
+        (line)))))
+
+================================================================================
+tricky codeblock
+================================================================================
+>
+  line1 >
+  line2
+  < line3
+<
+
+tricky
+--------------------------------------------------------------------------------
+
+(help_file
+  (block
+    (line
+      (code_block
+        (line)
+        (line)
+        (line))))
+  (block
+    (line
+      (word))))
+
+================================================================================
+strange codeblock
 ================================================================================
 
 Note that in the command: >
@@ -55,42 +185,48 @@ To test for a non-empty string, use empty(): >
 --------------------------------------------------------------------------------
 
 (help_file
-  (line
-    (word)
-    (word)
-    (word)
-    (word)
-    (word)
-    (code_block))
-  (line
-    (word)
-    (word)
-    (word)
-    (word)
-    (word)
-    (word)
-    (word)
-    (word)
-    (word)
-    (word)
-    (word)
-    (word)
-    (word)
-    (word))
-  (line
-    (word)
-    (word)
-    (word)
-    (word)
-    (word)
-    (code_block))
-  (line
-    (word)
-    (word)
-    (word)
-    (word)
-    (word)
-    (word)
-    (word)
-    (word)
-    (code_block)))
+  (block
+    (line
+      (word)
+      (word)
+      (word)
+      (word)
+      (word)
+      (code_block
+        (line)
+        (line)))
+    (line
+      (word)
+      (word)
+      (word)
+      (word)
+      (word)
+      (word)
+      (word)
+      (word)
+      (word)
+      (word)
+      (word)
+      (word)
+      (word)
+      (word))
+    (line
+      (word)
+      (word)
+      (word)
+      (word)
+      (word)
+      (code_block
+        (line)
+        (line)))
+    (line
+      (word)
+      (word)
+      (word)
+      (word)
+      (word)
+      (word)
+      (word)
+      (word)
+      (code_block
+        (line)))))
