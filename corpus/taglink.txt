@@ -1,5 +1,5 @@
 ================================================================================
-hotlink alone
+taglink alone
 ================================================================================
 |world|
 
@@ -8,11 +8,11 @@ hotlink alone
 (help_file
   (block
     (line
-      (hotlink
+      (taglink
         (word)))))
 
 ================================================================================
-hotlink in text
+taglink in text
 ================================================================================
 Hello |world| hello
 
@@ -22,15 +22,16 @@ Hello |world| hello
   (block
     (line
       (word)
-      (hotlink
+      (taglink
         (word))
       (word))))
 
 ================================================================================
-NOT a hotlink
+NOT a taglink
 ================================================================================
 
 whitespace |world foo bar|
+adjacent || |||
 table-borders |=========| |---------|
 
 - {event}  (String|Array) event
@@ -45,7 +46,7 @@ Note: ":autocmd" can...
   (block
     (line
       (word)
-      (hotlink
+      (taglink
         (word)
         (MISSING "|"))
       (word)
@@ -53,10 +54,13 @@ Note: ":autocmd" can...
     (line
       (word)
       (word)
-      (word)))
-  (block
+      (word))
     (line
       (word)
+      (word)
+      (word)))
+  (block
+    (line_li
       (argument
         (word))
       (word)

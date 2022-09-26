@@ -1,5 +1,5 @@
 ================================================================================
-option alone
+optionlink alone
 ================================================================================
 
 'hello'
@@ -9,11 +9,11 @@ option alone
 (help_file
   (block
     (line
-      (option
+      (optionlink
         (word)))))
 
 ================================================================================
-option in text
+optionlink in text
 ================================================================================
 
 world 'hello' world
@@ -24,12 +24,12 @@ world 'hello' world
   (block
     (line
       (word)
-      (option
+      (optionlink
         (word))
       (word))))
 
 ================================================================================
-NOT an option #7 #14
+NOT an optionlink #7 #14
 ================================================================================
 
 Let's see if that works.
@@ -78,7 +78,7 @@ number: '04' 'ISO-10646-1' 'python3'
       (word)
       (word)
       (word)
-      (option
+      (optionlink
         (word)))
     (line
       (word)

@@ -1,5 +1,5 @@
 ================================================================================
-simple backtick
+simple codespan
 ================================================================================
 
 a `foobar` b `:echo`
@@ -10,14 +10,14 @@ a `foobar` b `:echo`
   (block
     (line
       (word)
-      (backtick
+      (codespan
         (word))
       (word)
-      (backtick
+      (codespan
         (word)))))
 
 ================================================================================
-backtick in text
+codespan in text
 ================================================================================
 
 Hello `world`, I am `markup language`. But `this is
@@ -29,16 +29,16 @@ an error`.
   (block
     (line
       (word)
-      (backtick
+      (codespan
         (word))
       (word)
       (word)
       (word)
-      (backtick
+      (codespan
         (word))
       (word)
       (word)
-      (backtick
+      (codespan
         (word)
         (MISSING "`")))
     (line
@@ -46,7 +46,7 @@ an error`.
       (word))))
 
 ================================================================================
-NOT a codespan / backtick
+NOT a codespan
 ================================================================================
 						*'* *'a* *`* *`a*
 '{a-z}  `{a-z}		Jump to the mark.

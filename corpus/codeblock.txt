@@ -21,13 +21,13 @@ block3:
 (help_file
   (block
     (line
-      (code_block
+      (codeblock
         (line))))
   (block
     (line
       (word))
     (line
-      (code_block
+      (codeblock
         (line)))
     (line
       (word)))
@@ -35,7 +35,7 @@ block3:
     (line
       (word))
     (line
-      (code_block
+      (codeblock
         (line))))
   (block
     (line
@@ -68,7 +68,7 @@ text
     (line
       (word)
       (word)
-      (code_block
+      (codeblock
         (line)
         (line)
         (line))))
@@ -79,11 +79,11 @@ text
   (block
     (line
       (word)
-      (hotlink
+      (taglink
         (word))
       (word))
     (line
-      (code_block
+      (codeblock
         (line)
         (line)
         (line))))
@@ -92,23 +92,36 @@ text
       (word))))
 
 ================================================================================
-codeblock with implicit stop
+codeblock with implicit stop (FIXME)
 ================================================================================
 >
   line1
   line2
 
-Blehke
+-------------------------------
+h1-headline *foo*
+
+-------------------------------
+h1-headline *foo*
+
 --------------------------------------------------------------------------------
 
 (help_file
   (block
     (line
-      (code_block
+      (codeblock
         (line)
         (line)
         (line)))
     (line
+      (word))
+    (line
+      (word)
+      (tag
+        (word))))
+  (h2
+    (word)
+    (tag
       (word))))
 
 ================================================================================
@@ -133,7 +146,7 @@ x
   (block
     (line
       (word)
-      (code_block
+      (codeblock
         (line)
         (line)
         (line)
@@ -159,7 +172,7 @@ tricky
 (help_file
   (block
     (line
-      (code_block
+      (codeblock
         (line)
         (line)
         (line))))
@@ -192,7 +205,7 @@ To test for a non-empty string, use empty(): >
       (word)
       (word)
       (word)
-      (code_block
+      (codeblock
         (line)
         (line)))
     (line
@@ -216,7 +229,7 @@ To test for a non-empty string, use empty(): >
       (word)
       (word)
       (word)
-      (code_block
+      (codeblock
         (line)
         (line)))
     (line
@@ -228,5 +241,5 @@ To test for a non-empty string, use empty(): >
       (word)
       (word)
       (word)
-      (code_block
+      (codeblock
         (line)))))

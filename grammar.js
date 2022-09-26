@@ -9,8 +9,9 @@ module.exports = grammar({
         repeat(/[\t ]*\n/),  // Eat whitespace at top of file.
         repeat(choice(
           $.block,
-          $.column_heading,
-          $.headline,
+          $.h1,
+          $.h2,
+          $.h3,
         )),
         // Last block may not be followed by a blank line or EOL.
         optional(alias($.block_end, $.block)),
@@ -21,9 +22,9 @@ module.exports = grammar({
         $.word,
         $.tag,
         $.url,
-        $.option,
-        $.hotlink,
-        $.backtick,
+        $.optionlink,
+        $.taglink,
+        $.codespan,
         $.argument,
       ),
 
@@ -32,22 +33,29 @@ module.exports = grammar({
       // "foo({a})" parse as "(word) (argument)" instead of "(word)".
       token(prec(-1, /[^\n\t~{ ]+/)),
       token(prec(-2, /[^\n\t ]+/)),
-      // Special case: "|====|" and "|----|" are (plain text) table borders, not hotlinks.
-      token(prec(1, /\|(([+=][+=][+=][+=]+)|([+-][+-][+-][+-]+))\|/)),
-      // Special case: NOT an option link: single "'".
+
+      // Special cases:
+      //
+      // "|====|" and "|----|" are (plain text) table borders, not taglinks.
+      /\|(([+=][+=][+=][+=]+)|([+-][+-][+-][+-]+))\|/,
+      // NOT optionlink: single "'".
       /[\t ]'[\t ]/,
-      // Special case: NOT an option link: contains any non-lowercase char.
+      // NOT optionlink: contains any non-lowercase char.
       seq("'", token.immediate(/[^'\n\t ]*[^'a-z\n\t ][^'\n\t ]*/), token.immediate("'")),
-      // Special case: NOT an option link: single char surrounded by "'".
+      // NOT optionlink: single char surrounded by "'".
       seq("'", token.immediate(/[^'\n\t ]/), token.immediate("'")),
-      // Special case: NOT a tag link: single "|".
+      // NOT taglink: single "|".
       /[\t ]\|[\t ]/,
+      // NOT taglink: "||".
+      /\|\|*/,
+      // NOT argument: "{}".
+      /\{\}/,
     ),
 
     // Text block/paragraph: adjacent lines followed by blank line(s).
     block: ($) => prec.right(seq(
         repeat1(choice($.line, $.line_li)),
-        _blank(),
+        repeat1(_blank()),
       )
     ),
     // Special case: last block in the document may not end with blank line (nor even EOL).
@@ -62,7 +70,7 @@ module.exports = grammar({
     ),
 
     // Code block: preformatted lines delimited by ">" and "<".
-    code_block: ($) => prec.right(seq(
+    codeblock: ($) => prec.right(seq(
       />[\t ]*\n/,
       repeat1(alias($.line_code, $.line)),
       // Code block ends if a line starts with "<" or a non-empty line starts with a visible char.
@@ -73,34 +81,46 @@ module.exports = grammar({
     line: ($) => _line($, true),
     line_noeol: ($) => _line($, false),
     // Listitem line.
-    line_li: ($) => seq(/[*-+•][ ]+/, repeat1($._atom), '\n'),
-    line_li_noeol: ($) => seq(/[*-+•][ ]+/, repeat1($._atom)),
+    line_li: ($) => seq(/[-*+•][ ]+/, repeat1($._atom), '\n'),
+    line_li_noeol: ($) => seq(/[-*+•][ ]+/, repeat1($._atom)),
     // Codeblock lines: must be indented by at least 1 space/tab.
     // Line content (incl. whitespace) is captured as a single atom.
     line_code: () => choice('\n', seq(/[\t ]+[^\n]+/, /\n/)),
 
-    column_name: ($) => seq(repeat1($._atom), choice('~', token.immediate('~'))),
-    uppercase_name: () => seq(
-      token.immediate(/[^a-z][A-Z]+[^a-z]/),  // No whitespace before heading.
-      repeat(/[^a-z][A-Z]+[^a-z]/)),
+    // "Column heading": plaintext followed by "~".
+    // Intended for table column names per `:help help-writing`.
     column_heading: ($) =>
       seq(
-        choice(
-          seq(field('text', $.uppercase_name), repeat($.tag)),
-          field('text', $.column_name),
-        ),
+        field('name', choice($.uppercase_name, repeat1($._atom))),  // TODO: should be $.word (plaintext).
+        /~[\t ]*\n/,
+      ),
+
+    h1: ($) =>
+      seq(
+        field('delimiter', /[\t ]*============+[\t ]*\n/),
+        repeat1($._atom),
         '\n',
         repeat(_blank()),
       ),
 
-    headline: ($) =>
+    h2: ($) =>
       seq(
-        field('delimiter', choice(
-          seq(/[\t ]*============+[\t ]*\n/)),
-          seq(/[\t ]*------------+[\t ]*\n/)),
+        field('delimiter', /[\t ]*------------+[\t ]*\n/),
         repeat1($._atom),
         '\n',
-        optional(_blank()),
+        repeat(_blank()),
+      ),
+
+    // Heading 3: UPPERCASE WORDS, followed by optional *tags*.
+    uppercase_name: () => seq(
+      token.immediate(/[A-Z0-9.()][-A-Z0-9.()_]+/),  // No whitespace before heading.
+      repeat(/[A-Z0-9.()][-A-Z0-9.()_]+/)),
+    h3: ($) =>
+      seq(
+        field('name', $.uppercase_name),
+        repeat($.tag),
+        '\n',
+        repeat(_blank()),
       ),
 
     tag: ($) => _word($,
@@ -108,7 +128,7 @@ module.exports = grammar({
       '*', '*'),
 
     // URL without surrounding (), [], etc.
-    url_word: () => /http[s]:[^\n\t)\] ]+/,
+    url_word: () => /https?:[^\n\t)\] ]+/,
     url: ($) => choice(
       // seq('(', field('text', prec.left(alias($.url_word, $.word))), token.immediate(')')),
       // seq('[', field('text', prec.left(alias($.url_word, $.word))), token.immediate(']')),
@@ -116,21 +136,21 @@ module.exports = grammar({
     ),
 
     // Link to option: 'foo'. Lowercase non-digit ASCII, minimum 2 chars. #14
-    option: ($) => _word($,
-      // Option text without surrounding "'".
+    optionlink: ($) => _word($,
+      // Option name without surrounding "'".
       /[a-z][a-z]+/,
       "'", "'"),
     // Link to tag: |foo|
-    hotlink: ($) => _word($,
-      /[^|\n\t ]+/,    // Link text without surrounding "|".
+    taglink: ($) => _word($,
+      /[^|\n\t ]+/,
       '|', '|'),
     // Inline code (may contain whitespace!): `foo bar`
-    backtick: ($) => _word($,
-      /[^``\n]+/,   // Code text without surrounding "`".
+    codespan: ($) => _word($,
+      /[^``\n]+/,
       '`', '`'),
     // Argument: {arg}
     argument: ($) => _word($,
-      /[^{}\n\t ]+/,   // Argument text without surrounding "{}".
+      /[^{}\n\t ]+/,
       '{', '}'),
   },
 });
@@ -146,8 +166,9 @@ function _word($, word_regex, c1, c2, fname) {
 function _line($, require_eol) {
   const eol = require_eol ? '\n' : optional('\n');
   return choice(
-    seq(repeat($._atom), $.code_block),
-    seq(repeat1($._atom), choice($.code_block, eol)));
+    $.column_heading,
+    seq(repeat($._atom), $.codeblock),
+    seq(repeat1($._atom), choice($.codeblock, eol)));
 }
 
 function _blank() {
