@@ -1,0 +1,245 @@
+================================================================================
+simple codeblock
+================================================================================
+>
+  1.1
+<   
+
+block2:
+>
+  2.1
+<   foo
+
+block3:
+>
+  3.1
+<
+
+  text
+--------------------------------------------------------------------------------
+
+(help_file
+  (block
+    (line
+      (codeblock
+        (line))))
+  (block
+    (line
+      (word))
+    (line
+      (codeblock
+        (line)))
+    (line
+      (word)))
+  (block
+    (line
+      (word))
+    (line
+      (codeblock
+        (line))))
+  (block
+    (line
+      (word))))
+
+================================================================================
+codeblock with text before
+================================================================================
+This code: >
+  code-line1
+  code-line2
+  code-line3
+<
+
+From luaref.txt:
+
+        (see |luaref-luaL_newstate|).
+>
+            static void *l_alloc (void *ud, void *ptr) {
+              return NULL;
+            }
+<
+
+text
+
+--------------------------------------------------------------------------------
+
+(help_file
+  (block
+    (line
+      (word)
+      (word)
+      (codeblock
+        (line)
+        (line)
+        (line))))
+  (block
+    (line
+      (word)
+      (word)))
+  (block
+    (line
+      (word)
+      (taglink
+        (word))
+      (word))
+    (line
+      (codeblock
+        (line)
+        (line)
+        (line))))
+  (block
+    (line
+      (word))))
+
+================================================================================
+codeblock with implicit stop (FIXME)
+================================================================================
+>
+  line1
+  line2
+
+-------------------------------
+h1-headline *foo*
+
+-------------------------------
+h1-headline *foo*
+
+--------------------------------------------------------------------------------
+
+(help_file
+  (block
+    (line
+      (codeblock
+        (line)
+        (line)
+        (line)))
+    (line
+      (word))
+    (line
+      (word)
+      (tag
+        (word))))
+  (h2
+    (word)
+    (tag
+      (word))))
+
+================================================================================
+codeblock with empty lines
+================================================================================
+
+Example: >
+
+    let buf = nvim_create_buf(v:false, v:true)
+    call nvim_buf_set_lines(buf, 0, -1, v:true, ["test", "text"])
+
+    let opts = {'relative': 'cursor', 'width': 10, 'height': 2, 'col': 0,
+        \ 'row': 1, 'anchor': 'NW', 'style': 'minimal'}
+
+    let win = nvim_open_win(buf, 0, opts)
+    call nvim_win_set_option(win, 'winhl', 'Normal:MyHighlight')
+x
+
+--------------------------------------------------------------------------------
+
+(help_file
+  (block
+    (line
+      (word)
+      (codeblock
+        (line)
+        (line)
+        (line)
+        (line)
+        (line)
+        (line)
+        (line)
+        (line)
+        (line)))))
+
+================================================================================
+tricky codeblock
+================================================================================
+>
+  line1 >
+  line2
+  < line3
+<
+
+tricky
+--------------------------------------------------------------------------------
+
+(help_file
+  (block
+    (line
+      (codeblock
+        (line)
+        (line)
+        (line))))
+  (block
+    (line
+      (word))))
+
+================================================================================
+strange codeblock
+================================================================================
+
+Note that in the command: >
+	:if "foo"
+	:" NOT executed
+"foo" is converted to 0, which means FALSE.  If the string starts with a
+non-zero number it means TRUE: >
+	:if "8foo"
+	:" executed
+To test for a non-empty string, use empty(): >
+	:if !empty("foo")
+<
+
+--------------------------------------------------------------------------------
+
+(help_file
+  (block
+    (line
+      (word)
+      (word)
+      (word)
+      (word)
+      (word)
+      (codeblock
+        (line)
+        (line)))
+    (line
+      (word)
+      (word)
+      (word)
+      (word)
+      (word)
+      (word)
+      (word)
+      (word)
+      (word)
+      (word)
+      (word)
+      (word)
+      (word)
+      (word))
+    (line
+      (word)
+      (word)
+      (word)
+      (word)
+      (word)
+      (codeblock
+        (line)
+        (line)))
+    (line
+      (word)
+      (word)
+      (word)
+      (word)
+      (word)
+      (word)
+      (word)
+      (word)
+      (codeblock
+        (line)))))

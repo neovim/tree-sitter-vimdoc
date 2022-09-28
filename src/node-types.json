@@ -3,7 +3,7 @@
     "type": "argument",
     "named": true,
     "fields": {
-      "name": {
+      "text": {
         "multiple": false,
         "required": true,
         "types": [
@@ -16,10 +16,44 @@
     }
   },
   {
-    "type": "backtick",
+    "type": "block",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "line",
+          "named": true
+        },
+        {
+          "type": "line_li",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "codeblock",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "line",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "codespan",
     "named": true,
     "fields": {
-      "content": {
+      "text": {
         "multiple": false,
         "required": true,
         "types": [
@@ -36,33 +70,47 @@
     "named": true,
     "fields": {
       "name": {
-        "multiple": false,
+        "multiple": true,
         "required": true,
         "types": [
           {
-            "type": "column_name",
+            "type": "argument",
+            "named": true
+          },
+          {
+            "type": "codespan",
+            "named": true
+          },
+          {
+            "type": "optionlink",
+            "named": true
+          },
+          {
+            "type": "tag",
+            "named": true
+          },
+          {
+            "type": "taglink",
             "named": true
           },
           {
             "type": "uppercase_name",
             "named": true
+          },
+          {
+            "type": "url",
+            "named": true
+          },
+          {
+            "type": "word",
+            "named": true
           }
         ]
       }
-    },
-    "children": {
-      "multiple": false,
-      "required": false,
-      "types": [
-        {
-          "type": "tag",
-          "named": true
-        }
-      ]
     }
   },
   {
-    "type": "headline",
+    "type": "h1",
     "named": true,
     "fields": {},
     "children": {
@@ -74,15 +122,11 @@
           "named": true
         },
         {
-          "type": "backtick",
+          "type": "codespan",
           "named": true
         },
         {
-          "type": "hotlink",
-          "named": true
-        },
-        {
-          "type": "option",
+          "type": "optionlink",
           "named": true
         },
         {
@@ -90,7 +134,80 @@
           "named": true
         },
         {
+          "type": "taglink",
+          "named": true
+        },
+        {
+          "type": "url",
+          "named": true
+        },
+        {
           "type": "word",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "h2",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "argument",
+          "named": true
+        },
+        {
+          "type": "codespan",
+          "named": true
+        },
+        {
+          "type": "optionlink",
+          "named": true
+        },
+        {
+          "type": "tag",
+          "named": true
+        },
+        {
+          "type": "taglink",
+          "named": true
+        },
+        {
+          "type": "url",
+          "named": true
+        },
+        {
+          "type": "word",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "h3",
+    "named": true,
+    "fields": {
+      "name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "uppercase_name",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "tag",
           "named": true
         }
       ]
@@ -105,7 +222,42 @@
       "required": false,
       "types": [
         {
-          "type": "code_block",
+          "type": "block",
+          "named": true
+        },
+        {
+          "type": "h1",
+          "named": true
+        },
+        {
+          "type": "h2",
+          "named": true
+        },
+        {
+          "type": "h3",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "line",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "argument",
+          "named": true
+        },
+        {
+          "type": "codeblock",
+          "named": true
+        },
+        {
+          "type": "codespan",
           "named": true
         },
         {
@@ -113,34 +265,30 @@
           "named": true
         },
         {
-          "type": "headline",
+          "type": "optionlink",
           "named": true
         },
         {
-          "type": "line",
+          "type": "tag",
+          "named": true
+        },
+        {
+          "type": "taglink",
+          "named": true
+        },
+        {
+          "type": "url",
+          "named": true
+        },
+        {
+          "type": "word",
           "named": true
         }
       ]
     }
   },
   {
-    "type": "hotlink",
-    "named": true,
-    "fields": {
-      "destination": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "word",
-            "named": true
-          }
-        ]
-      }
-    }
-  },
-  {
-    "type": "line",
+    "type": "line_li",
     "named": true,
     "fields": {},
     "children": {
@@ -152,23 +300,23 @@
           "named": true
         },
         {
-          "type": "backtick",
+          "type": "codespan",
           "named": true
         },
         {
-          "type": "code_block",
-          "named": true
-        },
-        {
-          "type": "hotlink",
-          "named": true
-        },
-        {
-          "type": "option",
+          "type": "optionlink",
           "named": true
         },
         {
           "type": "tag",
+          "named": true
+        },
+        {
+          "type": "taglink",
+          "named": true
+        },
+        {
+          "type": "url",
           "named": true
         },
         {
@@ -179,10 +327,10 @@
     }
   },
   {
-    "type": "option",
+    "type": "optionlink",
     "named": true,
     "fields": {
-      "name": {
+      "text": {
         "multiple": false,
         "required": true,
         "types": [
@@ -198,30 +346,10 @@
     "type": "tag",
     "named": true,
     "fields": {
-      "name": {
+      "text": {
         "multiple": false,
         "required": true,
         "types": [
-          {
-            "type": "argument",
-            "named": true
-          },
-          {
-            "type": "backtick",
-            "named": true
-          },
-          {
-            "type": "hotlink",
-            "named": true
-          },
-          {
-            "type": "option",
-            "named": true
-          },
-          {
-            "type": "tag",
-            "named": true
-          },
           {
             "type": "word",
             "named": true
@@ -229,6 +357,48 @@
         ]
       }
     }
+  },
+  {
+    "type": "taglink",
+    "named": true,
+    "fields": {
+      "text": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "word",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "uppercase_name",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "url",
+    "named": true,
+    "fields": {
+      "text": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "word",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "word",
+    "named": true,
+    "fields": {}
   },
   {
     "type": "\n",
@@ -245,22 +415,6 @@
   {
     "type": "`",
     "named": false
-  },
-  {
-    "type": "code_block",
-    "named": true
-  },
-  {
-    "type": "column_name",
-    "named": true
-  },
-  {
-    "type": "uppercase_name",
-    "named": true
-  },
-  {
-    "type": "word",
-    "named": true
   },
   {
     "type": "{",

@@ -1,53 +1,87 @@
 ================================================================================
-simple argument
+optionlink alone
 ================================================================================
-This in an argument: {arg}
+
+'hello'
+
 --------------------------------------------------------------------------------
 
 (help_file
   (block
     (line
-      (word)
-      (word)
-      (word)
-      (word)
-      (argument
+      (optionlink
         (word)))))
 
 ================================================================================
-multiple arguments on the same line
+optionlink in text
 ================================================================================
-{foo} {bar} {baz}
+
+world 'hello' world
 
 --------------------------------------------------------------------------------
 
 (help_file
   (block
     (line
-      (argument
-        (word))
-      (argument
-        (word))
-      (argument
-        (word)))))
-
-================================================================================
-NOT an argument
-================================================================================
-{foo "{bar}" `{baz}` |{baz| } {}
-
---------------------------------------------------------------------------------
-
-(help_file
-  (block
-    (line
-      (argument
-        (word)
-        (ERROR))
       (word)
-      (codespan
+      (optionlink
         (word))
-      (taglink
-        (word))
+      (word))))
+
+================================================================================
+NOT an optionlink #7 #14
+================================================================================
+
+Let's see if that works.
+no! ','sqlKeyword'
+single-char '-' 'g' '보'
+non-ascii: '\"' '%)' '-bang' '.*\\.log' '.gitignore' '@{${\"foo\"}}'
+number: '04' 'ISO-10646-1' 'python3'
+
+	Option	  '	:help 'textwidth'
+	Regular	  /	:help /[
+
+--------------------------------------------------------------------------------
+
+(help_file
+  (block
+    (line
+      (word)
+      (word)
+      (word)
+      (word)
+      (word))
+    (line
+      (word)
+      (word)
+      (word))
+    (line
+      (word)
+      (word)
+      (word)
+      (word))
+    (line
+      (word)
+      (word)
+      (word)
+      (word)
+      (word)
+      (word)
+      (word))
+    (line
+      (word)
+      (word)
+      (word)
+      (word)))
+  (block
+    (line
+      (word)
+      (word)
+      (word)
+      (optionlink
+        (word)))
+    (line
+      (word)
+      (word)
       (word)
       (word))))

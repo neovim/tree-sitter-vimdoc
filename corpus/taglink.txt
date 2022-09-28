@@ -1,53 +1,84 @@
 ================================================================================
-simple argument
+taglink alone
 ================================================================================
-This in an argument: {arg}
+|world|
+
 --------------------------------------------------------------------------------
 
 (help_file
   (block
     (line
-      (word)
-      (word)
-      (word)
-      (word)
-      (argument
+      (taglink
         (word)))))
 
 ================================================================================
-multiple arguments on the same line
+taglink in text
 ================================================================================
-{foo} {bar} {baz}
+Hello |world| hello
 
 --------------------------------------------------------------------------------
 
 (help_file
   (block
     (line
-      (argument
-        (word))
-      (argument
-        (word))
-      (argument
-        (word)))))
-
-================================================================================
-NOT an argument
-================================================================================
-{foo "{bar}" `{baz}` |{baz| } {}
-
---------------------------------------------------------------------------------
-
-(help_file
-  (block
-    (line
-      (argument
-        (word)
-        (ERROR))
       (word)
-      (codespan
-        (word))
       (taglink
         (word))
+      (word))))
+
+================================================================================
+NOT a taglink
+================================================================================
+
+whitespace |world foo bar|
+adjacent || |||
+table-borders |=========| |---------|
+
+- {event}  (String|Array) event
+
+Note: ":autocmd" can...
+'|' works:
+	:augroup mine | au! BufRead | augroup END
+
+--------------------------------------------------------------------------------
+
+(help_file
+  (block
+    (line
+      (word)
+      (taglink
+        (word)
+        (MISSING "|"))
+      (word)
+      (word))
+    (line
+      (word)
+      (word)
+      (word))
+    (line
+      (word)
+      (word)
+      (word)))
+  (block
+    (line_li
+      (argument
+        (word))
+      (word)
+      (word)))
+  (block
+    (line
+      (word)
+      (word)
+      (word))
+    (line
+      (word)
+      (word))
+    (line
+      (word)
+      (word)
+      (word)
+      (word)
+      (word)
+      (word)
       (word)
       (word))))
