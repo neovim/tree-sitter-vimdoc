@@ -151,6 +151,13 @@ NOT h3 uppercase heading
 ^V	0x16	 22	(SYN)
 ^W	0x17	 23	END
 
+ABC not-h3
+
+4. 'runtimepath' `/xxx;yyy/baz`.The
+   `/foo/bar`-and-`/abc`.
+5. PRODUCT of 3.
+   ...`/lua`-path,-leaving:
+
 --------------------------------------------------------------------------------
 
 (help_file
@@ -164,6 +171,29 @@ NOT h3 uppercase heading
       (word)
       (word)
       (word)
+      (word)))
+  (block
+    (line
+      (word)
+      (word)))
+  (block
+    (line
+      (word)
+      (optionlink
+        (word))
+      (codespan
+        (word))
+      (word))
+    (line
+      (codespan
+        (word))
+      (word))
+    (line
+      (word)
+      (word)
+      (word)
+      (word))
+    (line
       (word))))
 
 ================================================================================

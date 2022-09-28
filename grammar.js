@@ -1,7 +1,13 @@
+const _uppercase_word = /[A-Z0-9.()][-A-Z0-9.()_]+/;
+
 module.exports = grammar({
   name: 'help', // The actual language name is help
 
   extras: () => [/[\t ]/],
+
+  inline: ($) => [
+    $.uppercase_words,
+  ],
 
   rules: {
     help_file: ($) =>
@@ -51,6 +57,17 @@ module.exports = grammar({
       // NOT argument: "{}".
       /\{\}/,
     ),
+
+    // First part (minus tags) of h3 or column_heading.
+    uppercase_name: () => seq(
+      token.immediate(_uppercase_word),  // No whitespace before heading.
+      repeat(_uppercase_word),
+    ),
+    // Line (plaintext) can start with uppercase words; don't flag as "invalid h3".
+    uppercase_words: ($) => prec.left(-1, seq(
+      alias(token.immediate(_uppercase_word), $.word),
+      alias(repeat(_uppercase_word), $.word),
+    )),
 
     // Text block/paragraph: adjacent lines followed by blank line(s).
     block: ($) => prec.right(seq(
@@ -111,10 +128,7 @@ module.exports = grammar({
         repeat(_blank()),
       ),
 
-    // Heading 3: UPPERCASE WORDS, followed by optional *tags*.
-    uppercase_name: () => seq(
-      token.immediate(/[A-Z0-9.()][-A-Z0-9.()_]+/),  // No whitespace before heading.
-      repeat(/[A-Z0-9.()][-A-Z0-9.()_]+/)),
+    // Heading 3: UPPERCASE NAME, followed by optional *tags*.
     h3: ($) =>
       seq(
         field('name', $.uppercase_name),
@@ -167,8 +181,9 @@ function _line($, require_eol) {
   const eol = require_eol ? '\n' : optional('\n');
   return choice(
     $.column_heading,
-    seq(repeat($._atom), $.codeblock),
-    seq(repeat1($._atom), choice($.codeblock, eol)));
+    seq(optional($.uppercase_words), repeat($._atom), $.codeblock),
+    seq(optional($.uppercase_words), repeat1($._atom), choice($.codeblock, eol)),
+  );
 }
 
 function _blank() {
