@@ -97,7 +97,7 @@ module.exports = grammar({
 
     h1: ($) =>
       seq(
-        field('delimiter', /[\t ]*============+[\t ]*\n/),
+        token.immediate(field('delimiter', /============+[\t ]*\n/)),
         repeat1($._atom),
         '\n',
         repeat(_blank()),
@@ -105,7 +105,7 @@ module.exports = grammar({
 
     h2: ($) =>
       seq(
-        field('delimiter', /[\t ]*------------+[\t ]*\n/),
+        token.immediate(field('delimiter', /------------+[\t ]*\n/)),
         repeat1($._atom),
         '\n',
         repeat(_blank()),
