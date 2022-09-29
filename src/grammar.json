@@ -180,6 +180,58 @@
         }
       ]
     },
+    "uppercase_name": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "IMMEDIATE_TOKEN",
+          "content": {
+            "type": "PATTERN",
+            "value": "[A-Z0-9.()][-A-Z0-9.()_]+"
+          }
+        },
+        {
+          "type": "REPEAT",
+          "content": {
+            "type": "PATTERN",
+            "value": "[A-Z0-9.()][-A-Z0-9.()_]+"
+          }
+        }
+      ]
+    },
+    "uppercase_words": {
+      "type": "PREC_LEFT",
+      "value": -1,
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "ALIAS",
+            "content": {
+              "type": "IMMEDIATE_TOKEN",
+              "content": {
+                "type": "PATTERN",
+                "value": "[A-Z0-9.()][-A-Z0-9.()_]+"
+              }
+            },
+            "named": true,
+            "value": "word"
+          },
+          {
+            "type": "ALIAS",
+            "content": {
+              "type": "REPEAT",
+              "content": {
+                "type": "PATTERN",
+                "value": "[A-Z0-9.()][-A-Z0-9.()_]+"
+              }
+            },
+            "named": true,
+            "value": "word"
+          }
+        ]
+      }
+    },
     "block": {
       "type": "PREC_RIGHT",
       "value": 0,
@@ -344,6 +396,18 @@
           "type": "SEQ",
           "members": [
             {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "uppercase_words"
+                },
+                {
+                  "type": "BLANK"
+                }
+              ]
+            },
+            {
               "type": "REPEAT",
               "content": {
                 "type": "SYMBOL",
@@ -359,6 +423,18 @@
         {
           "type": "SEQ",
           "members": [
+            {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "uppercase_words"
+                },
+                {
+                  "type": "BLANK"
+                }
+              ]
+            },
             {
               "type": "REPEAT1",
               "content": {
@@ -394,6 +470,18 @@
           "type": "SEQ",
           "members": [
             {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "uppercase_words"
+                },
+                {
+                  "type": "BLANK"
+                }
+              ]
+            },
+            {
               "type": "REPEAT",
               "content": {
                 "type": "SYMBOL",
@@ -409,6 +497,18 @@
         {
           "type": "SEQ",
           "members": [
+            {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "uppercase_words"
+                },
+                {
+                  "type": "BLANK"
+                }
+              ]
+            },
             {
               "type": "REPEAT1",
               "content": {
@@ -600,25 +700,6 @@
               "type": "PATTERN",
               "value": "[\\t ]*\\n"
             }
-          }
-        }
-      ]
-    },
-    "uppercase_name": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "IMMEDIATE_TOKEN",
-          "content": {
-            "type": "PATTERN",
-            "value": "[A-Z0-9.()][-A-Z0-9.()_]+"
-          }
-        },
-        {
-          "type": "REPEAT",
-          "content": {
-            "type": "PATTERN",
-            "value": "[A-Z0-9.()][-A-Z0-9.()_]+"
           }
         }
       ]
@@ -850,7 +931,9 @@
   "conflicts": [],
   "precedences": [],
   "externals": [],
-  "inline": [],
+  "inline": [
+    "uppercase_words"
+  ],
   "supertypes": []
 }
 
