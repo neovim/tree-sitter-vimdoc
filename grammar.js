@@ -1,3 +1,6 @@
+// https://tree-sitter.github.io/tree-sitter/creating-parsers
+// - Rules starting with underscore are hidden in the syntax tree.
+
 const _uppercase_word = /[A-Z0-9.()][-A-Z0-9.()_]+/;
 
 module.exports = grammar({
@@ -70,31 +73,34 @@ module.exports = grammar({
     )),
 
     // Text block/paragraph: adjacent lines followed by blank line(s).
-    block: ($) => prec.right(seq(
-        repeat1(choice($.line, $.line_li)),
-        repeat1(_blank()),
-      )
+    block: ($) => seq(
+      repeat1(choice($.line, $.line_li)),
+      choice(
+        token.immediate('<'),  // Eat codeblock terminating char.
+        $._blank),
+      repeat($._blank),
     ),
     // Special case: last block in the document may not end with blank line (nor even EOL).
-    block_end: ($) => prec.right(choice(
+    block_end: ($) => choice(
       choice(
         alias($.line_noeol, $.line),
         alias($.line_li_noeol, $.line_li)),
       seq(repeat1(choice($.line, $.line_li)),
         choice(
           alias($.line_noeol, $.line),
-          alias($.line_li_noeol, $.line_li))))
+          alias($.line_li_noeol, $.line_li)))
     ),
 
-    // Code block: preformatted lines delimited by ">" and "<".
+    // Codeblock: preformatted block of lines starting with ">".
     codeblock: ($) => prec.right(seq(
       />[\t ]*\n/,
       repeat1(alias($.line_code, $.line)),
-      // Code block ends if a line starts with "<" or a non-empty line starts with a visible char.
-      token.immediate(choice(/<[\t ]*\n/, /[^\t\n ]/)),
+      // Codeblock ends if a line starts with non-whitespace.
+      // The terminating "<" is consumed in other rules.
     )),
 
     // Lines.
+    _blank: () => field('blank', /[\t ]*\n/),
     line: ($) => _line($, true),
     line_noeol: ($) => _line($, false),
     // Listitem line.
@@ -102,7 +108,7 @@ module.exports = grammar({
     line_li_noeol: ($) => seq(/[-*+•][ ]+/, repeat1($._atom)),
     // Codeblock lines: must be indented by at least 1 space/tab.
     // Line content (incl. whitespace) is captured as a single atom.
-    line_code: () => choice('\n', seq(/[\t ]+[^\n]+/, /\n/)),
+    line_code: () => choice('\n', /[\t ]+[^\n]+\n/),
 
     // "Column heading": plaintext followed by "~".
     // Intended for table column names per `:help help-writing`.
@@ -117,7 +123,7 @@ module.exports = grammar({
         token.immediate(field('delimiter', /============+[\t ]*\n/)),
         repeat1($._atom),
         '\n',
-        repeat(_blank()),
+        repeat($._blank),
       ),
 
     h2: ($) =>
@@ -125,7 +131,7 @@ module.exports = grammar({
         token.immediate(field('delimiter', /------------+[\t ]*\n/)),
         repeat1($._atom),
         '\n',
-        repeat(_blank()),
+        repeat($._blank),
       ),
 
     // Heading 3: UPPERCASE NAME, followed by optional *tags*.
@@ -134,7 +140,7 @@ module.exports = grammar({
         field('name', $.uppercase_name),
         repeat($.tag),
         '\n',
-        repeat(_blank()),
+        repeat($._blank),
       ),
 
     tag: ($) => _word($,
@@ -184,8 +190,4 @@ function _line($, require_eol) {
     seq(optional($.uppercase_words), repeat($._atom), $.codeblock),
     seq(optional($.uppercase_words), repeat1($._atom), choice($.codeblock, eol)),
   );
-}
-
-function _blank() {
-  return field('blank', /[\t ]*\n/);
 }

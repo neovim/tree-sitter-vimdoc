@@ -28,7 +28,8 @@ block3:
       (word))
     (line
       (codeblock
-        (line)))
+        (line))))
+  (block
     (line
       (word)))
   (block
@@ -100,6 +101,9 @@ codeblock with implicit stop (FIXME)
 
 -------------------------------
 h1-headline *foo*
+line1
+
+line2
 
 -------------------------------
 h1-headline *foo*
@@ -118,7 +122,12 @@ h1-headline *foo*
     (line
       (word)
       (tag
-        (word))))
+        (word)))
+    (line
+      (word)))
+  (block
+    (line
+      (word)))
   (h2
     (word)
     (tag
@@ -155,7 +164,9 @@ x
         (line)
         (line)
         (line)
-        (line)))))
+        (line)))
+    (line
+      (word))))
 
 ================================================================================
 tricky codeblock
@@ -166,13 +177,33 @@ tricky codeblock
   < line3
 <
 
+    Example: >
+
+        vim.spell.check()
+        -->
+        {
+            {'quik', 'bad', 4}
+        }
+<
+
 tricky
+
 --------------------------------------------------------------------------------
 
 (help_file
   (block
     (line
       (codeblock
+        (line)
+        (line)
+        (line))))
+  (block
+    (line
+      (word)
+      (codeblock
+        (line)
+        (line)
+        (line)
         (line)
         (line)
         (line))))
@@ -242,4 +273,52 @@ To test for a non-empty string, use empty(): >
       (word)
       (word)
       (codeblock
+        (line)))))
+
+================================================================================
+codeblock stop and start on same line
+================================================================================
+    Examples: >
+        :lua vim.api.nvim_command('echo "Hello, Nvim!"')
+<    LuaJIT: >
+        :lua =jit.version
+<
+    *:lua-heredoc*
+:lua << [endmarker]
+{script}
+
+    Example: >
+        lua << EOF
+        EOF
+<
+
+--------------------------------------------------------------------------------
+
+(help_file
+  (block
+    (line
+      (word)
+      (codeblock
+        (line))))
+  (block
+    (line
+      (word)
+      (codeblock
+        (line))))
+  (block
+    (line
+      (tag
+        (word)))
+    (line
+      (word)
+      (word)
+      (word))
+    (line
+      (argument
+        (word))))
+  (block
+    (line
+      (word)
+      (codeblock
+        (line)
         (line)))))

@@ -43,7 +43,10 @@ NOT an argument
     (line
       (argument
         (word)
-        (ERROR))
+        (MISSING "}"))
+      (word)
+      (argument
+        (word))
       (word)
       (codespan
         (word))
