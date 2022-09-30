@@ -18,9 +18,6 @@ module.exports = grammar({
         repeat(/[\t ]*\n/),  // Eat whitespace at top of file.
         repeat(choice(
           $.block,
-          $.h1,
-          $.h2,
-          $.h3,
         )),
         // Last block may not be followed by a blank line or EOL.
         optional(alias($.block_end, $.block)),
@@ -123,7 +120,6 @@ module.exports = grammar({
         token.immediate(field('delimiter', /============+[\t ]*\n/)),
         repeat1($._atom),
         '\n',
-        repeat($._blank),
       ),
 
     h2: ($) =>
@@ -131,7 +127,6 @@ module.exports = grammar({
         token.immediate(field('delimiter', /------------+[\t ]*\n/)),
         repeat1($._atom),
         '\n',
-        repeat($._blank),
       ),
 
     // Heading 3: UPPERCASE NAME, followed by optional *tags*.
@@ -140,7 +135,6 @@ module.exports = grammar({
         field('name', $.uppercase_name),
         repeat($.tag),
         '\n',
-        repeat($._blank),
       ),
 
     tag: ($) => _word($,
@@ -187,6 +181,9 @@ function _line($, require_eol) {
   const eol = require_eol ? '\n' : optional('\n');
   return choice(
     $.column_heading,
+    $.h1,
+    $.h2,
+    $.h3,
     seq(optional($.uppercase_words), repeat($._atom), $.codeblock),
     seq(optional($.uppercase_words), repeat1($._atom), choice($.codeblock, eol)),
   );

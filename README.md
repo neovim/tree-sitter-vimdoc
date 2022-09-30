@@ -18,10 +18,13 @@ Overview
 - `block` is the main top-level node which contains `line` nodes.
   - ends at blank line(s) or a line starting with `<`.
 - `line`:
-  - contains atoms (words, tags, taglinks, …).
+  - contains atoms (words, tags, taglinks, …)
   - contains `codeblock` because `>` can start a codeblock at the end of a line.
+  - contains headings (`h1`, `h2`, `h3`) because `codeblock` terminated by
+    "implicit stop" (no terminating `<`) consumes blank lines, so `block` has
+    no way to end.
   - contains `column_heading` because `<` (the `codeblock` terminating char)
-    can appear at the start of a `column_heading`.
+    can appear at the start of `column_heading`.
 - `codeblock`:
   - contains `line` nodes which do not contain `word` nodes, it's just the full
     raw text line including whitespace. This is somewhat dictated by its
@@ -39,8 +42,6 @@ Known issues
 - Spec requires that `codeblock` delimiter ">" must be preceded by a space
   (" >"), not a tab. But currently the grammar doesn't enforce this. Example:
   `:help lcs-tab`.
-- `codeblock` terminated by an "implicit stop" (no terminating `<`) consumes
-  blank lines, preventing top-level forms like `h1` from being recognized.
 - `url` doesn't handle _surrounding_ parens. E.g. `(https://example.com/#yay)` yields `word`
 - `url` doesn't handle _nested_ parens. E.g. `(https://example.com/(foo)#yay)`
 
