@@ -2,30 +2,48 @@
 // - Rules starting with underscore are hidden in the syntax tree.
 
 const _uppercase_word = /[A-Z0-9.()][-A-Z0-9.()_]+/;
+const _li_token = /[-*+•][ ]+/;
 
 module.exports = grammar({
   name: 'help', // The actual language name is help
 
   extras: () => [/[\t ]/],
 
-  inline: ($) => [
-    $.uppercase_words,
-  ],
+  // inline: ($) => [
+  // ],
 
   rules: {
     help_file: ($) =>
       seq(
         repeat(/[\t ]*\n/),  // Eat whitespace at top of file.
-        repeat(choice(
-          $.block,
-        )),
-        // Last block may not be followed by a blank line or EOL.
-        optional(alias($.block_end, $.block)),
+        repeat($.block),
       ),
 
-    _atom: ($) =>
+    _atom: ($) => choice(
+      $.word,
+      $._atom_common
+    ),
+    word: ($) => choice(
+      // Try the more-restrictive pattern at higher relative precedence, so that things like
+      // "foo({a})" parse as "(word) (argument)" instead of "(word)".
+      token(prec(-1, /[^\n\t{ ][^\n\t ]*/)),
+      token(prec(-2, /[^\n\t ]+/)),
+      choice($._word_common),
+    ),
+
+    _atom_noli: ($) => prec(1, choice(
+      alias($.word_noli, $.word),
+      $._atom_common
+    )),
+    word_noli: ($) => prec(1, choice(
+      // Lines contained by line_li must not start with a listitem symbol.
+      token(prec(-1, /[^-*+•\n\t ][^\n\t ]*/)),
+      token(prec(-1, /[-*+•][^\n\t ]+/)),
+      choice($._word_common),
+    )),
+
+    _atom_common: ($) =>
       choice(
-        $.word,
         $.tag,
         $.url,
         $.optionlink,
@@ -34,14 +52,8 @@ module.exports = grammar({
         $.argument,
       ),
 
-    word: () => choice(
-      // Try the more-restrictive pattern at higher relative precedence, so that things like
-      // "foo({a})" parse as "(word) (argument)" instead of "(word)".
-      token(prec(-1, /[^\n\t~{ ]+/)),
-      token(prec(-2, /[^\n\t ]+/)),
-
-      // Special cases:
-      //
+    // Explicit special cases: these are plaintext, not errors.
+    _word_common: () => choice(
       // "|====|" and "|----|" are (plain text) table borders, not taglinks.
       /\|(([+=][+=][+=][+=]+)|([+-][+-][+-][+-]+))\|/,
       // NOT optionlink: single "'".
@@ -64,28 +76,22 @@ module.exports = grammar({
       repeat(_uppercase_word),
     ),
     // Line (plaintext) can start with uppercase words; don't flag as "invalid h3".
-    uppercase_words: ($) => prec.left(-1, seq(
+    _uppercase_words: ($) => prec.left(-1, seq(
       alias(token.immediate(_uppercase_word), $.word),
       alias(repeat(_uppercase_word), $.word),
     )),
 
     // Text block/paragraph: adjacent lines followed by blank line(s).
     block: ($) => seq(
-      repeat1(choice($.line, $.line_li)),
       choice(
-        token.immediate('<'),  // Eat codeblock terminating char.
+        repeat1($.line),
+        repeat1($.line_li),
+        seq(repeat1($.line), repeat1($.line_li)),
+      ),
+      choice(
+        token.immediate('<'),  // Treat codeblock-terminating "<" as whitespace.
         $._blank),
       repeat($._blank),
-    ),
-    // Special case: last block in the document may not end with blank line (nor even EOL).
-    block_end: ($) => choice(
-      choice(
-        alias($.line_noeol, $.line),
-        alias($.line_li_noeol, $.line_li)),
-      seq(repeat1(choice($.line, $.line_li)),
-        choice(
-          alias($.line_noeol, $.line),
-          alias($.line_li_noeol, $.line_li)))
     ),
 
     // Codeblock: preformatted block of lines starting with ">".
@@ -93,27 +99,47 @@ module.exports = grammar({
       />[\t ]*\n/,
       repeat1(alias($.line_code, $.line)),
       // Codeblock ends if a line starts with non-whitespace.
-      // The terminating "<" is consumed in other rules.
+      // Terminating "<" is consumed in other rules.
     )),
 
     // Lines.
     _blank: () => field('blank', /[\t ]*\n/),
-    line: ($) => _line($, true),
-    line_noeol: ($) => _line($, false),
-    // Listitem line.
-    line_li: ($) => seq(/[-*+•][ ]+/, repeat1($._atom), '\n'),
-    line_li_noeol: ($) => seq(/[-*+•][ ]+/, repeat1($._atom)),
+    line: ($) => choice(
+      $.column_heading,
+      $.h1,
+      $.h2,
+      $.h3,
+      $.codeblock,
+      $._line_noli,
+    ),
+    // Listitem line: consumes "*" line and all adjacent non-list lines.
+    line_li: ($) => prec.right(1, seq(
+      optional(token.immediate('<')),  // Treat codeblock-terminating "<" as whitespace.
+      _li_token,
+      choice(
+        alias(seq(repeat1($._atom), '\n'), $.line),
+        seq(alias(repeat1($._atom), $.line), $.codeblock),
+      ),
+      repeat(alias($._line_noli, $.line)),
+    )),
     // Codeblock lines: must be indented by at least 1 space/tab.
     // Line content (incl. whitespace) is captured as a single atom.
     line_code: () => choice('\n', /[\t ]+[^\n]+\n/),
+    _line_noli: ($) => seq(
+      choice($._atom_noli, $._uppercase_words),
+      repeat($._atom),
+      choice($.codeblock, '\n')
+    ),
 
     // "Column heading": plaintext followed by "~".
     // Intended for table column names per `:help help-writing`.
-    column_heading: ($) =>
-      seq(
-        field('name', choice($.uppercase_name, repeat1($._atom))),  // TODO: should be $.word (plaintext).
+    column_heading: ($) => seq(
+      field('name', seq(choice($._atom_noli, $._uppercase_words), repeat($._atom))),  // TODO: should be $.word (plaintext).
+      choice(
+        token.immediate(/~[\t ]*\n/),
         /~[\t ]*\n/,
       ),
+    ),
 
     h1: ($) =>
       seq(
@@ -150,22 +176,13 @@ module.exports = grammar({
     ),
 
     // Link to option: 'foo'. Lowercase non-digit ASCII, minimum 2 chars. #14
-    optionlink: ($) => _word($,
-      // Option name without surrounding "'".
-      /[a-z][a-z]+/,
-      "'", "'"),
+    optionlink: ($) => _word($, /[a-z][a-z]+/, "'", "'"),
     // Link to tag: |foo|
-    taglink: ($) => _word($,
-      /[^|\n\t ]+/,
-      '|', '|'),
+    taglink: ($) => _word($, /[^|\n\t ]+/, '|', '|'),
     // Inline code (may contain whitespace!): `foo bar`
-    codespan: ($) => _word($,
-      /[^``\n]+/,
-      '`', '`'),
+    codespan: ($) => _word($, /[^``\n]+/, '`', '`'),
     // Argument: {arg}
-    argument: ($) => _word($,
-      /[^{}\n\t ]+/,
-      '{', '}'),
+    argument: ($) => _word($, /[^{}\n\t ]+/, '{', '}'),
   },
 });
 
@@ -175,16 +192,4 @@ module.exports = grammar({
 function _word($, word_regex, c1, c2, fname) {
   fname = fname ?? 'text';
   return seq(c1, field(fname, alias(token.immediate(word_regex), $.word)), token.immediate(c2));
-}
-
-function _line($, require_eol) {
-  const eol = require_eol ? '\n' : optional('\n');
-  return choice(
-    $.column_heading,
-    $.h1,
-    $.h2,
-    $.h3,
-    seq(optional($.uppercase_words), repeat($._atom), $.codeblock),
-    seq(optional($.uppercase_words), repeat1($._atom), choice($.codeblock, eol)),
-  );
 }

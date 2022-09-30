@@ -5,8 +5,10 @@ HELLO
 
 Test
 
-GUI ~
+GUI COOL ~
 Text
+
+
 --------------------------------------------------------------------------------
 
 (help_file
@@ -20,7 +22,8 @@ Text
   (block
     (line
       (column_heading
-        (uppercase_name)))
+        (word)
+        (word)))
     (line
       (word))))
 
@@ -30,6 +33,8 @@ h3 (uppercase) heading, multiple words
 HELLO WORLD
 
   LEADING-SPACE-NOT-A-HEADING
+
+
 --------------------------------------------------------------------------------
 
 (help_file
@@ -47,6 +52,8 @@ h3 heading with tag
 HELLO WORLD        *abc*
 
 Test
+
+
 --------------------------------------------------------------------------------
 
 (help_file
@@ -63,9 +70,11 @@ Test
 ================================================================================
 column_heading lowercase
 ================================================================================
-Test~
+test-Test ~
 
 Below
+
+
 --------------------------------------------------------------------------------
 
 (help_file
@@ -78,17 +87,35 @@ Below
       (word))))
 
 ================================================================================
+column_heading no space before tilde (FIXME)
+================================================================================
+test~
+
+Below
+
+
+--------------------------------------------------------------------------------
+
+(help_file
+  (block
+    (line
+      (word)))
+  (block
+    (line
+      (word))))
+
+================================================================================
 column_heading with multiple words
 ================================================================================
-Multiple words~
-
-text
+Multiple words ~
 
 nvim_ui_try_resize({width}, {height})                   *nvim_ui_try_resize()*
     TODO: Documentation
 
     Attributes: ~
         |RPC| only
+
+
 --------------------------------------------------------------------------------
 
 (help_file
@@ -97,9 +124,6 @@ nvim_ui_try_resize({width}, {height})                   *nvim_ui_try_resize()*
       (column_heading
         (word)
         (word))))
-  (block
-    (line
-      (word)))
   (block
     (line
       (word)
@@ -131,6 +155,7 @@ column_heading should NOT parse atoms (links, tags, etc.) (FIXME)
 <			'quik', 'bad' ~
 
     Text.
+
 
 --------------------------------------------------------------------------------
 
@@ -164,6 +189,7 @@ ABC not-h3
    `/foo/bar`-and-`/abc`.
 5. PRODUCT of 3.
    ...`/lua`-path,-leaving:
+
 
 --------------------------------------------------------------------------------
 
@@ -208,12 +234,12 @@ NOT column_heading
 ================================================================================
 tilde ~/foo/bar foo~ bar
 
+
 --------------------------------------------------------------------------------
 
 (help_file
   (block
     (line
-      (word)
       (word)
       (word)
       (word)
