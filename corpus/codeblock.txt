@@ -28,7 +28,8 @@ block3:
       (word))
     (line
       (codeblock
-        (line)))
+        (line))))
+  (block
     (line
       (word)))
   (block
@@ -92,17 +93,28 @@ text
       (word))))
 
 ================================================================================
-codeblock with implicit stop (FIXME)
+codeblock with implicit stop
 ================================================================================
 >
   line1
   line2
 
--------------------------------
+===============================
 h1-headline *foo*
+line1
+
+line2
+
+>
+  line1
 
 -------------------------------
-h1-headline *foo*
+h2-headline *foo*
+
+>
+  line1
+
+H3 HEADLINE *foo*
 
 --------------------------------------------------------------------------------
 
@@ -114,15 +126,35 @@ h1-headline *foo*
         (line)
         (line)))
     (line
-      (word))
+      (h1
+        (word)
+        (tag
+          (word))))
     (line
-      (word)
-      (tag
-        (word))))
-  (h2
-    (word)
-    (tag
-      (word))))
+      (word)))
+  (block
+    (line
+      (word)))
+  (block
+    (line
+      (codeblock
+        (line)
+        (line)))
+    (line
+      (h2
+        (word)
+        (tag
+          (word)))))
+  (block
+    (line
+      (codeblock
+        (line)
+        (line)))
+    (line
+      (h3
+        (uppercase_name)
+        (tag
+          (word))))))
 
 ================================================================================
 codeblock with empty lines
@@ -155,7 +187,9 @@ x
         (line)
         (line)
         (line)
-        (line)))))
+        (line)))
+    (line
+      (word))))
 
 ================================================================================
 tricky codeblock
@@ -166,13 +200,33 @@ tricky codeblock
   < line3
 <
 
+    Example: >
+
+        vim.spell.check()
+        -->
+        {
+            {'quik', 'bad', 4}
+        }
+<
+
 tricky
+
 --------------------------------------------------------------------------------
 
 (help_file
   (block
     (line
       (codeblock
+        (line)
+        (line)
+        (line))))
+  (block
+    (line
+      (word)
+      (codeblock
+        (line)
+        (line)
+        (line)
         (line)
         (line)
         (line))))
@@ -242,4 +296,52 @@ To test for a non-empty string, use empty(): >
       (word)
       (word)
       (codeblock
+        (line)))))
+
+================================================================================
+codeblock stop and start on same line
+================================================================================
+    Examples: >
+        :lua vim.api.nvim_command('echo "Hello, Nvim!"')
+<    LuaJIT: >
+        :lua =jit.version
+<
+    *:lua-heredoc*
+:lua << [endmarker]
+{script}
+
+    Example: >
+        lua << EOF
+        EOF
+<
+
+--------------------------------------------------------------------------------
+
+(help_file
+  (block
+    (line
+      (word)
+      (codeblock
+        (line))))
+  (block
+    (line
+      (word)
+      (codeblock
+        (line))))
+  (block
+    (line
+      (tag
+        (word)))
+    (line
+      (word)
+      (word)
+      (word))
+    (line
+      (argument
+        (word))))
+  (block
+    (line
+      (word)
+      (codeblock
+        (line)
         (line)))))

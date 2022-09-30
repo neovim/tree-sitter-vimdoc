@@ -15,20 +15,24 @@ Text2
 --------------------------------------------------------------------------------
 
 (help_file
-  (h1
-    (word)
-    (tag
-      (word)))
+  (block
+    (line
+      (h1
+        (word)
+        (tag
+          (word)))))
   (block
     (line
       (word)))
-  (h2
-    (word)
-    (word)
-    (tag
-      (word))
-    (tag
-      (word)))
+  (block
+    (line
+      (h2
+        (word)
+        (word)
+        (tag
+          (word))
+        (tag
+          (word)))))
   (block
     (line
       (word))))
@@ -50,19 +54,23 @@ Text
 --------------------------------------------------------------------------------
 
 (help_file
-  (h1
-    (tag
-      (word))
-    (word)
-    (word))
+  (block
+    (line
+      (h1
+        (tag
+          (word))
+        (word)
+        (word))))
   (block
     (line
       (word)))
-  (h2
-    (tag
-      (word))
-    (word)
-    (word))
+  (block
+    (line
+      (h2
+        (tag
+          (word))
+        (word)
+        (word))))
   (block
     (line
       (word))))

@@ -10,8 +10,10 @@ Text
 --------------------------------------------------------------------------------
 
 (help_file
-  (h3
-    (uppercase_name))
+  (block
+    (line
+      (h3
+        (uppercase_name))))
   (block
     (line
       (word)))
@@ -31,8 +33,10 @@ HELLO WORLD
 --------------------------------------------------------------------------------
 
 (help_file
-  (h3
-    (uppercase_name))
+  (block
+    (line
+      (h3
+        (uppercase_name))))
   (block
     (line
       (word))))
@@ -46,10 +50,12 @@ Test
 --------------------------------------------------------------------------------
 
 (help_file
-  (h3
-    (uppercase_name)
-    (tag
-      (word)))
+  (block
+    (line
+      (h3
+        (uppercase_name)
+        (tag
+          (word)))))
   (block
     (line
       (word))))
@@ -133,7 +139,8 @@ column_heading should NOT parse atoms (links, tags, etc.) (FIXME)
     (line
       (word)
       (codeblock
-        (line)))
+        (line))))
+  (block
     (line
       (column_heading
         (optionlink
