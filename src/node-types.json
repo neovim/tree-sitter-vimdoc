@@ -224,18 +224,6 @@
         {
           "type": "block",
           "named": true
-        },
-        {
-          "type": "h1",
-          "named": true
-        },
-        {
-          "type": "h2",
-          "named": true
-        },
-        {
-          "type": "h3",
-          "named": true
         }
       ]
     }
@@ -262,6 +250,18 @@
         },
         {
           "type": "column_heading",
+          "named": true
+        },
+        {
+          "type": "h1",
+          "named": true
+        },
+        {
+          "type": "h2",
+          "named": true
+        },
+        {
+          "type": "h3",
           "named": true
         },
         {
@@ -410,6 +410,10 @@
   },
   {
     "type": "*",
+    "named": false
+  },
+  {
+    "type": "<",
     "named": false
   },
   {
