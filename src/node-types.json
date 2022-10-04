@@ -94,10 +94,6 @@
             "named": true
           },
           {
-            "type": "uppercase_name",
-            "named": true
-          },
-          {
             "type": "url",
             "named": true
           },
@@ -296,31 +292,11 @@
       "required": true,
       "types": [
         {
-          "type": "argument",
+          "type": "codeblock",
           "named": true
         },
         {
-          "type": "codespan",
-          "named": true
-        },
-        {
-          "type": "optionlink",
-          "named": true
-        },
-        {
-          "type": "tag",
-          "named": true
-        },
-        {
-          "type": "taglink",
-          "named": true
-        },
-        {
-          "type": "url",
-          "named": true
-        },
-        {
-          "type": "word",
+          "type": "line",
           "named": true
         }
       ]
@@ -406,6 +382,10 @@
   },
   {
     "type": "'",
+    "named": false
+  },
+  {
+    "type": "(",
     "named": false
   },
   {
