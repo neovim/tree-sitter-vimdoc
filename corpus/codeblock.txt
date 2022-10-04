@@ -16,6 +16,8 @@ block3:
 <
 
   text
+
+
 --------------------------------------------------------------------------------
 
 (help_file
@@ -62,6 +64,7 @@ From luaref.txt:
 
 text
 
+
 --------------------------------------------------------------------------------
 
 (help_file
@@ -79,6 +82,7 @@ text
       (word)))
   (block
     (line
+      (word)
       (word)
       (taglink
         (word))
@@ -115,6 +119,7 @@ h2-headline *foo*
   line1
 
 H3 HEADLINE *foo*
+
 
 --------------------------------------------------------------------------------
 
@@ -162,8 +167,8 @@ codeblock with empty lines
 
 Example: >
 
-    let buf = nvim_create_buf(v:false, v:true)
-    call nvim_buf_set_lines(buf, 0, -1, v:true, ["test", "text"])
+    - let buf = nvim_create_buf(v:false, v:true)
+    - call nvim_buf_set_lines(buf, 0, -1, v:true, ["test", "text"])
 
     let opts = {'relative': 'cursor', 'width': 10, 'height': 2, 'col': 0,
         \ 'row': 1, 'anchor': 'NW', 'style': 'minimal'}
@@ -171,6 +176,7 @@ Example: >
     let win = nvim_open_win(buf, 0, opts)
     call nvim_win_set_option(win, 'winhl', 'Normal:MyHighlight')
 x
+
 
 --------------------------------------------------------------------------------
 
@@ -211,6 +217,7 @@ tricky codeblock
 
 tricky
 
+
 --------------------------------------------------------------------------------
 
 (help_file
@@ -237,7 +244,6 @@ tricky
 ================================================================================
 strange codeblock
 ================================================================================
-
 Note that in the command: >
 	:if "foo"
 	:" NOT executed
@@ -287,6 +293,7 @@ To test for a non-empty string, use empty(): >
         (line)
         (line)))
     (line
+      (word)
       (word)
       (word)
       (word)

@@ -1,8 +1,8 @@
 ================================================================================
 line: basic
 ================================================================================
-
      a foo bar
+
 
 --------------------------------------------------------------------------------
 
@@ -14,7 +14,7 @@ line: basic
       (word))))
 
 ================================================================================
-blocks: no blank line (EOL) at end of document
+blocks: missing EOL at end of document
 ================================================================================
 block1 text text
 text text
@@ -24,6 +24,7 @@ block2 text
 block3 text text
 text text
 text text text text
+
 --------------------------------------------------------------------------------
 
 (help_file
@@ -51,7 +52,8 @@ text text text text
       (word)
       (word)
       (word)
-      (word))))
+      (word))
+    (MISSING "help_file_token1")))
 
 ================================================================================
 blocks: with blank line at end of document
@@ -60,6 +62,7 @@ block1 text text
 
 block2 text text
 
+
 --------------------------------------------------------------------------------
 
 (help_file
@@ -75,42 +78,211 @@ block2 text text
       (word))))
 
 ================================================================================
-list block, listitems
+listitems
 ================================================================================
 * list1.a item1
-  * list1.b item1
-  * list1.b item2
-    item2 line2
-* list1.a item2 ~/foo/bar.txt
+  * - •
+  • word,
+    !foo! ~bar. word word
+    'item' line3 |foo|
+* x 'list1.a' ~/foo/bar.txt
+li continues
+  * {nested} here
 
-* list2 item 1
-* list2 item 1
+* 'list2' item w3
+  * *nested_li* word *tag2*
+* list2 item w3
+  * nested_li-2
+    foo
+    foo
+
+
 --------------------------------------------------------------------------------
 
 (help_file
   (block
     (line_li
-      (word)
-      (word))
+      (line
+        (word)
+        (word))
+      (line))
     (line_li
-      (word)
-      (word))
+      (line
+        (word)
+        (word))
+      (line))
     (line_li
-      (word)
-      (word))
-    (line
-      (word)
-      (word))
+      (line
+        (word))
+      (line)
+      (line
+        (word)
+        (word)
+        (word)
+        (word))
+      (line
+        (optionlink
+          (word))
+        (word)
+        (taglink
+          (word))))
     (line_li
-      (word)
-      (word)
-      (word)))
+      (line
+        (word)
+        (word)
+        (word))
+      (line)
+      (line
+        (word)
+        (word)))
+    (line_li
+      (line
+        (argument
+          (word))
+        (word))
+      (line)))
   (block
     (line_li
-      (word)
-      (word)
+      (line
+        (word)
+        (word)
+        (word))
+      (line))
+    (line_li
+      (line
+        (tag
+          (word))
+        (word)
+        (tag
+          (word)))
+      (line))
+    (line_li
+      (line
+        (word)
+        (word)
+        (word))
+      (line))
+    (line_li
+      (line
+        (word))
+      (line)
+      (line
+        (word))
+      (line
+        (word)))))
+
+================================================================================
+listitem with codeblock
+================================================================================
+
+* list1.a item1 >
+  foo
+< * list1.b item1
+* w1 w2
+  w3 >
+  code1 {
+    code2
+  }
+<* w1
+* w2 w3
+    `item2` line2
+    {item2} line3
+
+
+--------------------------------------------------------------------------------
+
+(help_file
+  (block
+    (line_li
+      (line
+        (word)
+        (word))
+      (codeblock
+        (line)))
+    (line_li
+      (line
+        (word)
+        (word))
+      (line))
+    (line_li
+      (line
+        (word)
+        (word))
+      (line)
+      (line
+        (word)
+        (codeblock
+          (line)
+          (line)
+          (line))))
+    (line_li
+      (line
+        (word))
+      (line))
+    (line_li
+      (line
+        (word)
+        (word))
+      (line)
+      (line
+        (codespan
+          (word))
+        (word))
+      (line
+        (argument
+          (word))
+        (word)))))
+
+================================================================================
+listitems + lines without blank lines
+================================================================================
+
+  {lines}   |readfile()|-style
+  {type}    behavior:
+            • "b" |blockwise-visual|
+            • "c" |charwise|
+            • "l" |linewise|
+            • "listitem"
+  {consumes} adjacent
+
+
+--------------------------------------------------------------------------------
+
+(help_file
+  (block
+    (line
+      (argument
+        (word))
+      (taglink
+        (word))
+      (word))
+    (line
+      (argument
+        (word))
       (word))
     (line_li
-      (word)
-      (word)
-      (word))))
+      (line
+        (word)
+        (taglink
+          (word)))
+      (line))
+    (line_li
+      (line
+        (word)
+        (taglink
+          (word)))
+      (line))
+    (line_li
+      (line
+        (word)
+        (taglink
+          (word)))
+      (line))
+    (line_li
+      (line
+        (word))
+      (line)
+      (line
+        (argument
+          (word))
+        (word)))))

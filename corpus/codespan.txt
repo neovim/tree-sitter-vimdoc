@@ -4,6 +4,7 @@ simple codespan
 
 a `foobar` b `:echo`
 
+
 --------------------------------------------------------------------------------
 
 (help_file
@@ -22,6 +23,7 @@ codespan in text
 
 Hello `world`, I am `markup language`. But `this is
 an error`.
+
 
 --------------------------------------------------------------------------------
 
@@ -52,6 +54,7 @@ NOT codespan
 				*g'* *g'a* *g`* *g`a*
 g'{mark}  g`{mark}
 
+
 --------------------------------------------------------------------------------
 
 (help_file
@@ -76,8 +79,4 @@ g'{mark}  g`{mark}
         (word)))
     (line
       (word)
-      (argument
-        (word))
-      (word)
-      (argument
-        (word)))))
+        (word))))
