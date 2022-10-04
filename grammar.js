@@ -1,3 +1,9 @@
+// https://tree-sitter.github.io/tree-sitter/creating-parsers#conflicting-tokens
+// - Match Specificity: Tree-sitter will prefer a token that is specified in
+//   the grammar as a String instead of a RegExp.
+// - Rule Order: Tree-sitter will prefer the token that appears earlier in the
+//   grammar.
+//
 // https://tree-sitter.github.io/tree-sitter/creating-parsers
 // - Rules starting with underscore are hidden in the syntax tree.
 
@@ -50,6 +56,7 @@ module.exports = grammar({
         $.taglink,
         $.codespan,
         $.argument,
+        $.keycode,
       ),
 
     // Explicit special cases: these are plaintext, not errors.
@@ -69,6 +76,17 @@ module.exports = grammar({
       /\{\{+[0-9]*/,
       '(',
       /\w+\(/,
+    ),
+
+    keycode: () => choice(
+      /<[-a-zA-Z0-9_]+>/,
+      /<[SCMAD]-.>/,
+      /CTRL-./,
+      /CTRL-SHIFT-./,
+      /CTRL-(Break|PageUp|PageDown|Insert|Del)/,
+      /CTRL-\{char\}/,
+      /META-./,
+      /ALT-./,
     ),
 
     // First part (minus tags) of h3 or column_heading.
