@@ -99,9 +99,13 @@ x `after_codespan`'s
   (ERROR)
   (block
     (line
-      (codespan
+      (argument
         (word))
-      (ERROR))))
+      (word))
+    (ERROR
+      (word)
+      (codespan
+        (word)))))
 
 ================================================================================
 NOT optionlink 3 (FIXME)
@@ -116,6 +120,8 @@ foo '"\ '.  Notice
   (block
     (line
       (word)
-      (word
-        (ERROR)
-        (MISSING "'")))))
+      (ERROR)
+      (word))
+    (line
+      (taglink
+        (word)))))

@@ -137,10 +137,7 @@ module.exports = grammar({
     // TODO: children should be $.word (plaintext), not $.atom.
     column_heading: ($) => seq(
       field('name', seq(choice($._atom_noli, $._uppercase_words), repeat($._atom))),
-      choice(
-        token.immediate(/~[\t ]*\n/),
-        /~[\t ]*\n/,
-      ),
+      /~\n/,
     ),
 
     h1: ($) =>
