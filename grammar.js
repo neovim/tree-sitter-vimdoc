@@ -54,8 +54,6 @@ module.exports = grammar({
 
     // Explicit special cases: these are plaintext, not errors.
     _word_common: () => choice(
-      // "|====|" and "|----|" are (plain text) table borders, not taglinks.
-      /\|(([+=][+=][+=][+=]+)|([+-][+-][+-][+-]+))\|/,
       // NOT optionlink: single "'".
       /[\t ]'[\t ]/,
       // NOT optionlink: contains any non-lowercase char.
@@ -115,7 +113,7 @@ module.exports = grammar({
       $.codeblock,
       $._line_noli,
     ),
-    // Listitem line: consumes "*" line and all adjacent non-list lines.
+    // Listitem: consumes prefixed line and all adjacent non-prefixed lines.
     line_li: ($) => prec.right(1, seq(
       optional(token.immediate('<')),  // Treat codeblock-terminating "<" as whitespace.
       _li_token,
@@ -136,8 +134,9 @@ module.exports = grammar({
 
     // "Column heading": plaintext followed by "~".
     // Intended for table column names per `:help help-writing`.
+    // TODO: children should be $.word (plaintext), not $.atom.
     column_heading: ($) => seq(
-      field('name', seq(choice($._atom_noli, $._uppercase_words), repeat($._atom))),  // TODO: should be $.word (plaintext).
+      field('name', seq(choice($._atom_noli, $._uppercase_words), repeat($._atom))),
       choice(
         token.immediate(/~[\t ]*\n/),
         /~[\t ]*\n/,
