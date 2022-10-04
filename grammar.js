@@ -68,6 +68,7 @@ module.exports = grammar({
       /\|\|*/,
       // NOT argument: "{}".
       /\{\}/,
+      /\{\{+[0-9]*/,
       '(',
       /\w+\(/,
     ),
