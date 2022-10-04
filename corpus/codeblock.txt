@@ -83,6 +83,7 @@ text
   (block
     (line
       (word)
+      (word)
       (taglink
         (word))
       (word))
@@ -243,7 +244,6 @@ tricky
 ================================================================================
 strange codeblock
 ================================================================================
-
 Note that in the command: >
 	:if "foo"
 	:" NOT executed
@@ -293,6 +293,7 @@ To test for a non-empty string, use empty(): >
         (line)
         (line)))
     (line
+      (word)
       (word)
       (word)
       (word)

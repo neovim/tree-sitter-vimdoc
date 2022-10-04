@@ -79,8 +79,4 @@ g'{mark}  g`{mark}
         (word)))
     (line
       (word)
-      (argument
-        (word))
-      (word)
-      (argument
-        (word)))))
+        (word))))

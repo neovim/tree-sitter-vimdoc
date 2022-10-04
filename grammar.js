@@ -68,6 +68,8 @@ module.exports = grammar({
       /\|\|*/,
       // NOT argument: "{}".
       /\{\}/,
+      '(',
+      /\w+\(/,
     ),
 
     // First part (minus tags) of h3 or column_heading.

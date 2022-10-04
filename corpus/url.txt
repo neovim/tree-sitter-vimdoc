@@ -30,13 +30,14 @@ x (https://neovim.io/doc/user/#yay) https://neovim.io/doc/user/#yay
       (word)
       (word)
       (url
+        (word))
+      (word)
+      (url
         (word)))))
 
 ================================================================================
 url with parens (FIXME)
 ================================================================================
-text
-
 url: (https://neovim.io/doc/user/(foo)#yay)
 markdown: [https://neovim.io/doc/user/#yay](https://neovim.io/doc/user/#yay).
 
@@ -46,10 +47,10 @@ markdown: [https://neovim.io/doc/user/#yay](https://neovim.io/doc/user/#yay).
 (help_file
   (block
     (line
-      (word)))
-  (block
-    (line
       (word)
+      (word)
+      (url
+        (word))
       (word))
     (line
       (word)
