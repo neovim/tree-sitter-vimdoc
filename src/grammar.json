@@ -157,16 +157,16 @@
         {
           "type": "SYMBOL",
           "name": "argument"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "keycode"
         }
       ]
     },
     "_word_common": {
       "type": "CHOICE",
       "members": [
-        {
-          "type": "PATTERN",
-          "value": "\\|(([+=][+=][+=][+=]+)|([+-][+-][+-][+-]+))\\|"
-        },
         {
           "type": "PATTERN",
           "value": "[\\t ]'[\\t ]"
@@ -230,12 +230,53 @@
           "value": "\\{\\}"
         },
         {
+          "type": "PATTERN",
+          "value": "\\{\\{+[0-9]*"
+        },
+        {
           "type": "STRING",
           "value": "("
         },
         {
           "type": "PATTERN",
           "value": "\\w+\\("
+        }
+      ]
+    },
+    "keycode": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "PATTERN",
+          "value": "<[-a-zA-Z0-9_]+>"
+        },
+        {
+          "type": "PATTERN",
+          "value": "<[SCMAD]-.>"
+        },
+        {
+          "type": "PATTERN",
+          "value": "CTRL-."
+        },
+        {
+          "type": "PATTERN",
+          "value": "CTRL-SHIFT-."
+        },
+        {
+          "type": "PATTERN",
+          "value": "CTRL-(Break|PageUp|PageDown|Insert|Del)"
+        },
+        {
+          "type": "PATTERN",
+          "value": "CTRL-\\{char\\}"
+        },
+        {
+          "type": "PATTERN",
+          "value": "META-."
+        },
+        {
+          "type": "PATTERN",
+          "value": "ALT-."
         }
       ]
     },
@@ -590,20 +631,8 @@
           }
         },
         {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "IMMEDIATE_TOKEN",
-              "content": {
-                "type": "PATTERN",
-                "value": "~[\\t ]*\\n"
-              }
-            },
-            {
-              "type": "PATTERN",
-              "value": "~[\\t ]*\\n"
-            }
-          ]
+          "type": "PATTERN",
+          "value": "~\\n"
         }
       ]
     },

@@ -82,6 +82,10 @@
             "named": true
           },
           {
+            "type": "keycode",
+            "named": true
+          },
+          {
             "type": "optionlink",
             "named": true
           },
@@ -122,6 +126,10 @@
           "named": true
         },
         {
+          "type": "keycode",
+          "named": true
+        },
+        {
           "type": "optionlink",
           "named": true
         },
@@ -158,6 +166,10 @@
         },
         {
           "type": "codespan",
+          "named": true
+        },
+        {
+          "type": "keycode",
           "named": true
         },
         {
@@ -225,6 +237,11 @@
     }
   },
   {
+    "type": "keycode",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "line",
     "named": true,
     "fields": {},
@@ -258,6 +275,10 @@
         },
         {
           "type": "h3",
+          "named": true
+        },
+        {
+          "type": "keycode",
           "named": true
         },
         {

@@ -17,6 +17,11 @@ taglink in text
 ================================================================================
 Hello |world| hello
 
+|-+|	+[num]	line
+|-e|	-e	Ex
+|-|	-	minus
+
+
 
 --------------------------------------------------------------------------------
 
@@ -26,6 +31,22 @@ Hello |world| hello
       (word)
       (taglink
         (word))
+      (word)))
+  (block
+    (line
+      (taglink
+        (word))
+      (word)
+      (word))
+    (line
+      (taglink
+        (word))
+      (word)
+      (word))
+    (line
+      (taglink
+        (word))
+      (word)
       (word))))
 
 ================================================================================
@@ -78,8 +99,10 @@ Note: ":autocmd" can...
       (word))
     (line
       (word)
-      (word)
-      (word)))
+      (taglink
+        (word))
+      (taglink
+        (word))))
   (block
     (line_li
       (line

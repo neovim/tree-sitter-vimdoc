@@ -55,6 +55,11 @@ NOT an argument
 ================================================================================
 {foo "{bar}" `{baz}` |{baz| } {}
 
+===============
+3. Netrw *netrw-ref* {{{1
+
+EXTERNAL *netrw-externapp* {{{2
+
 
 --------------------------------------------------------------------------------
 
@@ -70,4 +75,19 @@ NOT an argument
       (taglink
         (word))
       (word)
-      (word))))
+      (word)))
+  (block
+    (line
+      (h1
+        (word)
+        (word)
+        (tag
+          (word))
+        (word))))
+  (block
+    (line
+      (h3
+        (uppercase_name)
+        (tag
+          (word))
+        (ERROR)))))

@@ -1,3 +1,9 @@
+// https://tree-sitter.github.io/tree-sitter/creating-parsers#conflicting-tokens
+// - Match Specificity: Tree-sitter will prefer a token that is specified in
+//   the grammar as a String instead of a RegExp.
+// - Rule Order: Tree-sitter will prefer the token that appears earlier in the
+//   grammar.
+//
 // https://tree-sitter.github.io/tree-sitter/creating-parsers
 // - Rules starting with underscore are hidden in the syntax tree.
 
@@ -50,12 +56,11 @@ module.exports = grammar({
         $.taglink,
         $.codespan,
         $.argument,
+        $.keycode,
       ),
 
     // Explicit special cases: these are plaintext, not errors.
     _word_common: () => choice(
-      // "|====|" and "|----|" are (plain text) table borders, not taglinks.
-      /\|(([+=][+=][+=][+=]+)|([+-][+-][+-][+-]+))\|/,
       // NOT optionlink: single "'".
       /[\t ]'[\t ]/,
       // NOT optionlink: contains any non-lowercase char.
@@ -68,8 +73,20 @@ module.exports = grammar({
       /\|\|*/,
       // NOT argument: "{}".
       /\{\}/,
+      /\{\{+[0-9]*/,
       '(',
       /\w+\(/,
+    ),
+
+    keycode: () => choice(
+      /<[-a-zA-Z0-9_]+>/,
+      /<[SCMAD]-.>/,
+      /CTRL-./,
+      /CTRL-SHIFT-./,
+      /CTRL-(Break|PageUp|PageDown|Insert|Del)/,
+      /CTRL-\{char\}/,
+      /META-./,
+      /ALT-./,
     ),
 
     // First part (minus tags) of h3 or column_heading.
@@ -114,7 +131,7 @@ module.exports = grammar({
       $.codeblock,
       $._line_noli,
     ),
-    // Listitem line: consumes "*" line and all adjacent non-list lines.
+    // Listitem: consumes prefixed line and all adjacent non-prefixed lines.
     line_li: ($) => prec.right(1, seq(
       optional(token.immediate('<')),  // Treat codeblock-terminating "<" as whitespace.
       _li_token,
@@ -135,12 +152,10 @@ module.exports = grammar({
 
     // "Column heading": plaintext followed by "~".
     // Intended for table column names per `:help help-writing`.
+    // TODO: children should be $.word (plaintext), not $.atom.
     column_heading: ($) => seq(
-      field('name', seq(choice($._atom_noli, $._uppercase_words), repeat($._atom))),  // TODO: should be $.word (plaintext).
-      choice(
-        token.immediate(/~[\t ]*\n/),
-        /~[\t ]*\n/,
-      ),
+      field('name', seq(choice($._atom_noli, $._uppercase_words), repeat($._atom))),
+      /~\n/,
     ),
 
     h1: ($) =>

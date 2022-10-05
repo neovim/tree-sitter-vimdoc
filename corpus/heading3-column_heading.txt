@@ -234,6 +234,7 @@ ABC not-h3
 NOT column_heading
 ================================================================================
 tilde ~/foo/bar foo~ bar
+trailing-space-is-NOT-column_heading ~ 
 
 
 --------------------------------------------------------------------------------
@@ -243,5 +244,8 @@ tilde ~/foo/bar foo~ bar
     (line
       (word)
       (word)
+      (word)
+      (word))
+    (line
       (word)
       (word))))
