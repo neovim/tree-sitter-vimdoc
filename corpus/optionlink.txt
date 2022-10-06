@@ -29,6 +29,40 @@ world 'hello' world
       (word))))
 
 ================================================================================
+NOT optionlink: ' followed by whitespace
+================================================================================
+'fillchars'
+	  stl		' ' or '^'	statusline
+	  wbr		' '		windowbar
+          tricky:	' 'yes'
+
+
+--------------------------------------------------------------------------------
+
+(help_file
+  (block
+    (line
+      (optionlink
+        (word)))
+    (line
+      (word)
+      (word)
+      (word)
+      (word)
+      (word)
+      (word))
+    (line
+      (word)
+      (word)
+      (word)
+      (word))
+    (line
+      (word)
+      (word)
+      (optionlink
+        (word)))))
+
+================================================================================
 NOT optionlink #7 #14
 ================================================================================
 Let's see if that works.

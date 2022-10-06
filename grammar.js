@@ -62,7 +62,7 @@ module.exports = grammar({
     // Explicit special cases: these are plaintext, not errors.
     _word_common: () => choice(
       // NOT optionlink: single "'".
-      /[\t ]'[\t ]/,
+      /'[\t ]/,
       // NOT optionlink: contains any non-lowercase char.
       seq("'", token.immediate(/[^'\n\t ]*[^'a-z\n\t ][^'\n\t ]*/), token.immediate("'")),
       // NOT optionlink: single char surrounded by "'".
