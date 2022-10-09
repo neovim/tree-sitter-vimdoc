@@ -169,7 +169,7 @@
       "members": [
         {
           "type": "PATTERN",
-          "value": "[\\t ]'[\\t ]"
+          "value": "'[\\t ]"
         },
         {
           "type": "SEQ",
@@ -219,7 +219,20 @@
         },
         {
           "type": "PATTERN",
-          "value": "[\\t ]\\|[\\t ]"
+          "value": "\\|[\\t ]"
+        },
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "STRING",
+              "value": "|"
+            },
+            {
+              "type": "PATTERN",
+              "value": "[^|\\n\\t ]+"
+            }
+          ]
         },
         {
           "type": "PATTERN",
