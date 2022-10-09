@@ -418,8 +418,12 @@
         "type": "SEQ",
         "members": [
           {
-            "type": "PATTERN",
-            "value": ">[\\t ]*\\n"
+            "type": "STRING",
+            "value": ">"
+          },
+          {
+            "type": "STRING",
+            "value": "\n"
           },
           {
             "type": "REPEAT1",

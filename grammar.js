@@ -117,7 +117,8 @@ module.exports = grammar({
 
     // Codeblock: preformatted block of lines starting with ">".
     codeblock: ($) => prec.right(seq(
-      />[\t ]*\n/,
+      '>',
+      '\n',
       repeat1(alias($.line_code, $.line)),
       // Codeblock ends if a line starts with non-whitespace.
       // Terminating "<" is consumed in other rules.
