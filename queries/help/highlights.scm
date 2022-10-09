@@ -13,4 +13,7 @@
 (codespan
    "`" @conceal (#set! conceal "")
    text: (_) @text.literal)
+(codeblock) @text.literal
 (argument) @parameter
+(keycode) @string.special
+(url) @text.uri
