@@ -9,8 +9,8 @@
    "|" @conceal (#set! conceal "")
    text: (_) @text.reference)
 (optionlink
-   text: (_) @text.literal)
+   text: (_) @text.reference)
 (codespan
    "`" @conceal (#set! conceal "")
-   text: (_) @string)
+   text: (_) @text.literal)
 (argument) @parameter
