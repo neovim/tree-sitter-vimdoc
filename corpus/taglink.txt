@@ -70,8 +70,10 @@ taglink in parentheses
 ================================================================================
 NOT a taglink
 ================================================================================
-
 whitespace |world foo bar|
+	    |
+	rx  |
+	rx  |	ry
 adjacent || |||
 table-borders |=========| |---------|
 
@@ -91,6 +93,16 @@ Note: ":autocmd" can...
       (taglink
         (word)
         (MISSING "|"))
+      (word)
+      (word))
+    (line
+      (word
+        (MISSING "_word_common_token5")))
+    (line
+      (word)
+      (ERROR))
+    (line
+      (word)
       (word)
       (word))
     (line

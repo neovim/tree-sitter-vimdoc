@@ -68,7 +68,9 @@ module.exports = grammar({
       // NOT optionlink: single char surrounded by "'".
       seq("'", token.immediate(/[^'\n\t ]/), token.immediate("'")),
       // NOT taglink: single "|".
-      /[\t ]\|[\t ]/,
+      /\|[\t ]/,
+      // NOT taglink: "|foo".
+      seq('|', /[^|\n\t ]+/),
       // NOT taglink: "||".
       /\|\|*/,
       // NOT argument: "{}".
