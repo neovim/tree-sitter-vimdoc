@@ -239,8 +239,16 @@
           "value": "\\|\\|*"
         },
         {
-          "type": "PATTERN",
-          "value": "\\{\\}"
+          "type": "STRING",
+          "value": "{"
+        },
+        {
+          "type": "STRING",
+          "value": "}"
+        },
+        {
+          "type": "STRING",
+          "value": "{}"
         },
         {
           "type": "PATTERN",
@@ -893,7 +901,7 @@
               "type": "IMMEDIATE_TOKEN",
               "content": {
                 "type": "PATTERN",
-                "value": "[^{}\\n\\t ]+"
+                "value": "[^{}\\n\\t ][^{}\\n\\t]*"
               }
             },
             "named": true,

@@ -73,8 +73,10 @@ module.exports = grammar({
       seq('|', /[^|\n\t ]+/),
       // NOT taglink: "||".
       /\|\|*/,
-      // NOT argument: "{}".
-      /\{\}/,
+      // NOT argument:
+      '{',
+      '}',
+      '{}',
       /\{\{+[0-9]*/,
       '(',
       /\w+\(/,
@@ -201,7 +203,7 @@ module.exports = grammar({
     // Inline code (may contain whitespace!): `foo bar`
     codespan: ($) => _word($, /[^``\n]+/, '`', '`'),
     // Argument: {arg}
-    argument: ($) => _word($, /[^{}\n\t ]+/, '{', '}'),
+    argument: ($) => _word($, /[^{}\n\t ][^{}\n\t]*/, '{', '}'),
   },
 });
 
