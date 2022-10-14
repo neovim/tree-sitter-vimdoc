@@ -1,7 +1,10 @@
 ================================================================================
-simple argument
+argument
 ================================================================================
-This in an argument: {arg}
+argument: {arg}
+argument: {arg arg}
+CTRL-R CTRL-R {register CTRL-F}
+list of { uri:string, name: string } tables
 
 
 --------------------------------------------------------------------------------
@@ -10,11 +13,26 @@ This in an argument: {arg}
   (block
     (line
       (word)
-      (word)
-      (word)
+      (argument
+        (word)))
+    (line
       (word)
       (argument
-        (word)))))
+        (word)))
+    (line
+      (word)
+      (keycode)
+      (argument
+        (word)))
+    (line
+      (word)
+      (word)
+      (word)
+      (word)
+      (word)
+      (word)
+      (word)
+      (word))))
 
 ================================================================================
 multiple arguments on the same line
@@ -54,6 +72,14 @@ argument in parentheses
 NOT an argument
 ================================================================================
 {foo "{bar}" `{baz}` |{baz| } {}
+foo { bar 
+{ {} foo{{ foo{{{
+ {{ 
+ {{{ 
+{ }	foo
+,	inside { }: 
+\}	literal } x
+\{	literal { x
 
 ===============
 3. Netrw *netrw-ref* {{{1
@@ -66,14 +92,49 @@ EXTERNAL *netrw-externapp* {{{2
 (help_file
   (block
     (line
+      (word)
+      (ERROR
+        (word))
       (argument
-        (word)
-        (MISSING "}"))
+        (word))
       (word)
       (codespan
         (word))
       (taglink
         (word))
+      (word)
+      (word))
+    (line
+      (word)
+      (word)
+      (word))
+    (line
+      (word)
+      (word)
+      (word)
+      (word))
+    (line
+      (word))
+    (line
+      (word))
+    (line
+      (word)
+      (word)
+      (word))
+    (line
+      (word)
+      (word)
+      (word)
+      (word)
+      (word))
+    (line
+      (word)
+      (word)
+      (word)
+      (word))
+    (line
+      (word)
+      (word)
       (word)
       (word)))
   (block
