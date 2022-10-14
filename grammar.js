@@ -73,6 +73,8 @@ module.exports = grammar({
       seq('|', /[^|\n\t ]+/),
       // NOT taglink: "||".
       /\|\|*/,
+      // NOT listitem: "-" or "•" followed by tab.
+      /[-•]\t/,
       // NOT argument:
       '{',
       '}',
