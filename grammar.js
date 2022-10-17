@@ -21,7 +21,7 @@ module.exports = grammar({
   rules: {
     help_file: ($) =>
       seq(
-        repeat(/[\t ]*\n/),  // Eat whitespace at top of file.
+        repeat($._blank),  // Eat blank lines at top of file.
         repeat($.block),
       ),
 
@@ -67,8 +67,8 @@ module.exports = grammar({
       seq("'", token.immediate(/[^'\n\t ]*[^'a-z\n\t ][^'\n\t ]*/), token.immediate("'")),
       // NOT optionlink: single char surrounded by "'".
       seq("'", token.immediate(/[^'\n\t ]/), token.immediate("'")),
-      // NOT taglink: "||".
-      /\|\|*/,
+      // NOT taglink: "||", "|"
+      /\|\|+/,
       '|',
       // NOT listitem: "-" or "•" followed by tab.
       /[-•]\t/,
@@ -125,7 +125,7 @@ module.exports = grammar({
     )),
 
     // Lines.
-    _blank: () => field('blank', /[\t ]*\n/),
+    _blank: () => field('blank', '\n'),
     line: ($) => choice(
       $.column_heading,
       $.h1,
