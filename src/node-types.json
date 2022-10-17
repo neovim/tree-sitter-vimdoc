@@ -18,7 +18,18 @@
   {
     "type": "block",
     "named": true,
-    "fields": {},
+    "fields": {
+      "blank": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "\n",
+            "named": false
+          }
+        ]
+      }
+    },
     "children": {
       "multiple": true,
       "required": true,
@@ -224,7 +235,18 @@
   {
     "type": "help_file",
     "named": true,
-    "fields": {},
+    "fields": {
+      "blank": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "\n",
+            "named": false
+          }
+        ]
+      }
+    },
     "children": {
       "multiple": true,
       "required": false,
@@ -435,6 +457,10 @@
   },
   {
     "type": "}",
+    "named": false
+  },
+  {
+    "type": "~",
     "named": false
   }
 ]
