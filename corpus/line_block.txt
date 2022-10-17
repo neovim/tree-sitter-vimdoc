@@ -53,7 +53,7 @@ text text text text
       (word)
       (word)
       (word))
-    (MISSING "help_file_token1")))
+    (MISSING "<")))
 
 ================================================================================
 blocks: with blank line at end of document
@@ -119,6 +119,7 @@ li continues
         (word)
         (word)
         (word)
+        (word)
         (word))
       (line
         (optionlink
@@ -128,6 +129,7 @@ li continues
           (word))))
     (line_li
       (line
+        (word)
         (word)
         (word)
         (word))

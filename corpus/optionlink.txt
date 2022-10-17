@@ -136,10 +136,12 @@ x `after_codespan`'s
       (argument
         (word))
       (word))
-    (ERROR
+    (line
       (word)
       (codespan
-        (word)))))
+        (word))
+      (word
+        (MISSING "'")))))
 
 ================================================================================
 NOT optionlink 3 (FIXME)

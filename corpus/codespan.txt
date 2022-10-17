@@ -40,9 +40,11 @@ an error`.
         (word))
       (word)
       (word)
-      (ERROR
+      (codespan
         (word)
-        (word))
+        (MISSING "`")))
+    (line
+      (word)
       (word))))
 
 ================================================================================

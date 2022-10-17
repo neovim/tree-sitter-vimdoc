@@ -90,17 +90,16 @@ Note: ":autocmd" can...
   (block
     (line
       (word)
-      (taglink
-        (word)
-        (MISSING "|"))
+      (word)
+      (ERROR
+        (word))
       (word)
       (word))
     (line
-      (word
-        (MISSING "_word_common_token5")))
+      (word))
     (line
       (word)
-      (ERROR))
+      (word))
     (line
       (word)
       (word)

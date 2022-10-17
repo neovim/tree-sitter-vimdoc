@@ -236,6 +236,13 @@ NOT column_heading
 tilde ~/foo/bar foo~ bar
 trailing-space-is-NOT-column_heading ~ 
 
+buffer-diagram
+|-----|
+|foo  |
+|~    |
+|~    |
+|-----|
+
 
 --------------------------------------------------------------------------------
 
@@ -245,7 +252,30 @@ trailing-space-is-NOT-column_heading ~
       (word)
       (word)
       (word)
+      (word)
       (word))
     (line
       (word)
-      (word))))
+      (word)))
+  (block
+    (line
+      (word))
+    (line
+      (taglink
+        (word)))
+    (line
+      (word)
+      (ERROR
+        (word))
+      (word))
+    (line
+      (word)
+      (word)
+      (word))
+    (line
+      (word)
+      (word)
+      (word))
+    (line
+      (taglink
+        (word)))))
