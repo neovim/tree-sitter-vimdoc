@@ -79,6 +79,7 @@ module.exports = grammar({
       /\{\{+[0-9]*/,
       '(',
       /\w+\(/,
+      '~',
     ),
 
     keycode: () => choice(

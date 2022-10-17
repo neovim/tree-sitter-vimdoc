@@ -252,6 +252,7 @@ buffer-diagram
       (word)
       (word)
       (word)
+      (word)
       (word))
     (line
       (word)
