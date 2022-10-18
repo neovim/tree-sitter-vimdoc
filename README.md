@@ -20,7 +20,8 @@ Overview
   - contains headings (`h1`, `h2`, `h3`, `column_heading`) because `codeblock`
     terminated by "implicit stop" (no terminating `<`) consumes blank lines, so
     `block` has no way to end.
-- `line_li` ("list item")
+- `line_li` ("listitem")
+  - lines starting with `-`/`•` (_not_ `+`/`*`) are listitems.
   - consumes lines until blank line, codeblock, or next listitem.
   - nesting is ignored: indented listitems are parsed as siblings.
 - `codeblock`:
@@ -48,7 +49,7 @@ Known issues
 - `url` doesn't handle _nested_ parens. E.g. `(https://example.com/(foo)#yay)`
 - `column_heading` currently only recognizes tilde `~` preceded by space (i.e.
   `foo ~` not `foo~`). This covers 99% of :help files.
-- `column_heading` children should be plaintext. Currently its children are parsed as `$._atom`.
+- `column_heading` children should be plaintext, but currently are parsed as `$._atom`.
 
 TODO
 ----

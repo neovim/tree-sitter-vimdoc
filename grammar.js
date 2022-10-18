@@ -8,7 +8,7 @@
 // - Rules starting with underscore are hidden in the syntax tree.
 
 const _uppercase_word = /[A-Z0-9.()][-A-Z0-9.()_]+/;
-const _li_token = /[-*+•][ ]+/;
+const _li_token = /[-•][ ]+/;
 
 module.exports = grammar({
   name: 'vimdoc',
@@ -27,7 +27,7 @@ module.exports = grammar({
 
     _atom: ($) => choice(
       $.word,
-      $._atom_common
+      $._atom_common,
     ),
     word: ($) => choice(
       // Try the more-restrictive pattern at higher relative precedence, so that things like
@@ -39,12 +39,12 @@ module.exports = grammar({
 
     _atom_noli: ($) => prec(1, choice(
       alias($.word_noli, $.word),
-      $._atom_common
+      $._atom_common,
     )),
     word_noli: ($) => prec(1, choice(
       // Lines contained by line_li must not start with a listitem symbol.
-      token(prec(-1, /[^-*+•\n\t ][^\n\t ]*/)),
-      token(prec(-1, /[-*+•][^\n\t ]+/)),
+      token(prec(-1, /[^-•\n\t ][^\n\t ]*/)),
+      token(prec(-1, /[-•][^\n\t ]+/)),
       $._word_common,
     )),
 
@@ -61,13 +61,15 @@ module.exports = grammar({
 
     // Explicit special cases: these are plaintext, not errors.
     _word_common: () => choice(
+      // NOT tag: isolated "*".
+      /\*[\n\t ]/,
       // NOT optionlink: '
       "'",
       // NOT optionlink: 'x
       seq("'", token.immediate(/[^'\n\t ]/)),
-      // NOT optionlink: followed by non-lowercase char.
+      // NOT optionlink: 'X (non-lowercase char).
       seq("'", token.immediate(/[a-z]*[^'a-z\n\t ][a-z]*/), optional(token.immediate("'"))),
-      // NOT optionlink: single char surrounded by "'".
+      // NOT optionlink: 'x' (single char).
       seq("'", token.immediate(/[^'\n\t ]/), token.immediate("'")),
       // NOT taglink: "||", "|"
       /\|\|+/,

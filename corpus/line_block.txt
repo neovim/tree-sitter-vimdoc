@@ -80,19 +80,19 @@ block2 text text
 ================================================================================
 listitems
 ================================================================================
-* list1.a item1
-  * - •
+- list1.a item1
+  - - •
   • word,
     !foo! ~bar. word word
     'item' line3 |foo|
-* x 'list1.a' ~/foo/bar.txt
+- x 'list1.a' ~/foo/bar.txt
 li continues
-  * {nested} here
+  - {nested} here
 
-* 'list2' item w3
-  * *nested_li* word *tag2*
-* list2 item w3
-  * nested_li-2
+• 'list2' item w3
+  - *nested_li* word *tag2*
+• list2 item w3
+  - nested_li-2
     foo
     foo
 
@@ -178,16 +178,16 @@ li continues
 listitem with codeblock
 ================================================================================
 
-* list1.a item1 >
+• list1.a item1 >
   foo
-< * list1.b item1
-* w1 w2
+< • list1.b item1
+• w1 w2
   w3 >
   code1 {
     code2
   }
-<* w1
-* w2 w3
+<• w1
+• w2 w3
     `item2` line2
     {item2} line3
 
@@ -291,3 +291,48 @@ listitems + lines without blank lines
         (argument
           (word))
         (word)))))
+
+================================================================================
+listitem tricky
+================================================================================
+
+- x - x
+
+-x -x
+
+- - x -x
+- -x - x
+- -
+
+
+--------------------------------------------------------------------------------
+
+(help_file
+  (block
+    (line_li
+      (line
+        (word)
+        (word)
+        (word))
+      (line)))
+  (block
+    (line
+      (word)
+      (word)))
+  (block
+    (line_li
+      (line
+        (word)
+        (word)
+        (word))
+      (line))
+    (line_li
+      (line
+        (word)
+        (word)
+        (word))
+      (line))
+    (line_li
+      (line
+        (word))
+      (line))))
