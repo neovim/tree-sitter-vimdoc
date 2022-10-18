@@ -168,8 +168,8 @@
       "type": "CHOICE",
       "members": [
         {
-          "type": "PATTERN",
-          "value": "'[\\t ]"
+          "type": "STRING",
+          "value": "'"
         },
         {
           "type": "SEQ",
@@ -182,15 +182,23 @@
               "type": "IMMEDIATE_TOKEN",
               "content": {
                 "type": "PATTERN",
-                "value": "[^'\\n\\t ]*[^'a-z\\n\\t ][^'\\n\\t ]*"
+                "value": "[a-z]*[^'a-z\\n\\t ][a-z]*"
               }
             },
             {
-              "type": "IMMEDIATE_TOKEN",
-              "content": {
-                "type": "STRING",
-                "value": "'"
-              }
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "IMMEDIATE_TOKEN",
+                  "content": {
+                    "type": "STRING",
+                    "value": "'"
+                  }
+                },
+                {
+                  "type": "BLANK"
+                }
+              ]
             }
           ]
         },

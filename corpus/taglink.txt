@@ -130,6 +130,8 @@ Note: ":autocmd" can...
       (word))
     (line
       (word)
+      (word)
+      (word)
       (word))
     (line
       (word)
