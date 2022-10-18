@@ -101,8 +101,22 @@ number: '04' 'ISO-10646-1' 'python3'
       (word)
       (word)
       (word)
+      (word)
+      (tag
+        (word)
+        (MISSING "*"))
+      (word)
+      (word)
+      (word)
+      (ERROR
+        (word))
+      (argument
+        (word))
+      (word)
       (word))
     (line
+      (word)
+      (word)
       (word)
       (word)
       (word)
@@ -121,7 +135,7 @@ number: '04' 'ISO-10646-1' 'python3'
       (word))))
 
 ================================================================================
-NOT optionlink 2 (FIXME)
+NOT optionlink 2
 ================================================================================
 '{a-z}  `{a-z} foo
 x `after_codespan`'s
@@ -130,21 +144,22 @@ x `after_codespan`'s
 --------------------------------------------------------------------------------
 
 (help_file
-  (ERROR)
   (block
     (line
-      (argument
-        (word))
-      (word))
+      (word)
+      (word)
+      (codespan
+        (word)
+        (MISSING "`")))
     (line
       (word)
       (codespan
         (word))
-      (word
-        (MISSING "'")))))
+      (word)
+      (ERROR))))
 
 ================================================================================
-NOT optionlink 3 (FIXME)
+NOT optionlink 3
 ================================================================================
 foo '"\ '.  Notice
 |foo|
@@ -156,7 +171,9 @@ foo '"\ '.  Notice
   (block
     (line
       (word)
-      (ERROR)
+      (word)
+      (word)
+      (word)
       (word))
     (line
       (taglink
