@@ -46,9 +46,10 @@ Known issues
   `:help lcs-tab`.
 - `url` doesn't handle _surrounding_ parens. E.g. `(https://example.com/#yay)` yields `word`
 - `url` doesn't handle _nested_ parens. E.g. `(https://example.com/(foo)#yay)`
-- `column_heading` currently only recognizes tilde "~" preceded by space (i.e.
-  "foo ~" not "foo~"). This covers 99% of :help files, but the grammar should
+- `column_heading` currently only recognizes tilde `~` preceded by space (i.e.
+  `foo ~` not `foo~`). This covers 99% of :help files, but the grammar should
   probably support "foo~" also.
+- `column_heading` children should be plaintext. Currently its children are parsed as `$._atom`.
 
 TODO
 ----
