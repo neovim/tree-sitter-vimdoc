@@ -15,6 +15,8 @@ taglink alone
 ================================================================================
 taglink in text
 ================================================================================
+|(|, |)|, |`|, |{|, |}|.
+
 Hello |world| hello
 
 |-+|	+[num]	line
@@ -26,6 +28,23 @@ Hello |world| hello
 --------------------------------------------------------------------------------
 
 (help_file
+  (block
+    (line
+      (taglink
+        (word))
+      (word)
+      (taglink
+        (word))
+      (word)
+      (taglink
+        (word))
+      (word)
+      (taglink
+        (word))
+      (word)
+      (taglink
+        (word))
+      (word)))
   (block
     (line
       (word)

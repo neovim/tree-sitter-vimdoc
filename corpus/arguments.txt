@@ -92,11 +92,11 @@ EXTERNAL *netrw-externapp* {{{2
 (help_file
   (block
     (line
-      (word)
-      (ERROR
-        (word))
       (argument
-        (word))
+        (word)
+        (ERROR
+          (word)
+          (word)))
       (word)
       (codespan
         (word))

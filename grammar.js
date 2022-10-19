@@ -199,7 +199,15 @@ module.exports = grammar({
     // Link to option: 'foo'. Lowercase non-digit ASCII, minimum 2 chars. #14
     optionlink: ($) => _word($, /[a-z][a-z]+/, "'", "'"),
     // Link to tag: |foo|
-    taglink: ($) => _word($, /[^|\n\t ]+/, '|', '|'),
+    taglink: ($) => _word($, choice(
+          token.immediate(/[^|\n\t ]+/),
+          // Special cases: |(| |{| …
+          token.immediate('{'),
+          token.immediate('}'),
+          token.immediate('('),
+          token.immediate(')'),
+          token.immediate('`'),
+    ), '|', '|'),
     // Inline code (may contain whitespace!): `foo bar`
     codespan: ($) => _word($, /[^``\n]+/, '`', '`'),
     // Argument: {arg}
@@ -208,9 +216,10 @@ module.exports = grammar({
 });
 
 // Word delimited by special chars.
-// The word_regex capture is aliased to "word" because they are semantically
-// the same: atoms of captured plain text.
-function _word($, word_regex, c1, c2, fname) {
+// `rule` can be a rule function or regex. It is aliased to "word" because they are
+// semantically the same: atoms of captured plain text.
+function _word($, rule, c1, c2, fname) {
+  rule = rule.test !== undefined ? token.immediate(rule) : rule
   fname = fname ?? 'text';
-  return seq(c1, field(fname, alias(token.immediate(word_regex), $.word)), token.immediate(c2));
+  return seq(c1, field(fname, alias(rule, $.word)), token.immediate(c2));
 }
