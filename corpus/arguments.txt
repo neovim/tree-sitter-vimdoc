@@ -151,4 +151,4 @@ EXTERNAL *netrw-externapp* {{{2
         (uppercase_name)
         (tag
           (word))
-        (ERROR)))))
+        (word)))))

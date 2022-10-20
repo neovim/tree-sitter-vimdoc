@@ -82,6 +82,8 @@ module.exports = grammar({
       '(',
       /\w+\(/,
       '~',
+      // NOT codeblock: random ">" in middle of the motherflippin text.
+      '>',
     ),
 
     keycode: () => choice(
@@ -121,7 +123,8 @@ module.exports = grammar({
 
     // Codeblock: preformatted block of lines starting with ">".
     codeblock: ($) => prec.right(seq(
-      />[\t ]*\n/,
+      '>',
+      token.immediate('\n'),
       repeat1(alias($.line_code, $.line)),
       // Codeblock ends if a line starts with non-whitespace.
       // Terminating "<" is consumed in other rules.
@@ -182,7 +185,7 @@ module.exports = grammar({
     h3: ($) =>
       seq(
         field('name', $.uppercase_name),
-        repeat($.tag),
+        optional(seq($.tag, repeat($._atom))),
         '\n',
       ),
 
