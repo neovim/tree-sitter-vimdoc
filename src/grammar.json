@@ -280,6 +280,10 @@
         {
           "type": "STRING",
           "value": "~"
+        },
+        {
+          "type": "STRING",
+          "value": ">"
         }
       ]
     },
@@ -445,8 +449,15 @@
         "type": "SEQ",
         "members": [
           {
-            "type": "PATTERN",
-            "value": ">[\\t ]*\\n"
+            "type": "STRING",
+            "value": ">"
+          },
+          {
+            "type": "IMMEDIATE_TOKEN",
+            "content": {
+              "type": "STRING",
+              "value": "\n"
+            }
           },
           {
             "type": "REPEAT1",
@@ -742,11 +753,28 @@
           }
         },
         {
-          "type": "REPEAT",
-          "content": {
-            "type": "SYMBOL",
-            "name": "tag"
-          }
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SEQ",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "tag"
+                },
+                {
+                  "type": "REPEAT",
+                  "content": {
+                    "type": "SYMBOL",
+                    "name": "_atom"
+                  }
+                }
+              ]
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
         },
         {
           "type": "STRING",

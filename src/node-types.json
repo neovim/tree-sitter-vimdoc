@@ -226,7 +226,35 @@
       "required": false,
       "types": [
         {
+          "type": "argument",
+          "named": true
+        },
+        {
+          "type": "codespan",
+          "named": true
+        },
+        {
+          "type": "keycode",
+          "named": true
+        },
+        {
+          "type": "optionlink",
+          "named": true
+        },
+        {
           "type": "tag",
+          "named": true
+        },
+        {
+          "type": "taglink",
+          "named": true
+        },
+        {
+          "type": "url",
+          "named": true
+        },
+        {
+          "type": "word",
           "named": true
         }
       ]
@@ -437,6 +465,10 @@
   },
   {
     "type": "<",
+    "named": false
+  },
+  {
+    "type": ">",
     "named": false
   },
   {
