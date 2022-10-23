@@ -352,3 +352,30 @@ codeblock stop and start on same line
       (codeblock
         (line)
         (line)))))
+
+================================================================================
+NOT codeblock: whitespace after ">"
+================================================================================
+x > 
+  line
+
+x x> 
+  line
+
+
+
+--------------------------------------------------------------------------------
+
+(help_file
+  (block
+    (line
+      (word)
+      (word))
+    (line
+      (word)))
+  (block
+    (line
+      (word)
+      (word))
+    (line
+      (word))))
