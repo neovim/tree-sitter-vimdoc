@@ -164,7 +164,8 @@ column_heading should NOT parse atoms (links, tags, etc.) (FIXME)
     (line
       (word)
       (codeblock
-        (line))))
+        (code
+          (line)))))
   (block
     (line
       (column_heading

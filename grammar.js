@@ -121,11 +121,13 @@ module.exports = grammar({
       repeat($._blank),
     ),
 
-    // Codeblock: preformatted block of lines starting with ">".
+    // Codeblock: preformatted block of lines starting with ">" or ">language" at EOL
     codeblock: ($) => prec.right(seq(
       '>',
-      token.immediate('\n'),
-      repeat1(alias($.line_code, $.line)),
+      choice(
+        alias(token.immediate(/[a-z0-9]+\n/), $.language),
+        token.immediate('\n')),
+      alias(repeat1(alias($.line_code, $.line)), $.code),
       // Codeblock ends if a line starts with non-whitespace.
       // Terminating "<" is consumed in other rules.
     )),

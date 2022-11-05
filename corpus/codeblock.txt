@@ -24,13 +24,15 @@ block3:
   (block
     (line
       (codeblock
-        (line))))
+        (code
+          (line)))))
   (block
     (line
       (word))
     (line
       (codeblock
-        (line))))
+        (code
+          (line)))))
   (block
     (line
       (word)))
@@ -39,7 +41,8 @@ block3:
       (word))
     (line
       (codeblock
-        (line))))
+        (code
+          (line)))))
   (block
     (line
       (word))))
@@ -73,9 +76,10 @@ text
       (word)
       (word)
       (codeblock
-        (line)
-        (line)
-        (line))))
+        (code
+          (line)
+          (line)
+          (line)))))
   (block
     (line
       (word)
@@ -89,12 +93,50 @@ text
       (word))
     (line
       (codeblock
-        (line)
-        (line)
-        (line))))
+        (code
+          (line)
+          (line)
+          (line)))))
   (block
     (line
       (word))))
+
+================================================================================
+codeblock with language annotations
+================================================================================
+This code is in Lua: >lua
+  local foo = 'bar'
+<
+
+This code is in Vimscript: >vim
+  let foo = "bar"
+<
+
+--------------------------------------------------------------------------------
+
+(help_file
+  (block
+    (line
+      (word)
+      (word)
+      (word)
+      (word)
+      (word)
+      (codeblock
+        (language)
+        (code
+          (line)))))
+  (block
+    (line
+      (word)
+      (word)
+      (word)
+      (word)
+      (word)
+      (codeblock
+        (language)
+        (code
+          (line))))))
 
 ================================================================================
 codeblock with implicit stop
@@ -127,9 +169,10 @@ H3 HEADLINE *foo*
   (block
     (line
       (codeblock
-        (line)
-        (line)
-        (line)))
+        (code
+          (line)
+          (line)
+          (line))))
     (line
       (h1
         (word)
@@ -143,8 +186,9 @@ H3 HEADLINE *foo*
   (block
     (line
       (codeblock
-        (line)
-        (line)))
+        (code
+          (line)
+          (line))))
     (line
       (h2
         (word)
@@ -153,8 +197,9 @@ H3 HEADLINE *foo*
   (block
     (line
       (codeblock
-        (line)
-        (line)))
+        (code
+          (line)
+          (line))))
     (line
       (h3
         (uppercase_name)
@@ -185,15 +230,16 @@ x
     (line
       (word)
       (codeblock
-        (line)
-        (line)
-        (line)
-        (line)
-        (line)
-        (line)
-        (line)
-        (line)
-        (line)))
+        (code
+          (line)
+          (line)
+          (line)
+          (line)
+          (line)
+          (line)
+          (line)
+          (line)
+          (line))))
     (line
       (word))))
 
@@ -224,19 +270,21 @@ tricky
   (block
     (line
       (codeblock
-        (line)
-        (line)
-        (line))))
+        (code
+          (line)
+          (line)
+          (line)))))
   (block
     (line
       (word)
       (codeblock
-        (line)
-        (line)
-        (line)
-        (line)
-        (line)
-        (line))))
+        (code
+          (line)
+          (line)
+          (line)
+          (line)
+          (line)
+          (line)))))
   (block
     (line
       (word))))
@@ -266,8 +314,9 @@ To test for a non-empty string, use empty(): >
       (word)
       (word)
       (codeblock
-        (line)
-        (line)))
+        (code
+          (line)
+          (line))))
     (line
       (word)
       (word)
@@ -290,8 +339,9 @@ To test for a non-empty string, use empty(): >
       (word)
       (word)
       (codeblock
-        (line)
-        (line)))
+        (code
+          (line)
+          (line))))
     (line
       (word)
       (word)
@@ -303,7 +353,8 @@ To test for a non-empty string, use empty(): >
       (word)
       (word)
       (codeblock
-        (line)))))
+        (code
+          (line))))))
 
 ================================================================================
 codeblock stop and start on same line
@@ -329,12 +380,14 @@ codeblock stop and start on same line
     (line
       (word)
       (codeblock
-        (line))))
+        (code
+          (line)))))
   (block
     (line
       (word)
       (codeblock
-        (line))))
+        (code
+          (line)))))
   (block
     (line
       (tag
@@ -350,8 +403,9 @@ codeblock stop and start on same line
     (line
       (word)
       (codeblock
-        (line)
-        (line)))))
+        (code
+          (line)
+          (line))))))
 
 ================================================================================
 NOT codeblock: whitespace after ">"
@@ -362,6 +416,11 @@ x >
 x x> 
   line
 
+Not a language annotation: > lua
+  line
+
+Not a language annotation: >lua is not at EOL
+  line
 
 
 --------------------------------------------------------------------------------
@@ -378,4 +437,28 @@ x x>
       (word)
       (word))
     (line
-      (word))))
+     (word)))
+  (block
+    (line
+      (word)
+      (word)
+      (word)
+      (word)
+      (word)
+      (word))
+    (line
+     (word)))
+  (block
+   (line
+    (word)
+    (word)
+    (word)
+    (word)
+    (word)
+    (word)
+    (word)
+    (word)
+    (word)
+    (word))
+   (line
+    (word))))

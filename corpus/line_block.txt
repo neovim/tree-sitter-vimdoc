@@ -201,7 +201,8 @@ listitem with codeblock
         (word)
         (word))
       (codeblock
-        (line)))
+        (code
+          (line))))
     (line_li
       (line
         (word)
@@ -215,9 +216,10 @@ listitem with codeblock
       (line
         (word)
         (codeblock
-          (line)
-          (line)
-          (line))))
+          (code
+            (line)
+            (line)
+            (line)))))
     (line_li
       (line
         (word))

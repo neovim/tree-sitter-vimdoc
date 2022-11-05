@@ -46,7 +46,7 @@
     }
   },
   {
-    "type": "codeblock",
+    "type": "code",
     "named": true,
     "fields": {},
     "children": {
@@ -55,6 +55,25 @@
       "types": [
         {
           "type": "line",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "codeblock",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "code",
+          "named": true
+        },
+        {
+          "type": "language",
           "named": true
         }
       ]
@@ -474,6 +493,10 @@
   {
     "type": "`",
     "named": false
+  },
+  {
+    "type": "language",
+    "named": true
   },
   {
     "type": "{",
