@@ -453,23 +453,45 @@
             "value": ">"
           },
           {
-            "type": "IMMEDIATE_TOKEN",
-            "content": {
-              "type": "STRING",
-              "value": "\n"
-            }
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "ALIAS",
+                "content": {
+                  "type": "IMMEDIATE_TOKEN",
+                  "content": {
+                    "type": "PATTERN",
+                    "value": "[a-z0-9]+\\n"
+                  }
+                },
+                "named": true,
+                "value": "language"
+              },
+              {
+                "type": "IMMEDIATE_TOKEN",
+                "content": {
+                  "type": "STRING",
+                  "value": "\n"
+                }
+              }
+            ]
           },
           {
-            "type": "REPEAT1",
+            "type": "ALIAS",
             "content": {
-              "type": "ALIAS",
+              "type": "REPEAT1",
               "content": {
-                "type": "SYMBOL",
-                "name": "line_code"
-              },
-              "named": true,
-              "value": "line"
-            }
+                "type": "ALIAS",
+                "content": {
+                  "type": "SYMBOL",
+                  "name": "line_code"
+                },
+                "named": true,
+                "value": "line"
+              }
+            },
+            "named": true,
+            "value": "code"
           }
         ]
       }
