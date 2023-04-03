@@ -1,7 +1,7 @@
 [package]
 name = "tree-sitter-vimdoc"
 description = "Vimdoc grammar for the tree-sitter parsing library"
-version = "1.3.0"
+version = "2.0.0"
 keywords = ["incremental", "parsing", "neovim", "vimdoc"]
 categories = ["parsing", "text-editors"]
 repository = "https://github.com/neovim/tree-sitter-vimdoc"
