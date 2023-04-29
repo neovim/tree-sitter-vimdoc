@@ -15,9 +15,6 @@ module.exports = grammar({
 
   extras: () => [/[\t ]/],
 
-  // inline: ($) => [
-  // ],
-
   rules: {
     help_file: ($) =>
       seq(
@@ -32,9 +29,9 @@ module.exports = grammar({
     word: ($) => choice(
       // Try the more-restrictive pattern at higher relative precedence, so that things like
       // "foo({a})" parse as "(word) (argument)" instead of "(word)".
-      token(prec(-1, /[^\n\t{ ][^\n\t ]*/)),
+      token(prec(-1, /[^\n\t,({\[ ][^\n\t( ]*/)),
       token(prec(-2, /[^\n\t ]+/)),
-      choice($._word_common),
+      $._word_common,
     ),
 
     _atom_noli: ($) => prec(1, choice(
@@ -43,9 +40,9 @@ module.exports = grammar({
     )),
     word_noli: ($) => prec(1, choice(
       // Lines contained by line_li must not start with a listitem symbol.
-      token(prec(-1, /[^-*+•\n\t ][^\n\t ]*/)),
-      token(prec(-1, /[-*+•][^\n\t ]+/)),
-      choice($._word_common),
+      token(prec(-1, /[^-*+•\n\t ][^\n\t(\[ ]*/)),
+      token(prec(-1, /[-*+•][^\n\t( ]+/)),
+      $._word_common,
     )),
 
     _atom_common: ($) =>
@@ -80,10 +77,16 @@ module.exports = grammar({
       '{}',
       /\{\{+[0-9]*/,
       '(',
+      ')',
+      '[',
+      ']',
+      '[\'',
+      '\']',
       /\w+\(/,
       '~',
       // NOT codeblock: random ">" in middle of the motherflippin text.
       '>',
+      ',',
     ),
 
     keycode: () => choice(
