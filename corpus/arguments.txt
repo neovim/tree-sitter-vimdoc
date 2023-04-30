@@ -152,3 +152,69 @@ EXTERNAL *netrw-externapp* {{{2
         (tag
           (word))
         (word)))))
+
+================================================================================
+Many arguments
+================================================================================
+
+vim.foo({bar})
+
+vim.foo( {bar})
+
+nvim_foo({bar})
+
+nvim_foo({bar},{baz})
+
+nvim_foo({bar}, {baz})
+
+nvim_buf_detach_event[{buf}]
+
+
+--------------------------------------------------------------------------------
+
+(help_file
+  (block
+    (line
+      (word)
+      (word)
+      (argument
+        (word))
+      (word)))
+  (block
+    (line
+      (word)
+      (word)
+      (argument
+        (word))
+      (word)))
+  (block
+    (line
+      (word)
+      (argument
+        (word))
+      (word)))
+  (block
+    (line
+      (word)
+      (argument
+        (word))
+      (word)
+      (argument
+        (word))
+      (word)))
+  (block
+    (line
+      (word)
+      (argument
+        (word))
+      (word)
+      (argument
+        (word))
+      (word)))
+  (block
+    (line
+      (word)
+      (word)
+      (argument
+        (word))
+      (word))))
