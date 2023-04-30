@@ -43,7 +43,7 @@
             "value": -1,
             "content": {
               "type": "PATTERN",
-              "value": "[^\\n\\t{ ][^\\n\\t ]*"
+              "value": "[^\\n\\t,({\\[ ][^\\n\\t( ]*"
             }
           }
         },
@@ -59,13 +59,8 @@
           }
         },
         {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "SYMBOL",
-              "name": "_word_common"
-            }
-          ]
+          "type": "SYMBOL",
+          "name": "_word_common"
         }
       ]
     },
@@ -104,7 +99,7 @@
               "value": -1,
               "content": {
                 "type": "PATTERN",
-                "value": "[^-*+•\\n\\t ][^\\n\\t ]*"
+                "value": "[^-*+•\\n\\t ][^\\n\\t(\\[ ]*"
               }
             }
           },
@@ -115,18 +110,13 @@
               "value": -1,
               "content": {
                 "type": "PATTERN",
-                "value": "[-*+•][^\\n\\t ]+"
+                "value": "[-*+•][^\\n\\t( ]+"
               }
             }
           },
           {
-            "type": "CHOICE",
-            "members": [
-              {
-                "type": "SYMBOL",
-                "name": "_word_common"
-              }
-            ]
+            "type": "SYMBOL",
+            "name": "_word_common"
           }
         ]
       }
@@ -274,6 +264,18 @@
           "value": "("
         },
         {
+          "type": "STRING",
+          "value": ")"
+        },
+        {
+          "type": "STRING",
+          "value": "["
+        },
+        {
+          "type": "STRING",
+          "value": "]"
+        },
+        {
           "type": "PATTERN",
           "value": "\\w+\\("
         },
@@ -284,6 +286,10 @@
         {
           "type": "STRING",
           "value": ">"
+        },
+        {
+          "type": "STRING",
+          "value": ","
         }
       ]
     },
