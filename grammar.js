@@ -34,7 +34,7 @@ module.exports = grammar({
       // "foo({a})" parse as "(word) (argument)" instead of "(word)".
       token(prec(-1, /[^\n\t{ ][^\n\t ]*/)),
       token(prec(-2, /[^\n\t ]+/)),
-      choice($._word_common),
+      $._word_common,
     ),
 
     _atom_noli: ($) => prec(1, choice(
@@ -45,7 +45,7 @@ module.exports = grammar({
       // Lines contained by line_li must not start with a listitem symbol.
       token(prec(-1, /[^-*+•\n\t ][^\n\t ]*/)),
       token(prec(-1, /[-*+•][^\n\t ]+/)),
-      choice($._word_common),
+      $._word_common,
     )),
 
     _atom_common: ($) =>
@@ -72,8 +72,6 @@ module.exports = grammar({
       // NOT taglink: "||", "|"
       /\|\|+/,
       '|',
-      // NOT listitem: "-" or "•" followed by tab.
-      /[-•]\t/,
       // NOT argument:
       '{',
       '}',
