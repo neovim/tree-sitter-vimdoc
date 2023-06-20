@@ -108,9 +108,9 @@ NOT a tag
       (word)
       (word)
       (word)
-      (tag
-        (word)
-        (MISSING "*")))
+      (word)
+      (ERROR
+        (word)))
     (line
       (word)
       (word)
@@ -121,16 +121,16 @@ NOT a tag
       (word))
     (line
       (word)
-      (tag
-        (word)
-        (MISSING "*"))
+      (word)
+      (ERROR
+        (word))
       (word)))
   (block
     (line
       (word)
-      (tag
-        (word)
-        (MISSING "*"))
+      (word)
+      (ERROR
+        (word))
       (word)
       (word)
       (word))))

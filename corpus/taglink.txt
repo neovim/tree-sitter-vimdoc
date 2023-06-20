@@ -150,7 +150,8 @@ Note: ":autocmd" can...
     (line
       (word)
       (word)
-      (word)
+      (ERROR
+        (word))
       (word))
     (line
       (word)

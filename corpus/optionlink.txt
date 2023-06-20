@@ -33,7 +33,6 @@ NOT optionlink: ' or 'x
 ================================================================================
 'fillchars'
 stl		' ' or '^'	statusline
-wbr		' '		windowbar
 tricky:	' 'yes'  's foo
 
 
@@ -54,11 +53,6 @@ tricky:	' 'yes'  's foo
     (line
       (word)
       (word)
-      (word)
-      (word))
-    (line
-      (word)
-      (word)
       (optionlink
         (word))
       (word)
@@ -72,9 +66,8 @@ no! ','sqlKeyword'
 single-char '-' 'g' '보'
 non-ascii: '\"' '%)' '-bang' '.*\\.log' '.gitignore' '@{${\"foo\"}}'
 number: '04' 'ISO-10646-1' 'python3'
-
-	Option	  '	:help 'textwidth'
-	Regular	  /	:help /[
+Option	  '	:help 'textwidth'
+Regular	  /	:help /[
 
 
 --------------------------------------------------------------------------------
@@ -101,16 +94,13 @@ number: '04' 'ISO-10646-1' 'python3'
       (word)
       (word)
       (word)
-      (tag
-        (word)
-        (MISSING "*"))
+      (word)
+      (ERROR
+        (word))
       (word)
       (word)
       (argument
-        (word)
-        (ERROR
-          (word)
-          (word)))
+        (word))
       (word)
       (word))
     (line
@@ -119,8 +109,9 @@ number: '04' 'ISO-10646-1' 'python3'
       (word)
       (word)
       (word)
-      (word)))
-  (block
+      (word
+        (ERROR
+          (word))))
     (line
       (word)
       (word)

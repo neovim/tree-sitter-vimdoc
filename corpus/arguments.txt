@@ -2,8 +2,8 @@
 argument
 ================================================================================
 argument: {arg}
-argument: {arg arg}
-CTRL-R CTRL-R {register CTRL-F}
+tuple: {arg,arg}
+keycode: CTRL-R {CTRL-R} {register CTRL-F}
 list of { uri:string, name: string } tables
 
 
@@ -23,7 +23,12 @@ list of { uri:string, name: string } tables
       (word)
       (keycode)
       (argument
-        (word)))
+        (word))
+      (word)
+      (ERROR
+        (word))
+      (keycode)
+      (word))
     (line
       (word)
       (word)
@@ -71,6 +76,7 @@ argument in parentheses
 ================================================================================
 NOT an argument
 ================================================================================
+a '{' '}' block
 {foo "{bar}" `{baz}` |{baz| } {}
 foo { bar 
 { {} foo{{ foo{{{
@@ -92,11 +98,19 @@ EXTERNAL *netrw-externapp* {{{2
 (help_file
   (block
     (line
-      (argument
-        (word)
-        (ERROR
-          (word)
-          (word)))
+      (word)
+      (word)
+      (word)
+      (ERROR
+        (word))
+      (word)
+      (word)
+      (word)
+      (word))
+    (line
+      (word)
+      (ERROR
+        (word))
       (word)
       (codespan
         (word))

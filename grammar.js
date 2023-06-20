@@ -62,7 +62,7 @@ module.exports = grammar({
     // Explicit special cases: these are plaintext, not errors.
     _word_common: () => choice(
       // NOT tag: isolated "*".
-      /\*[\n\t ]/,
+      '*',
       // NOT optionlink: '
       "'",
       // NOT optionlink: 'x
@@ -208,18 +208,19 @@ module.exports = grammar({
     optionlink: ($) => _word($, /[a-z][a-z]+/, "'", "'"),
     // Link to tag: |foo|
     taglink: ($) => _word($, choice(
-          token.immediate(/[^|\n\t ]+/),
-          // Special cases: |(| |{| …
-          token.immediate('{'),
-          token.immediate('}'),
-          token.immediate('('),
-          token.immediate(')'),
-          token.immediate('`'),
-    ), '|', '|'),
+        /[^|\n\t ]+/,
+        // Special cases: |(| |{| …
+        '{',
+        '}',
+        '(',
+        ')',
+        '`',
+      ),
+      '|', '|'),
     // Inline code (may contain whitespace!): `foo bar`
     codespan: ($) => _word($, /[^``\n]+/, '`', '`'),
-    // Argument: {arg}
-    argument: ($) => _word($, /[^{}\n\t ][^{}\n\t]*/, '{', '}'),
+    // Argument: {arg} (no whitespace allowed)
+    argument: ($) => _word($, /[^}\n\t ]+/, '{', '}'),
   },
 });
 
@@ -227,7 +228,8 @@ module.exports = grammar({
 // `rule` can be a rule function or regex. It is aliased to "word" because they are
 // semantically the same: atoms of captured plain text.
 function _word($, rule, c1, c2, fname) {
-  rule = rule.test !== undefined ? token.immediate(rule) : rule
+  // rule = rule.test ? token.immediate(rule) : rule
+  // rule = token.immediate(rule)
   fname = fname ?? 'text';
-  return seq(c1, field(fname, alias(rule, $.word)), token.immediate(c2));
+  return seq(c1, field(fname, alias(token.immediate(prec(1, rule)), $.word)), token.immediate(c2));
 }

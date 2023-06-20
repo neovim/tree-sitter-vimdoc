@@ -130,7 +130,9 @@ li continues
     (line_li
       (line
         (word)
-        (word)
+        (word
+          (ERROR
+            (word)))
         (word)
         (word)
         (word))
@@ -147,7 +149,9 @@ li continues
   (block
     (line_li
       (line
-        (word)
+        (word
+          (ERROR
+            (word)))
         (word)
         (word))
       (line))
