@@ -37,16 +37,16 @@ module.exports = grammar({
       $._word_common,
     ),
 
-    _atom_noli: ($) => prec(1, choice(
+    _atom_noli: ($) => choice(
       alias($.word_noli, $.word),
       $._atom_common,
-    )),
-    word_noli: ($) => prec(1, choice(
+    ),
+    word_noli: ($) => choice(
       // Lines contained by line_li must not start with a listitem symbol.
       token(prec(-1, /[^-•\n\t ][^\n\t ]*/)),
       token(prec(-1, /[-•][^\n\t ]+/)),
       $._word_common,
-    )),
+    ),
 
     _atom_common: ($) =>
       choice(
@@ -193,7 +193,7 @@ module.exports = grammar({
       ),
 
     tag: ($) => _word($,
-      /[^*\n\t ]+/,  // Tag text without surrounding "*".
+      prec(1, /[^*\n\t ]+/),  // Tag text without surrounding "*".
       '*', '*'),
 
     // URL without surrounding (), [], etc.
@@ -207,7 +207,7 @@ module.exports = grammar({
     // Link to option: 'foo'. Lowercase non-digit ASCII, minimum 2 chars. #14
     optionlink: ($) => _word($, /[a-z][a-z]+/, "'", "'"),
     // Link to tag: |foo|
-    taglink: ($) => _word($, choice(
+    taglink: ($) => _word($, prec(1, choice(
         /[^|\n\t ]+/,
         // Special cases: |(| |{| …
         '{',
@@ -215,7 +215,7 @@ module.exports = grammar({
         '(',
         ')',
         '`',
-      ),
+      )),
       '|', '|'),
     // Inline code (may contain whitespace!): `foo bar`
     codespan: ($) => _word($, /[^``\n]+/, '`', '`'),
@@ -231,5 +231,5 @@ function _word($, rule, c1, c2, fname) {
   // rule = rule.test ? token.immediate(rule) : rule
   // rule = token.immediate(rule)
   fname = fname ?? 'text';
-  return seq(c1, field(fname, alias(token.immediate(prec(1, rule)), $.word)), token.immediate(c2));
+  return seq(c1, field(fname, alias(token.immediate(rule), $.word)), token.immediate(c2));
 }

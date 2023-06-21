@@ -101,8 +101,7 @@ EXTERNAL *netrw-externapp* {{{2
       (word)
       (word)
       (word)
-      (ERROR
-        (word))
+      (word)
       (word)
       (word)
       (word)

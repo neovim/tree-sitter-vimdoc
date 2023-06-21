@@ -109,9 +109,7 @@ Regular	  /	:help /[
       (word)
       (word)
       (word)
-      (word
-        (ERROR
-          (word))))
+      (word))
     (line
       (word)
       (word)
