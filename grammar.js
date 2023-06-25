@@ -53,6 +53,7 @@ module.exports = grammar({
         $.taglink,
         $.codespan,
         $.argument,
+        $.optional_arg,
         $.keycode,
       ),
 
@@ -210,6 +211,8 @@ module.exports = grammar({
     codespan: ($) => _word($, /[^``\n]+/, '`', '`'),
     // Argument: {arg} (no whitespace allowed)
     argument: ($) => _word($, /[^}\n\t ]+/, '{', '}'),
+    // Optional argument: [arg] (no whitespace allowed)
+    optional_arg: ($) => _word($, /[^\]\n\t ]+/, '[', ']'),
   },
 });
 

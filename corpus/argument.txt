@@ -117,10 +117,8 @@ nvim_buf_detach_event[{buf}]
       (word))
     (line
       (word)
-      (word)
-      (argument
-        (word))
-      (word))))
+      (optional_arg
+        (word)))))
 
 ================================================================================
 NOT an argument
