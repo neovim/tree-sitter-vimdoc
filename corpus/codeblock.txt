@@ -90,7 +90,6 @@ text
       (word)
       (taglink
         (word))
-      (word)
       (word))
     (line
       (codeblock
@@ -442,7 +441,7 @@ Not a language annotation: >lua is not at EOL
       (word)
       (word))
     (line
-     (word)))
+      (word)))
   (block
     (line
       (word)
@@ -452,18 +451,18 @@ Not a language annotation: >lua is not at EOL
       (word)
       (word))
     (line
-     (word)))
+      (word)))
   (block
-   (line
-    (word)
-    (word)
-    (word)
-    (word)
-    (word)
-    (word)
-    (word)
-    (word)
-    (word)
-    (word))
-   (line
-    (word))))
+    (line
+      (word)
+      (word)
+      (word)
+      (word)
+      (word)
+      (word)
+      (word)
+      (word)
+      (word)
+      (word))
+    (line
+      (word))))

@@ -96,14 +96,12 @@ Regular	  /	:help /[
       (word)
       (word)
       (word)
-      (word)
       (ERROR
         (word))
       (word)
       (word)
       (argument
         (word))
-      (word)
       (word))
     (line
       (word)

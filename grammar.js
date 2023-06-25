@@ -30,10 +30,7 @@ module.exports = grammar({
       $._atom_common,
     ),
     word: ($) => choice(
-      // Try the more-restrictive pattern at higher relative precedence, so that things like
-      // "foo({a})" parse as "(word) (argument)" instead of "(word)".
-      token(prec(-1, /[^{,(\[\n\t ][^,(\[\n\t ]*/)),
-      token(prec(-2, /[^\n\t ]+/)),
+      token(prec(-1, /[^,(\[\n\t ]+/)),
       $._word_common,
     ),
 
@@ -76,16 +73,11 @@ module.exports = grammar({
       '|',
       // NOT argument:
       '{',
-      '}',
       '{}',
       /\{\{+[0-9]*/,
+
       '(',
-      ')',
       '[',
-      ']',
-      "['",
-      "']",
-      /\w+\(/,
       '~',
       // NOT codeblock: random ">" in middle of the motherflippin text.
       '>',

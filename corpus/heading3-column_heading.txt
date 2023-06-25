@@ -127,6 +127,7 @@ nvim_ui_try_resize({width}, {height})                   *nvim_ui_try_resize()*
   (block
     (line
       (word)
+      (word)
       (argument
         (word))
       (word)
