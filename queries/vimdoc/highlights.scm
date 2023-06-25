@@ -44,6 +44,8 @@
 
 (argument) @variable.parameter
 
+(optional) @variable.parameter
+
 (keycode) @string.special
 
 (url) @string.special.url
