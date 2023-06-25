@@ -43,18 +43,7 @@
             "value": -1,
             "content": {
               "type": "PATTERN",
-              "value": "[^\\n\\t{ ][^\\n\\t ]*"
-            }
-          }
-        },
-        {
-          "type": "TOKEN",
-          "content": {
-            "type": "PREC",
-            "value": -2,
-            "content": {
-              "type": "PATTERN",
-              "value": "[^\\n\\t ]+"
+              "value": "[^,(\\[\\n\\t ]+"
             }
           }
         },
@@ -92,7 +81,7 @@
             "value": -1,
             "content": {
               "type": "PATTERN",
-              "value": "[^-•\\n\\t ][^\\n\\t ]*"
+              "value": "[^-•\\n\\t ][^(\\[\\n\\t ]*"
             }
           }
         },
@@ -241,10 +230,6 @@
         },
         {
           "type": "STRING",
-          "value": "}"
-        },
-        {
-          "type": "STRING",
           "value": "{}"
         },
         {
@@ -256,8 +241,8 @@
           "value": "("
         },
         {
-          "type": "PATTERN",
-          "value": "\\w+\\("
+          "type": "STRING",
+          "value": "["
         },
         {
           "type": "STRING",
@@ -266,6 +251,10 @@
         {
           "type": "STRING",
           "value": ">"
+        },
+        {
+          "type": "STRING",
+          "value": ","
         }
       ]
     },

@@ -483,6 +483,10 @@
     "named": false
   },
   {
+    "type": ",",
+    "named": false
+  },
+  {
     "type": "<",
     "named": false
   },
@@ -492,6 +496,10 @@
   },
   {
     "type": "CTRL-{char}",
+    "named": false
+  },
+  {
+    "type": "[",
     "named": false
   },
   {
