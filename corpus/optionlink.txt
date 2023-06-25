@@ -80,6 +80,7 @@ Regular	  /	:help /[
     (line
       (word)
       (word)
+      (word)
       (word))
     (line
       (word)
@@ -101,7 +102,6 @@ Regular	  /	:help /[
       (word)
       (argument
         (word))
-      (word)
       (word))
     (line
       (word)
@@ -117,6 +117,7 @@ Regular	  /	:help /[
       (optionlink
         (word)))
     (line
+      (word)
       (word)
       (word)
       (word)

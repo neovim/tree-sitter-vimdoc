@@ -331,6 +331,7 @@ To test for a non-empty string, use empty(): >
       (word)
       (word)
       (word)
+      (word)
       (word))
     (line
       (word)
@@ -343,6 +344,8 @@ To test for a non-empty string, use empty(): >
           (line)
           (line))))
     (line
+      (word)
+      (word)
       (word)
       (word)
       (word)
@@ -395,6 +398,7 @@ codeblock stop and start on same line
     (line
       (word)
       (word)
+      (word)
       (word))
     (line
       (argument
@@ -437,7 +441,7 @@ Not a language annotation: >lua is not at EOL
       (word)
       (word))
     (line
-     (word)))
+      (word)))
   (block
     (line
       (word)
@@ -447,18 +451,18 @@ Not a language annotation: >lua is not at EOL
       (word)
       (word))
     (line
-     (word)))
+      (word)))
   (block
-   (line
-    (word)
-    (word)
-    (word)
-    (word)
-    (word)
-    (word)
-    (word)
-    (word)
-    (word)
-    (word))
-   (line
-    (word))))
+    (line
+      (word)
+      (word)
+      (word)
+      (word)
+      (word)
+      (word)
+      (word)
+      (word)
+      (word)
+      (word))
+    (line
+      (word))))

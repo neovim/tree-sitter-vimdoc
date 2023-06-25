@@ -54,4 +54,11 @@ markdown: [https://neovim.io/doc/user/#yay](https://neovim.io/doc/user/#yay).
       (word))
     (line
       (word)
+      (word)
+      (url
+        (word))
+      (word)
+      (word)
+      (url
+        (word))
       (word))))

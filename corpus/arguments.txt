@@ -37,6 +37,7 @@ list of { uri:string, name: string } tables
       (word)
       (word)
       (word)
+      (word)
       (word))))
 
 ================================================================================
@@ -61,6 +62,12 @@ multiple arguments on the same line
 argument in parentheses
 ================================================================================
 ({aaa})
+vim.foo({bar})
+vim.foo( {bar})
+nvim_foo({bar})
+nvim_foo({bar},{baz})
+nvim_foo({bar}, {baz})
+nvim_buf_detach_event[{buf}]
 
 
 --------------------------------------------------------------------------------
@@ -68,6 +75,48 @@ argument in parentheses
 (help_file
   (block
     (line
+      (word)
+      (argument
+        (word))
+      (word))
+    (line
+      (word)
+      (word)
+      (argument
+        (word))
+      (word))
+    (line
+      (word)
+      (word)
+      (argument
+        (word))
+      (word))
+    (line
+      (word)
+      (word)
+      (argument
+        (word))
+      (word))
+    (line
+      (word)
+      (word)
+      (argument
+        (word))
+      (word)
+      (argument
+        (word))
+      (word))
+    (line
+      (word)
+      (word)
+      (argument
+        (word))
+      (word)
+      (argument
+        (word))
+      (word))
+    (line
+      (word)
       (word)
       (argument
         (word))
@@ -103,8 +152,6 @@ EXTERNAL *netrw-externapp* {{{2
       (word)
       (word)
       (word)
-      (word)
-      (word)
       (word))
     (line
       (word)
@@ -135,7 +182,6 @@ EXTERNAL *netrw-externapp* {{{2
       (word)
       (word))
     (line
-      (word)
       (word)
       (word)
       (word)
