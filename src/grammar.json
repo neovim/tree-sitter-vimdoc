@@ -131,6 +131,10 @@
         },
         {
           "type": "SYMBOL",
+          "name": "optional"
+        },
+        {
+          "type": "SYMBOL",
           "name": "keycode"
         }
       ]
@@ -294,6 +298,10 @@
           "value": "ALT-."
         }
       ]
+    },
+    "optional": {
+      "type": "PATTERN",
+      "value": "\\[[^\\]{\\n\\t ]+\\]"
     },
     "uppercase_name": {
       "type": "SEQ",
