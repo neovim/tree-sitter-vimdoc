@@ -123,22 +123,20 @@ nvim_buf_detach_event[{buf}]
       (word))
     (line
       (word)
-      (word)
-      (argument
-        (word))
-      (word))))
+      (optional_arg
+        (word)))))
 
 ================================================================================
 NOT an argument
 ================================================================================
 a '{' '}' block
 {foo "{bar}" `{baz}` |{baz| } {}
-foo { bar 
+foo { bar
 { {} foo{{ foo{{{
- {{ 
- {{{ 
+ {{
+ {{{
 { }	foo
-,	inside { }: 
+,	inside { }:
 \}	literal } x
 \{	literal { x
 
