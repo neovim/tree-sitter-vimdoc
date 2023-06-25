@@ -53,7 +53,7 @@ module.exports = grammar({
         $.taglink,
         $.codespan,
         $.argument,
-        $.optional_arg,
+        $.optional,
         $.keycode,
       ),
 
@@ -95,6 +95,9 @@ module.exports = grammar({
       /META-./,
       /ALT-./,
     ),
+
+    // Optional argument: [arg] (no whitespace allowed)
+    optional: () => /\[[^\]{\n\t ]+\]/,
 
     // First part (minus tags) of h3 or column_heading.
     uppercase_name: () => seq(
@@ -211,8 +214,6 @@ module.exports = grammar({
     codespan: ($) => _word($, /[^``\n]+/, '`', '`'),
     // Argument: {arg} (no whitespace allowed)
     argument: ($) => _word($, /[^}\n\t ]+/, '{', '}'),
-    // Optional argument: [arg] (no whitespace allowed)
-    optional_arg: ($) => _word($, /[^\]\n\t ]+/, '[', ']'),
   },
 });
 

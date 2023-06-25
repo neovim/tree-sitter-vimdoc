@@ -11,30 +11,22 @@ optional [argument]
   (block
     (line
       (word)
-      (optional_arg
-        (word))
+      (optional)
       (word)
-      (optional_arg
-        (word))
-      (optional_arg
-        (word))
+      (optional)
+      (optional)
       (argument
         (word))
       (tag
         (word)))
     (line
       (word)
-      (optional_arg
-        (word))
+      (optional)
       (word)
-      (optional_arg
-        (word))
-      (optional_arg
-        (word))
-      (optional_arg
-        (word))
-      (optional_arg
-        (word))
+      (optional)
+      (optional)
+      (optional)
+      (optional)
       (argument
         (word))
       (word))))
