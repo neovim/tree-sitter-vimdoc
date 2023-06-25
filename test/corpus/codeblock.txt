@@ -402,8 +402,8 @@ codeblock stop and start on same line
     (line
       (word)
       (word)
-      (word)
-      (word))
+      (optional_arg
+        (word)))
     (line
       (argument
         (word))))

@@ -1,0 +1,40 @@
+================================================================================
+optional [argument]
+================================================================================
+:ar[gs]! [++opt] [+cmd] {arglist}			*:args_f!*
+:[count]arge[dit][!] [++opt] [+cmd] {name} ..
+
+
+--------------------------------------------------------------------------------
+
+(help_file
+  (block
+    (line
+      (word)
+      (optional_arg
+        (word))
+      (word)
+      (optional_arg
+        (word))
+      (optional_arg
+        (word))
+      (argument
+        (word))
+      (tag
+        (word)))
+    (line
+      (word)
+      (optional_arg
+        (word))
+      (word)
+      (optional_arg
+        (word))
+      (optional_arg
+        (word))
+      (optional_arg
+        (word))
+      (optional_arg
+        (word))
+      (argument
+        (word))
+      (word))))

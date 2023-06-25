@@ -64,6 +64,7 @@ module.exports = grammar({
         $.taglink,
         $.codespan,
         $.argument,
+        $.optional_arg,
         $.keycode,
         $.note,
       ),
@@ -236,8 +237,10 @@ module.exports = grammar({
     taglink: ($) => _word($, prec(1, /[^|\n\t ]+/), '|', '|'),
     // Inline code (may contain whitespace!): `foo bar`
     codespan: ($) => _word($, /[^``\n]+/, '`', '`'),
-    // Argument: {arg} (no whitespace allowed)
+    // Argument: {arg} (no whitespace allowed), also {arg}? for LuaLS-style optional args.
     argument: ($) => seq(_word($, /[^}\n\t ]+/, '{', '}'), optional(token.immediate('?'))),
+    // Optional argument: [arg] (no whitespace allowed)
+    optional_arg: ($) => _word($, /[^\]\n\t ]+/, '[', ']'),
   },
 });
 
