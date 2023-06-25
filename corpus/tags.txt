@@ -78,10 +78,9 @@ NOT a tag
 ================================================================================
 * bullet1
   * bullet2 bullet2
-  * bullet3
-    bullet3 bullet3
-* bullet4
 
+0 \* escaped
+0 (paren *)
 1	"*" not
 2   * 	not
 3this *not no
@@ -93,47 +92,45 @@ NOT a tag
 
 (help_file
   (block
-    (line_li
-      (line
-        (word))
-      (line))
-    (line_li
-      (line
-        (word)
-        (word))
-      (line))
-    (line_li
-      (line
-        (word))
-      (line)
-      (line
-        (word)
-        (word)))
-    (line_li
-      (line
-        (word))
-      (line)))
-  (block
     (line
-      (word)
       (word)
       (word))
     (line
       (word)
-      (ERROR)
-      (word))
-    (line
       (word)
-      (tag
-        (word)
-        (MISSING "*"))
       (word)))
   (block
     (line
       (word)
-      (tag
-        (word)
-        (MISSING "*"))
+      (word)
+      (word))
+    (line
+      (word)
+      (word)
+      (word)
+      (word)
+      (ERROR
+        (word)))
+    (line
+      (word)
+      (word)
+      (word))
+    (line
+      (word)
+      (word)
+      (word))
+    (line
+      (word)
+      (word)
+      (ERROR
+        (word))
+      (word)))
+  (block
+    (line
+      (word)
+      (word)
+      (ERROR
+        (word))
       (word)
       (word)
       (word))))

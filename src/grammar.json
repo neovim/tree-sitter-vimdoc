@@ -59,77 +59,59 @@
           }
         },
         {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "SYMBOL",
-              "name": "_word_common"
-            }
-          ]
+          "type": "SYMBOL",
+          "name": "_word_common"
         }
       ]
     },
     "_atom_noli": {
-      "type": "PREC",
-      "value": 1,
-      "content": {
-        "type": "CHOICE",
-        "members": [
-          {
-            "type": "ALIAS",
-            "content": {
-              "type": "SYMBOL",
-              "name": "word_noli"
-            },
-            "named": true,
-            "value": "word"
-          },
-          {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "ALIAS",
+          "content": {
             "type": "SYMBOL",
-            "name": "_atom_common"
-          }
-        ]
-      }
+            "name": "word_noli"
+          },
+          "named": true,
+          "value": "word"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_atom_common"
+        }
+      ]
     },
     "word_noli": {
-      "type": "PREC",
-      "value": 1,
-      "content": {
-        "type": "CHOICE",
-        "members": [
-          {
-            "type": "TOKEN",
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "TOKEN",
+          "content": {
+            "type": "PREC",
+            "value": -1,
             "content": {
-              "type": "PREC",
-              "value": -1,
-              "content": {
-                "type": "PATTERN",
-                "value": "[^-*+•\\n\\t ][^\\n\\t ]*"
-              }
+              "type": "PATTERN",
+              "value": "[^-•\\n\\t ][^\\n\\t ]*"
             }
-          },
-          {
-            "type": "TOKEN",
-            "content": {
-              "type": "PREC",
-              "value": -1,
-              "content": {
-                "type": "PATTERN",
-                "value": "[-*+•][^\\n\\t ]+"
-              }
-            }
-          },
-          {
-            "type": "CHOICE",
-            "members": [
-              {
-                "type": "SYMBOL",
-                "name": "_word_common"
-              }
-            ]
           }
-        ]
-      }
+        },
+        {
+          "type": "TOKEN",
+          "content": {
+            "type": "PREC",
+            "value": -1,
+            "content": {
+              "type": "PATTERN",
+              "value": "[-•][^\\n\\t ]+"
+            }
+          }
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_word_common"
+        }
+      ]
     },
     "_atom_common": {
       "type": "CHOICE",
@@ -167,6 +149,10 @@
     "_word_common": {
       "type": "CHOICE",
       "members": [
+        {
+          "type": "STRING",
+          "value": "*"
+        },
         {
           "type": "STRING",
           "value": "'"
@@ -250,10 +236,6 @@
           "value": "|"
         },
         {
-          "type": "PATTERN",
-          "value": "[-•]\\t"
-        },
-        {
           "type": "STRING",
           "value": "{"
         },
@@ -311,8 +293,8 @@
           "value": "CTRL-(Break|PageUp|PageDown|Insert|Del)"
         },
         {
-          "type": "PATTERN",
-          "value": "CTRL-\\{char\\}"
+          "type": "STRING",
+          "value": "CTRL-{char}"
         },
         {
           "type": "PATTERN",
@@ -556,7 +538,7 @@
           },
           {
             "type": "PATTERN",
-            "value": "[-*+•][ ]+"
+            "value": "[-•][ ]+"
           },
           {
             "type": "CHOICE",
@@ -826,8 +808,12 @@
             "content": {
               "type": "IMMEDIATE_TOKEN",
               "content": {
-                "type": "PATTERN",
-                "value": "[^*\\n\\t ]+"
+                "type": "PREC",
+                "value": 1,
+                "content": {
+                  "type": "PATTERN",
+                  "value": "[^*\\n\\t ]+"
+                }
               }
             },
             "named": true,
@@ -910,51 +896,15 @@
           "content": {
             "type": "ALIAS",
             "content": {
-              "type": "CHOICE",
-              "members": [
-                {
-                  "type": "IMMEDIATE_TOKEN",
-                  "content": {
-                    "type": "PATTERN",
-                    "value": "[^|\\n\\t ]+"
-                  }
-                },
-                {
-                  "type": "IMMEDIATE_TOKEN",
-                  "content": {
-                    "type": "STRING",
-                    "value": "{"
-                  }
-                },
-                {
-                  "type": "IMMEDIATE_TOKEN",
-                  "content": {
-                    "type": "STRING",
-                    "value": "}"
-                  }
-                },
-                {
-                  "type": "IMMEDIATE_TOKEN",
-                  "content": {
-                    "type": "STRING",
-                    "value": "("
-                  }
-                },
-                {
-                  "type": "IMMEDIATE_TOKEN",
-                  "content": {
-                    "type": "STRING",
-                    "value": ")"
-                  }
-                },
-                {
-                  "type": "IMMEDIATE_TOKEN",
-                  "content": {
-                    "type": "STRING",
-                    "value": "`"
-                  }
+              "type": "IMMEDIATE_TOKEN",
+              "content": {
+                "type": "PREC",
+                "value": 1,
+                "content": {
+                  "type": "PATTERN",
+                  "value": "[^|\\n\\t ]+"
                 }
-              ]
+              }
             },
             "named": true,
             "value": "word"
@@ -1017,7 +967,7 @@
               "type": "IMMEDIATE_TOKEN",
               "content": {
                 "type": "PATTERN",
-                "value": "[^{}\\n\\t ][^{}\\n\\t]*"
+                "value": "[^}\\n\\t ]+"
               }
             },
             "named": true,

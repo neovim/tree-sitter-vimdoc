@@ -8,7 +8,7 @@
 // - Rules starting with underscore are hidden in the syntax tree.
 
 const _uppercase_word = /[A-Z0-9.()][-A-Z0-9.()_]+/;
-const _li_token = /[-*+•][ ]+/;
+const _li_token = /[-•][ ]+/;
 
 module.exports = grammar({
   name: 'vimdoc',
@@ -27,26 +27,26 @@ module.exports = grammar({
 
     _atom: ($) => choice(
       $.word,
-      $._atom_common
+      $._atom_common,
     ),
     word: ($) => choice(
       // Try the more-restrictive pattern at higher relative precedence, so that things like
       // "foo({a})" parse as "(word) (argument)" instead of "(word)".
       token(prec(-1, /[^\n\t{ ][^\n\t ]*/)),
       token(prec(-2, /[^\n\t ]+/)),
-      choice($._word_common),
+      $._word_common,
     ),
 
-    _atom_noli: ($) => prec(1, choice(
+    _atom_noli: ($) => choice(
       alias($.word_noli, $.word),
-      $._atom_common
-    )),
-    word_noli: ($) => prec(1, choice(
+      $._atom_common,
+    ),
+    word_noli: ($) => choice(
       // Lines contained by line_li must not start with a listitem symbol.
-      token(prec(-1, /[^-*+•\n\t ][^\n\t ]*/)),
-      token(prec(-1, /[-*+•][^\n\t ]+/)),
-      choice($._word_common),
-    )),
+      token(prec(-1, /[^-•\n\t ][^\n\t ]*/)),
+      token(prec(-1, /[-•][^\n\t ]+/)),
+      $._word_common,
+    ),
 
     _atom_common: ($) =>
       choice(
@@ -61,19 +61,19 @@ module.exports = grammar({
 
     // Explicit special cases: these are plaintext, not errors.
     _word_common: () => choice(
+      // NOT tag: isolated "*".
+      '*',
       // NOT optionlink: '
       "'",
       // NOT optionlink: 'x
       seq("'", token.immediate(/[^'\n\t ]/)),
-      // NOT optionlink: followed by non-lowercase char.
+      // NOT optionlink: 'X (non-lowercase char).
       seq("'", token.immediate(/[a-z]*[^'a-z\n\t ][a-z]*/), optional(token.immediate("'"))),
-      // NOT optionlink: single char surrounded by "'".
+      // NOT optionlink: 'x' (single char).
       seq("'", token.immediate(/[^'\n\t ]/), token.immediate("'")),
       // NOT taglink: "||", "|"
       /\|\|+/,
       '|',
-      // NOT listitem: "-" or "•" followed by tab.
-      /[-•]\t/,
       // NOT argument:
       '{',
       '}',
@@ -92,7 +92,7 @@ module.exports = grammar({
       /CTRL-./,
       /CTRL-SHIFT-./,
       /CTRL-(Break|PageUp|PageDown|Insert|Del)/,
-      /CTRL-\{char\}/,
+      'CTRL-{char}',
       /META-./,
       /ALT-./,
     ),
@@ -193,7 +193,7 @@ module.exports = grammar({
       ),
 
     tag: ($) => _word($,
-      /[^*\n\t ]+/,  // Tag text without surrounding "*".
+      prec(1, /[^*\n\t ]+/),  // Tag text without surrounding "*".
       '*', '*'),
 
     // URL without surrounding (), [], etc.
@@ -207,19 +207,11 @@ module.exports = grammar({
     // Link to option: 'foo'. Lowercase non-digit ASCII, minimum 2 chars. #14
     optionlink: ($) => _word($, /[a-z][a-z]+/, "'", "'"),
     // Link to tag: |foo|
-    taglink: ($) => _word($, choice(
-          token.immediate(/[^|\n\t ]+/),
-          // Special cases: |(| |{| …
-          token.immediate('{'),
-          token.immediate('}'),
-          token.immediate('('),
-          token.immediate(')'),
-          token.immediate('`'),
-    ), '|', '|'),
+    taglink: ($) => _word($, prec(1, /[^|\n\t ]+/), '|', '|'),
     // Inline code (may contain whitespace!): `foo bar`
     codespan: ($) => _word($, /[^``\n]+/, '`', '`'),
-    // Argument: {arg}
-    argument: ($) => _word($, /[^{}\n\t ][^{}\n\t]*/, '{', '}'),
+    // Argument: {arg} (no whitespace allowed)
+    argument: ($) => _word($, /[^}\n\t ]+/, '{', '}'),
   },
 });
 
@@ -227,7 +219,6 @@ module.exports = grammar({
 // `rule` can be a rule function or regex. It is aliased to "word" because they are
 // semantically the same: atoms of captured plain text.
 function _word($, rule, c1, c2, fname) {
-  rule = rule.test !== undefined ? token.immediate(rule) : rule
   fname = fname ?? 'text';
-  return seq(c1, field(fname, alias(rule, $.word)), token.immediate(c2));
+  return seq(c1, field(fname, alias(token.immediate(rule), $.word)), token.immediate(c2));
 }
