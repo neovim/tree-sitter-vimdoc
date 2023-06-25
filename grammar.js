@@ -64,7 +64,7 @@ module.exports = grammar({
         $.taglink,
         $.codespan,
         $.argument,
-        $.optional_arg,
+        $.optional,
         $.keycode,
         $.note,
       ),
@@ -113,6 +113,10 @@ module.exports = grammar({
       /META-./,
       /ALT-./,
     ),
+
+    // Optional argument: [arg] (no whitespace allowed).
+    // This is the vimdoc style optional arg, as opposed to {arg}? (LuaLS style).
+    optional: () => /\[[^\]{\n\t ]+\]/,
 
     // First part (minus tags) of h3 or column_heading.
     uppercase_name: () => seq(
@@ -237,10 +241,8 @@ module.exports = grammar({
     taglink: ($) => _word($, prec(1, /[^|\n\t ]+/), '|', '|'),
     // Inline code (may contain whitespace!): `foo bar`
     codespan: ($) => _word($, /[^``\n]+/, '`', '`'),
-    // Argument: {arg} (no whitespace allowed), also {arg}? for LuaLS-style optional args.
+    // Argument: {arg} (no whitespace allowed), also {arg}? (LuaLS style "optional arg").
     argument: ($) => seq(_word($, /[^}\n\t ]+/, '{', '}'), optional(token.immediate('?'))),
-    // Optional argument: [arg] (no whitespace allowed)
-    optional_arg: ($) => _word($, /[^\]\n\t ]+/, '[', ']'),
   },
 });
 

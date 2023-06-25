@@ -56,8 +56,7 @@ Hello |world| hello
       (taglink
         (word))
       (word)
-      (optional_arg
-        (word))
+      (optional)
       (word))
     (line
       (taglink
