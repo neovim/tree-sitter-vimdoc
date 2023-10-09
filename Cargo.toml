@@ -6,7 +6,7 @@ keywords = ["incremental", "parsing", "neovim", "vimdoc"]
 categories = ["parsing", "text-editors"]
 repository = "https://github.com/neovim/tree-sitter-vimdoc"
 edition = "2018"
-license = "MIT"
+license = "Apache-2.0"
 
 build = "bindings/rust/build.rs"
 include = [
@@ -20,7 +20,7 @@ include = [
 path = "bindings/rust/lib.rs"
 
 [dependencies]
-tree-sitter = "~0.20.0"
+tree-sitter = "~0.20.7"
 
 [build-dependencies]
 cc = "1.0"
