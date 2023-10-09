@@ -116,6 +116,10 @@
             "named": true
           },
           {
+            "type": "optional",
+            "named": true
+          },
+          {
             "type": "optionlink",
             "named": true
           },
@@ -160,6 +164,10 @@
           "named": true
         },
         {
+          "type": "optional",
+          "named": true
+        },
+        {
           "type": "optionlink",
           "named": true
         },
@@ -200,6 +208,10 @@
         },
         {
           "type": "keycode",
+          "named": true
+        },
+        {
+          "type": "optional",
           "named": true
         },
         {
@@ -254,6 +266,10 @@
         },
         {
           "type": "keycode",
+          "named": true
+        },
+        {
+          "type": "optional",
           "named": true
         },
         {
@@ -348,6 +364,10 @@
         },
         {
           "type": "keycode",
+          "named": true
+        },
+        {
+          "type": "optional",
           "named": true
         },
         {
@@ -508,6 +528,10 @@
   },
   {
     "type": "language",
+    "named": true
+  },
+  {
+    "type": "optional",
     "named": true
   },
   {
