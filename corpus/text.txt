@@ -64,3 +64,47 @@ line
   (block
     (line
       (word))))
+
+================================================================================
+notes
+================================================================================
+NOTE: this is a note
+
+Note that this is not a note.
+
+This is DEPRECATED:
+
+This is not DEPRECATED.
+
+
+--------------------------------------------------------------------------------
+
+(help_file
+  (block
+    (line
+      (note)
+      (word)
+      (word)
+      (word)
+      (word)))
+  (block
+    (line
+      (word)
+      (word)
+      (word)
+      (word)
+      (word)
+      (word)
+      (word)))
+  (block
+    (line
+      (word)
+      (word)
+      (note)))
+  (block
+    (line
+      (word)
+      (word)
+      (word)
+      (word))))
+

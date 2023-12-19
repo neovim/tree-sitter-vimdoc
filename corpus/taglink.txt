@@ -146,7 +146,7 @@ Note: ":autocmd" can...
       (line)))
   (block
     (line
-      (word)
+      (note)
       (word)
       (word))
     (line

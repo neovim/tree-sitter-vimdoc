@@ -54,6 +54,7 @@ module.exports = grammar({
         $.codespan,
         $.argument,
         $.keycode,
+        $.note,
       ),
 
     // Explicit special cases: these are plaintext, not errors.
@@ -82,6 +83,12 @@ module.exports = grammar({
       // NOT codeblock: random ">" in middle of the motherflippin text.
       '>',
       ',',
+    ),
+
+    note: () => choice(
+      'Note:', 'NOTE:', 'Notes:',
+      'Warning:', 'WARNING:',
+      'Deprecated', 'DEPRECATED:'
     ),
 
     keycode: () => choice(
