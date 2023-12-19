@@ -116,6 +116,10 @@
             "named": true
           },
           {
+            "type": "note",
+            "named": true
+          },
+          {
             "type": "optionlink",
             "named": true
           },
@@ -160,6 +164,10 @@
           "named": true
         },
         {
+          "type": "note",
+          "named": true
+        },
+        {
           "type": "optionlink",
           "named": true
         },
@@ -200,6 +208,10 @@
         },
         {
           "type": "keycode",
+          "named": true
+        },
+        {
+          "type": "note",
           "named": true
         },
         {
@@ -254,6 +266,10 @@
         },
         {
           "type": "keycode",
+          "named": true
+        },
+        {
+          "type": "note",
           "named": true
         },
         {
@@ -351,6 +367,10 @@
           "named": true
         },
         {
+          "type": "note",
+          "named": true
+        },
+        {
           "type": "optionlink",
           "named": true
         },
@@ -391,6 +411,11 @@
         }
       ]
     }
+  },
+  {
+    "type": "note",
+    "named": true,
+    "fields": {}
   },
   {
     "type": "optionlink",
@@ -496,6 +521,34 @@
   },
   {
     "type": "CTRL-{char}",
+    "named": false
+  },
+  {
+    "type": "DEPRECATED:",
+    "named": false
+  },
+  {
+    "type": "Deprecated",
+    "named": false
+  },
+  {
+    "type": "NOTE:",
+    "named": false
+  },
+  {
+    "type": "Note:",
+    "named": false
+  },
+  {
+    "type": "Notes:",
+    "named": false
+  },
+  {
+    "type": "WARNING:",
+    "named": false
+  },
+  {
+    "type": "Warning:",
     "named": false
   },
   {

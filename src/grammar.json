@@ -132,6 +132,10 @@
         {
           "type": "SYMBOL",
           "name": "keycode"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "note"
         }
       ]
     },
@@ -255,6 +259,39 @@
         {
           "type": "STRING",
           "value": ","
+        }
+      ]
+    },
+    "note": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "Note:"
+        },
+        {
+          "type": "STRING",
+          "value": "NOTE:"
+        },
+        {
+          "type": "STRING",
+          "value": "Notes:"
+        },
+        {
+          "type": "STRING",
+          "value": "Warning:"
+        },
+        {
+          "type": "STRING",
+          "value": "WARNING:"
+        },
+        {
+          "type": "STRING",
+          "value": "Deprecated"
+        },
+        {
+          "type": "STRING",
+          "value": "DEPRECATED:"
         }
       ]
     },
