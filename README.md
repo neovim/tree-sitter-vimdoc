@@ -63,15 +63,19 @@ Release
 
 Steps to perform a release:
 
-1. Bump and tag the version (choose `patch`/`minor`/`major` as appropriate).
+1. Bump and tag the version:
    ```
    npm version patch -m "release %s"
    ```
-2. Bump to prerelease, without creating a tag .
+   Choose `patch`/`minor`/`major` to indicate query compatibility:
+     - `patch` for bugfixes (no changes to queries needed)
+     - `minor` for added nodes (queries may need changes to use new nodes but will not error)
+     - `major` for removed or renamed nodes (queries will error if not adapted), other breaking changes
+2. Bump to prerelease, without creating a tag:
    ```
    npm version --no-git-tag-version prerelease --preid dev && git add package*.json && git commit -m bump
    ```
-3. Push.
+3. Push:
    ```
    git push --follow-tags
    ```
