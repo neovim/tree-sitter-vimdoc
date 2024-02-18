@@ -1,7 +1,10 @@
 name: Run tree-sitter tests
 
 on:
+  push:
+    branches: [ master ]
   pull_request:
+    branches: [ master ]
 
 jobs:
   test:
@@ -9,6 +12,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
       - uses: actions/setup-node@v4
-      - run: npm install
-      - run: npm test
+      - name: Install Dependencies
+        run: npm install
+
+      - name: Run tests
+        run: npm test
