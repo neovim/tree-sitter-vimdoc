@@ -216,7 +216,7 @@ module.exports = grammar({
     // Inline code (may contain whitespace!): `foo bar`
     codespan: ($) => _word($, /[^``\n]+/, '`', '`'),
     // Argument: {arg} (no whitespace allowed)
-    argument: ($) => _word($, /[^}\n\t ]+/, '{', '}'),
+    argument: ($) => seq(_word($, /[^}\n\t ]+/, '{', '}'), optional(token.immediate('?'))),
   },
 });
 
