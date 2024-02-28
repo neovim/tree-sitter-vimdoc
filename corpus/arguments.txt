@@ -5,6 +5,7 @@ argument: {arg}
 tuple: {arg,arg}
 keycode: CTRL-R {CTRL-R} {register CTRL-F}
 list of { uri:string, name: string } tables
+optional argument: {arg}?
 
 
 --------------------------------------------------------------------------------
@@ -38,7 +39,12 @@ list of { uri:string, name: string } tables
       (word)
       (word)
       (word)
-      (word))))
+      (word))
+    (line
+      (word)
+      (word)
+      (argument
+        (word)))))
 
 ================================================================================
 multiple arguments on the same line
@@ -211,3 +217,4 @@ EXTERNAL *netrw-externapp* {{{2
         (tag
           (word))
         (word)))))
+

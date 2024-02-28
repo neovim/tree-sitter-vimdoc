@@ -520,6 +520,10 @@
     "named": false
   },
   {
+    "type": "?",
+    "named": false
+  },
+  {
     "type": "CTRL-{char}",
     "named": false
   },
