@@ -1,21 +1,115 @@
-name: Run tree-sitter tests
+name: CI
 
 on:
   push:
-    branches: [ master ]
+    branches: [master]
+    paths:
+      - grammar.js
+      - src/**
+      - test/**
+      - bindings/**
+      - binding.gyp
   pull_request:
-    branches: [ master ]
+    branches: [master]
+    paths:
+      - grammar.js
+      - src/**
+      - test/**
+      - bindings/**
+      - binding.gyp
+
+concurrency:
+  group: ${{github.workflow}}-${{github.ref}}
+  cancel-in-progress: true
 
 jobs:
   test:
     name: Tree-sitter tests
-    runs-on: ubuntu-latest
+    runs-on: ${{matrix.os}}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-14]
     steps:
-      - uses: actions/checkout@v4
-
-      - uses: actions/setup-node@v4
-      - name: Install Dependencies
-        run: npm install
-
+      - name: Set up repository
+        uses: tree-sitter/parser-setup-action@v1.1
+        with:
+          node-version: 20
+      - name: Clone nvim help files
+        uses: actions/checkout@v4
+        with:
+          repository: neovim/neovim
+          path: examples/neovim
+          sparse-checkout: runtime/doc/
       - name: Run tests
-        run: npm test
+        uses: tree-sitter/parser-test-action@v1.2
+        with:
+          test-library: ${{runner.os == 'Linux'}}
+          corpus-files: |-
+            examples/neovim/runtime/doc/*
+          # FIXME: these files should not have errors
+          invalid-files: |-
+            examples/neovim/runtime/doc/builtin.txt
+            examples/neovim/runtime/doc/change.txt
+            examples/neovim/runtime/doc/cmdline.txt
+            examples/neovim/runtime/doc/dev_style.txt
+            examples/neovim/runtime/doc/dev_tools.txt
+            examples/neovim/runtime/doc/develop.txt
+            examples/neovim/runtime/doc/diagnostic.txt
+            examples/neovim/runtime/doc/editing.txt
+            examples/neovim/runtime/doc/eval.txt
+            examples/neovim/runtime/doc/faq.txt
+            examples/neovim/runtime/doc/fold.txt
+            examples/neovim/runtime/doc/ft_ada.txt
+            examples/neovim/runtime/doc/ft_ps1.txt
+            examples/neovim/runtime/doc/ft_sql.txt
+            examples/neovim/runtime/doc/help.txt
+            examples/neovim/runtime/doc/helphelp.txt
+            examples/neovim/runtime/doc/if_perl.txt
+            examples/neovim/runtime/doc/if_pyth.txt
+            examples/neovim/runtime/doc/if_ruby.txt
+            examples/neovim/runtime/doc/indent.txt
+            examples/neovim/runtime/doc/index.txt
+            examples/neovim/runtime/doc/intro.txt
+            examples/neovim/runtime/doc/job_control.txt
+            examples/neovim/runtime/doc/lsp.txt
+            examples/neovim/runtime/doc/luaref.txt
+            examples/neovim/runtime/doc/map.txt
+            examples/neovim/runtime/doc/mbyte.txt
+            examples/neovim/runtime/doc/motion.txt
+            examples/neovim/runtime/doc/news.txt
+            examples/neovim/runtime/doc/nvim.txt
+            examples/neovim/runtime/doc/options.txt
+            examples/neovim/runtime/doc/pattern.txt
+            examples/neovim/runtime/doc/pi_gzip.txt
+            examples/neovim/runtime/doc/pi_health.txt
+            examples/neovim/runtime/doc/pi_msgpack.txt
+            examples/neovim/runtime/doc/pi_netrw.txt
+            examples/neovim/runtime/doc/pi_paren.txt
+            examples/neovim/runtime/doc/pi_tar.txt
+            examples/neovim/runtime/doc/pi_tutor.txt
+            examples/neovim/runtime/doc/pi_zip.txt
+            examples/neovim/runtime/doc/provider.txt
+            examples/neovim/runtime/doc/quickfix.txt
+            examples/neovim/runtime/doc/quickref.txt
+            examples/neovim/runtime/doc/remote_plugin.txt
+            examples/neovim/runtime/doc/repeat.txt
+            examples/neovim/runtime/doc/russian.txt
+            examples/neovim/runtime/doc/starting.txt
+            examples/neovim/runtime/doc/syntax.txt
+            examples/neovim/runtime/doc/tabpage.txt
+            examples/neovim/runtime/doc/tips.txt
+            examples/neovim/runtime/doc/ui.txt
+            examples/neovim/runtime/doc/usr_02.txt
+            examples/neovim/runtime/doc/usr_03.txt
+            examples/neovim/runtime/doc/usr_07.txt
+            examples/neovim/runtime/doc/usr_11.txt
+            examples/neovim/runtime/doc/usr_12.txt
+            examples/neovim/runtime/doc/usr_22.txt
+            examples/neovim/runtime/doc/usr_28.txt
+            examples/neovim/runtime/doc/usr_29.txt
+            examples/neovim/runtime/doc/usr_41.txt
+            examples/neovim/runtime/doc/various.txt
+            examples/neovim/runtime/doc/vim_diff.txt
+            examples/neovim/runtime/doc/visual.txt
+            examples/neovim/runtime/doc/windows.txt
