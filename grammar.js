@@ -7,6 +7,9 @@
 // https://tree-sitter.github.io/tree-sitter/creating-parsers
 // - Rules starting with underscore are hidden in the syntax tree.
 
+/// <reference types="tree-sitter-cli/dsl" />
+// @ts-check
+
 const _uppercase_word = /[A-Z0-9.()][-A-Z0-9.()_]+/;
 const _li_token = /[-•][ ]+/;
 

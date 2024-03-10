@@ -4,9 +4,17 @@
 //! tree-sitter [Parser][], and then use the parser to parse some code:
 //!
 //! ```
-//! let code = "";
+//! let code = r#"
+//!   {lines}   |readfile()|-style
+//!   {type}    behavior:
+//!             • "b" |blockwise-visual|
+//!             • "c" |charwise|
+//!             • "l" |linewise|
+//!             • "listitem"
+//!   {consumes} adjacent
+//! "#;
 //! let mut parser = tree_sitter::Parser::new();
-//! parser.set_language(tree_sitter_vimdoc::language()).expect("Error loading vimdoc grammar");
+//! parser.set_language(&tree_sitter_vimdoc::language()).expect("Error loading vimdoc grammar");
 //! let tree = parser.parse(code, None).unwrap();
 //! ```
 //!
@@ -31,14 +39,11 @@ pub fn language() -> Language {
 /// The content of the [`node-types.json`][] file for this grammar.
 ///
 /// [`node-types.json`]: https://tree-sitter.github.io/tree-sitter/using-parsers#static-node-types
-pub const NODE_TYPES: &'static str = include_str!("../../src/node-types.json");
+pub const NODE_TYPES: &str = include_str!("../../src/node-types.json");
 
-// Uncomment these to include any queries that this grammar contains
+pub const HIGHLIGHTS_QUERY: &str = include_str!("../../queries/vimdoc/highlights.scm");
 
-// pub const HIGHLIGHTS_QUERY: &'static str = include_str!("../../queries/highlights.scm");
-// pub const INJECTIONS_QUERY: &'static str = include_str!("../../queries/injections.scm");
-// pub const LOCALS_QUERY: &'static str = include_str!("../../queries/locals.scm");
-// pub const TAGS_QUERY: &'static str = include_str!("../../queries/tags.scm");
+pub const INJECTIONS_QUERY: &str = include_str!("../../queries/vimdoc/injections.scm");
 
 #[cfg(test)]
 mod tests {
@@ -46,7 +51,7 @@ mod tests {
     fn test_can_load_grammar() {
         let mut parser = tree_sitter::Parser::new();
         parser
-            .set_language(super::language())
-            .expect("Error loading vimdoc language");
+            .set_language(&super::language())
+            .expect("Error loading Vimdoc language");
     }
 }
