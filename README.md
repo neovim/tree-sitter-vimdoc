@@ -50,11 +50,11 @@ Known issues
 - `column_heading` currently only recognizes tilde `~` preceded by space (i.e.
   `foo ~` not `foo~`). This covers 99% of :help files.
 - `column_heading` children should be plaintext, but currently are parsed as `$._atom`.
+- `modeline` must be preceded by a blank line.
 
 TODO
 ----
 
-- `line_modeline` ?
 - `tag_heading` : line(s) containing only tags, typically implies a "heading"
   before a block.
 

@@ -17,6 +17,13 @@
             "type": "SYMBOL",
             "name": "block"
           }
+        },
+        {
+          "type": "REPEAT",
+          "content": {
+            "type": "SYMBOL",
+            "name": "modeline"
+          }
         }
       ]
     },
@@ -678,6 +685,17 @@
           ]
         }
       ]
+    },
+    "modeline": {
+      "type": "TOKEN",
+      "content": {
+        "type": "PREC",
+        "value": 2,
+        "content": {
+          "type": "PATTERN",
+          "value": "[\\t ]*vim:[^\\n]+\\n"
+        }
+      }
     },
     "column_heading": {
       "type": "SEQ",
