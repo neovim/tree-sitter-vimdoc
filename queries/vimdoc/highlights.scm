@@ -48,6 +48,8 @@
 
 (url) @string.special.url
 
+(modeline) @keyword.directive
+
 ((note) @comment.hint
   (#any-of? @comment.hint "Note:" "NOTE:" "Notes:"))
 

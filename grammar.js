@@ -26,6 +26,7 @@ module.exports = grammar({
       seq(
         repeat($._blank),  // Eat blank lines at top of file.
         repeat($.block),
+        repeat($.modeline),
       ),
 
     _atom: ($) => choice(
@@ -168,6 +169,9 @@ module.exports = grammar({
       repeat($._atom),
       choice($.codeblock, '\n')
     ),
+
+    // Modeline: must start with "vim:" (optionally preceded by whitespace)
+    modeline: ($) => token(prec(2, /[\t ]*vim:[^\n]+\n/)),
 
     // "Column heading": plaintext followed by "~".
     // Intended for table column names per `:help help-writing`.

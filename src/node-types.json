@@ -317,6 +317,10 @@
         {
           "type": "block",
           "named": true
+        },
+        {
+          "type": "modeline",
+          "named": true
         }
       ]
     }
@@ -565,6 +569,10 @@
   },
   {
     "type": "language",
+    "named": true
+  },
+  {
+    "type": "modeline",
     "named": true
   },
   {
