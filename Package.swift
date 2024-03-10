@@ -21,6 +21,7 @@ let package = Package(
                     "bindings/python",
                     "bindings/rust",
                     "prebuilds",
+                    "node_modules",
                     "grammar.js",
                     "package.json",
                     "package-lock.json",
