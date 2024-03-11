@@ -1,4 +1,4 @@
-VERSION := 2.3.0
+VERSION := 2.4.0
 
 LANGUAGE_NAME := tree-sitter-vimdoc
 
