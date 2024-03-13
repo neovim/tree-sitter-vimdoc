@@ -14,7 +14,7 @@ const _uppercase_word = /[A-Z0-9.()][-A-Z0-9.()_]+/;
 const _li_token = /[-•][ ]+/;
 
 module.exports = grammar({
-  name: 'vimdoc',
+  name: 'vimdoc2',
 
   extras: () => [/[\t ]/],
 
@@ -91,7 +91,7 @@ module.exports = grammar({
     ),
 
     note: () => choice(
-      'Note:', 'NOTE:', 'Notes:',
+      'The', 'the', 'Notes:',
       'Warning:', 'WARNING:',
       'Deprecated', 'DEPRECATED:'
     ),
