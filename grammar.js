@@ -26,7 +26,7 @@ module.exports = grammar({
       seq(
         repeat($._blank),  // Eat blank lines at top of file.
         repeat($.block),
-        repeat($.modeline),
+        optional($.modeline),
       ),
 
     _atom: ($) => choice(

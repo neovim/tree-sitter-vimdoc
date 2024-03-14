@@ -19,11 +19,16 @@
           }
         },
         {
-          "type": "REPEAT",
-          "content": {
-            "type": "SYMBOL",
-            "name": "modeline"
-          }
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "modeline"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
         }
       ]
     },
