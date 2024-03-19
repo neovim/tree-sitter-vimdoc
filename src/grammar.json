@@ -693,7 +693,7 @@
         "value": 2,
         "content": {
           "type": "PATTERN",
-          "value": "[\\t ]*vim:[^\\n]+\\n"
+          "value": "vim:[^\\n]+\\n"
         }
       }
     },
