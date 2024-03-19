@@ -171,7 +171,7 @@ module.exports = grammar({
     ),
 
     // Modeline: must start with "vim:" (optionally preceded by whitespace)
-    modeline: ($) => token(prec(2, /[\t ]*vim:[^\n]+\n/)),
+    modeline: ($) => token(prec(2, /vim:[^\n]+\n/)),
 
     // "Column heading": plaintext followed by "~".
     // Intended for table column names per `:help help-writing`.
