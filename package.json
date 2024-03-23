@@ -44,7 +44,8 @@
     "build": "tree-sitter generate --no-bindings",
     "test": "tree-sitter test",
     "install": "node-gyp-build",
-    "prebuildify": "prebuildify --napi --strip"
+    "prebuildify": "prebuildify --napi --strip",
+    "version": "make -s update"
   },
   "tree-sitter": [
     {

@@ -1,4 +1,4 @@
-VERSION := 2.5.1
+VERSION := 2.5.2-dev.0
 
 LANGUAGE_NAME := tree-sitter-vimdoc
 
@@ -112,4 +112,11 @@ parser/vimdoc.so: $(SRCS)
 	@mkdir -p parser
 	$(CC) $(CFLAGS) $^ -o $@
 
-.PHONY: all install uninstall clean test
+update: VERSION := $(shell awk -F '"' '/^  "version"/{print $$4}' package.json)
+update:
+	sed -i Makefile -e 's/^VERSION := .*/VERSION := $(VERSION)/'
+	sed -i Cargo.toml -e 's/^version = .*/version = "$(VERSION)"/'
+	sed -i pyproject.toml -e 's/^version = .*/version = "$(VERSION)"/'
+	git add package.json package-lock.json Cargo.toml pyproject.toml Makefile
+
+.PHONY: all install uninstall clean test update
