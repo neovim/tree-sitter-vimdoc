@@ -64,15 +64,17 @@ Release
 Steps to perform a release:
 
 1. Bump and tag the version:
+
+   **First** bump `Cargo.toml`, `pyproject.toml`, and `Makefile` to the new version. **Then** bump the package:
    ```bash
    npm version patch -m "release %s"
    ```
+
    Choose `patch`/`minor`/`major` to indicate query compatibility:
      - `patch` for bugfixes (no changes to queries needed)
      - `minor` for added nodes (queries may need changes to use new nodes but will not error)
      - `major` for removed or renamed nodes (queries will error if not adapted), other breaking changes
 
-   Ensure that `Cargo.toml`, `pyproject.toml`, and `Makefile` also have the same version.
 2. Bump to prerelease, without creating a tag:
    ```bash
    npm version --no-git-tag-version prerelease --preid dev
