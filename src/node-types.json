@@ -18,18 +18,7 @@
   {
     "type": "block",
     "named": true,
-    "fields": {
-      "blank": {
-        "multiple": true,
-        "required": false,
-        "types": [
-          {
-            "type": "\n",
-            "named": false
-          }
-        ]
-      }
-    },
+    "fields": {},
     "children": {
       "multiple": true,
       "required": true,
@@ -98,49 +87,20 @@
   {
     "type": "column_heading",
     "named": true,
-    "fields": {
-      "name": {
-        "multiple": true,
-        "required": true,
-        "types": [
-          {
-            "type": "argument",
-            "named": true
-          },
-          {
-            "type": "codespan",
-            "named": true
-          },
-          {
-            "type": "keycode",
-            "named": true
-          },
-          {
-            "type": "note",
-            "named": true
-          },
-          {
-            "type": "optionlink",
-            "named": true
-          },
-          {
-            "type": "tag",
-            "named": true
-          },
-          {
-            "type": "taglink",
-            "named": true
-          },
-          {
-            "type": "url",
-            "named": true
-          },
-          {
-            "type": "word",
-            "named": true
-          }
-        ]
-      }
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "delimiter",
+          "named": true
+        },
+        {
+          "type": "heading",
+          "named": true
+        }
+      ]
     }
   },
   {
@@ -157,6 +117,14 @@
         },
         {
           "type": "codespan",
+          "named": true
+        },
+        {
+          "type": "delimiter",
+          "named": true
+        },
+        {
+          "type": "heading",
           "named": true
         },
         {
@@ -207,6 +175,14 @@
           "named": true
         },
         {
+          "type": "delimiter",
+          "named": true
+        },
+        {
+          "type": "heading",
+          "named": true
+        },
+        {
           "type": "keycode",
           "named": true
         },
@@ -240,18 +216,58 @@
   {
     "type": "h3",
     "named": true,
-    "fields": {
-      "name": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "uppercase_name",
-            "named": true
-          }
-        ]
-      }
-    },
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "argument",
+          "named": true
+        },
+        {
+          "type": "codespan",
+          "named": true
+        },
+        {
+          "type": "heading",
+          "named": true
+        },
+        {
+          "type": "keycode",
+          "named": true
+        },
+        {
+          "type": "note",
+          "named": true
+        },
+        {
+          "type": "optionlink",
+          "named": true
+        },
+        {
+          "type": "tag",
+          "named": true
+        },
+        {
+          "type": "taglink",
+          "named": true
+        },
+        {
+          "type": "url",
+          "named": true
+        },
+        {
+          "type": "word",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "heading",
+    "named": true,
+    "fields": {},
     "children": {
       "multiple": true,
       "required": false,
@@ -298,18 +314,7 @@
   {
     "type": "help_file",
     "named": true,
-    "fields": {
-      "blank": {
-        "multiple": true,
-        "required": false,
-        "types": [
-          {
-            "type": "\n",
-            "named": false
-          }
-        ]
-      }
-    },
+    "fields": {},
     "children": {
       "multiple": true,
       "required": false,
@@ -470,11 +475,6 @@
     }
   },
   {
-    "type": "uppercase_name",
-    "named": true,
-    "fields": {}
-  },
-  {
     "type": "url",
     "named": true,
     "fields": {
@@ -494,10 +494,6 @@
     "type": "word",
     "named": true,
     "fields": {}
-  },
-  {
-    "type": "\n",
-    "named": false
   },
   {
     "type": "'",
@@ -566,6 +562,10 @@
   {
     "type": "`",
     "named": false
+  },
+  {
+    "type": "delimiter",
+    "named": true
   },
   {
     "type": "language",

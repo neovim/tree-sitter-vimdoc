@@ -15,15 +15,17 @@ Text
   (block
     (line
       (h3
-        (uppercase_name))))
+        (heading))))
   (block
     (line
       (word)))
   (block
     (line
       (column_heading
-        (word)
-        (word)))
+        (heading
+          (word)
+          (word))
+        (delimiter)))
     (line
       (word))))
 
@@ -41,7 +43,7 @@ HELLO WORLD
   (block
     (line
       (h3
-        (uppercase_name))))
+        (heading))))
   (block
     (line
       (word))))
@@ -60,7 +62,7 @@ Test
   (block
     (line
       (h3
-        (uppercase_name)
+        (heading)
         (tag
           (word)))))
   (block
@@ -81,7 +83,9 @@ Below
   (block
     (line
       (column_heading
-        (word))))
+        (heading
+          (word))
+        (delimiter))))
   (block
     (line
       (word))))
@@ -122,8 +126,10 @@ nvim_ui_try_resize({width}, {height})                   *nvim_ui_try_resize()*
   (block
     (line
       (column_heading
-        (word)
-        (word))))
+        (heading
+          (word)
+          (word))
+        (delimiter))))
   (block
     (line
       (word)
@@ -142,7 +148,9 @@ nvim_ui_try_resize({width}, {height})                   *nvim_ui_try_resize()*
   (block
     (line
       (column_heading
-        (word)))
+        (heading
+          (word))
+        (delimiter)))
     (line
       (taglink
         (word))
@@ -170,11 +178,13 @@ column_heading should NOT parse atoms (links, tags, etc.) (FIXME)
   (block
     (line
       (column_heading
-        (optionlink
-          (word))
-        (word)
-        (optionlink
-          (word)))))
+        (heading
+          (optionlink
+            (word))
+          (word)
+          (optionlink
+            (word)))
+        (delimiter))))
   (block
     (line
       (word))))

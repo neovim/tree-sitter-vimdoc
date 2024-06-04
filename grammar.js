@@ -4,7 +4,9 @@
 // - Rule Order: Tree-sitter will prefer the token that appears earlier in the
 //   grammar.
 //
-// https://tree-sitter.github.io/tree-sitter/creating-parsers
+// https://github.com/nvim-treesitter/nvim-treesitter/wiki/Parser-Development
+// - Visibility: Prefer JS regex (/\n/) over literals ('\n') unless it should be
+//   exposed to queries as an anonymous node.
 // - Rules starting with underscore are hidden in the syntax tree.
 
 /// <reference types="tree-sitter-cli/dsl" />
@@ -15,6 +17,11 @@ const _li_token = /[-•][ ]+/;
 
 module.exports = grammar({
   name: 'vimdoc',
+
+  conflicts: $ => [
+    [$._line_noli, $._column_heading],
+    [$._column_heading],
+  ],
 
   extras: () => [/[\t ]/],
 
@@ -135,14 +142,14 @@ module.exports = grammar({
       '>',
       choice(
         alias(token.immediate(/[a-z0-9]+\n/), $.language),
-        token.immediate('\n')),
+        token.immediate(/\n/)),
       alias(repeat1(alias($.line_code, $.line)), $.code),
       // Codeblock ends if a line starts with non-whitespace.
       // Terminating "<" is consumed in other rules.
     )),
 
     // Lines.
-    _blank: () => field('blank', '\n'),
+    _blank: () => field('blank', /\n/),
     line: ($) => choice(
       $.column_heading,
       $.h1,
@@ -156,18 +163,18 @@ module.exports = grammar({
       optional(token.immediate('<')),  // Treat codeblock-terminating "<" as whitespace.
       _li_token,
       choice(
-        alias(seq(repeat1($._atom), '\n'), $.line),
+        alias(seq(repeat1($._atom), /\n/), $.line),
         seq(alias(repeat1($._atom), $.line), $.codeblock),
       ),
       repeat(alias($._line_noli, $.line)),
     )),
     // Codeblock lines: must be indented by at least 1 space/tab.
     // Line content (incl. whitespace) is captured as a single atom.
-    line_code: () => choice('\n', /[\t ]+[^\n]+\n/),
+    line_code: () => choice(/\n/, /[\t ]+[^\n]+\n/),
     _line_noli: ($) => seq(
       choice($._atom_noli, $._uppercase_words),
       repeat($._atom),
-      choice($.codeblock, '\n')
+      choice($.codeblock, /\n/)
     ),
 
     // Modeline: must start with "vim:" (optionally preceded by whitespace)
@@ -177,31 +184,38 @@ module.exports = grammar({
     // Intended for table column names per `:help help-writing`.
     // TODO: children should be $.word (plaintext), not $.atom.
     column_heading: ($) => seq(
-      field('name', seq(choice($._atom_noli, $._uppercase_words), repeat($._atom))),
-      '~',
-      token.immediate('\n'),
+      alias($._column_heading, $.heading),
+      alias('~', $.delimiter),
+      token.immediate(/\n/),
     ),
+    // aliasing a seq exposes every item separately: create hidden rule and alias that
+    _column_heading: $ => prec.dynamic(1, seq(
+      choice($._atom_noli, $._uppercase_words),
+      repeat($._atom)
+    )),
 
     h1: ($) =>
-      seq(
-        token.immediate(field('delimiter', /============+[\t ]*\n/)),
-        repeat1($._atom),
-        '\n',
-      ),
+      prec(1, seq(
+        alias(token.immediate(/============+[\t ]*\n/), $.delimiter),
+        alias(repeat1($._atom), $.heading),
+        optional(seq($.tag, repeat($._atom))),
+        /\n/,
+      )),
 
     h2: ($) =>
-      seq(
-        token.immediate(field('delimiter', /------------+[\t ]*\n/)),
-        repeat1($._atom),
-        '\n',
-      ),
+      prec(1, seq(
+        alias(token.immediate(/------------+[\t ]*\n/), $.delimiter),
+        alias(repeat1($._atom), $.heading),
+        optional(seq($.tag, repeat($._atom))),
+        /\n/,
+      )),
 
     // Heading 3: UPPERCASE NAME, followed by optional *tags*.
     h3: ($) =>
       seq(
-        field('name', $.uppercase_name),
+        alias($.uppercase_name, $.heading),
         optional(seq($.tag, repeat($._atom))),
-        '\n',
+        /\n/,
       ),
 
     tag: ($) => _word($,

@@ -133,12 +133,12 @@ NOT an argument
 ================================================================================
 a '{' '}' block
 {foo "{bar}" `{baz}` |{baz| } {}
-foo { bar 
+foo { bar
 { {} foo{{ foo{{{
- {{ 
- {{{ 
+ {{
+ {{{
 { }	foo
-,	inside { }: 
+,	inside { }:
 \}	literal } x
 \{	literal { x
 
@@ -205,16 +205,17 @@ EXTERNAL *netrw-externapp* {{{2
   (block
     (line
       (h1
-        (word)
-        (word)
+        (delimiter)
+        (heading
+          (word)
+          (word))
         (tag
           (word))
         (word))))
   (block
     (line
       (h3
-        (uppercase_name)
+        (heading)
         (tag
           (word))
         (word)))))
-
