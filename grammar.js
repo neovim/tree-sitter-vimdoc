@@ -7,7 +7,7 @@
 // https://github.com/nvim-treesitter/nvim-treesitter/wiki/Parser-Development
 // - Visibility: Prefer JS regex (/\n/) over literals ('\n') unless it should be
 //   exposed to queries as an anonymous node.
-//   Rules starting with underscore are hidden in the syntax tree.
+// - Rules starting with underscore are hidden in the syntax tree.
 
 /// <reference types="tree-sitter-cli/dsl" />
 // @ts-check
