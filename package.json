@@ -3,18 +3,18 @@
   "version": "3.0.0",
   "description": "Vim help file grammar for tree-sitter",
   "repository": "github:neovim/tree-sitter-vimdoc",
-  "author": "Thomas Vigouroux <tomvig38@gmail.com>",
   "license": "Apache-2.0",
+  "author": {
+    "name": "Thomas Vigouroux",
+    "email": "tomvig38@gmail.com"
+  },
   "main": "bindings/node",
   "types": "bindings/node",
   "keywords": [
     "incremental",
     "parsing",
     "tree-sitter",
-    "vimdoc",
-    "vim",
-    "nvim",
-    "neovim"
+    "vimdoc"
   ],
   "files": [
     "grammar.js",
@@ -22,36 +22,29 @@
     "prebuilds/**",
     "bindings/node/*",
     "queries/*",
-    "src/**"
+    "src/**",
+    "*.wasm"
   ],
   "dependencies": {
-    "node-addon-api": "^7.1.0",
-    "node-gyp-build": "^4.8.0"
+    "node-addon-api": "^8.2.1",
+    "node-gyp-build": "^4.8.2"
   },
   "devDependencies": {
-    "tree-sitter-cli": "^0.21.0",
-    "prebuildify": "^6.0.0"
+    "prebuildify": "^6.0.1",
+    "tree-sitter-cli": "^0.24.3"
   },
   "peerDependencies": {
-    "tree-sitter": "^0.21.0"
+    "tree-sitter": "^0.21.1"
   },
   "peerDependenciesMeta": {
-    "tree_sitter": {
+    "tree-sitter": {
       "optional": true
     }
   },
   "scripts": {
-    "build": "tree-sitter generate --no-bindings",
-    "test": "tree-sitter test",
     "install": "node-gyp-build",
-    "prebuildify": "prebuildify --napi --strip"
-  },
-  "tree-sitter": [
-    {
-      "scope": "text.vimdoc",
-      "first-line-regex": "^\\*[\\w-]+\\.txt\\*",
-      "highlights": "queries/vimdoc/highlights.scm",
-      "injections": "queries/vimdoc/injections.scm"
-    }
-  ]
+    "prestart": "tree-sitter build --wasm",
+    "start": "tree-sitter playground",
+    "test": "node --test bindings/node/*_test.js"
+  }
 }
