@@ -31,21 +31,25 @@ jobs:
       matrix:
         os: [ubuntu-latest, windows-latest, macos-14]
     steps:
-      - name: Set up repository
-        uses: tree-sitter/parser-setup-action@v1.2
-        with:
-          node-version: 20
+      - name: Clone repository
+        uses: actions/checkout@v4
       - name: Clone nvim help files
         uses: actions/checkout@v4
         with:
           repository: neovim/neovim
           path: examples/neovim
           sparse-checkout: runtime/doc/
-      - name: Run tests
+      - name: Set up tree-sitter
+        uses: tree-sitter/setup-action/cli@v1
+      - name: Run parser tests
         uses: tree-sitter/parser-test-action@v2
         with:
-          test-library: ${{runner.os == 'Linux'}}
-          corpus-files: |-
+          test-rust: ${{runner.os == 'Linux'}}
+      - name: Parse sample files
+        uses: tree-sitter/parse-action@v4
+        id: parse-files
+        with:
+          files: |-
             examples/neovim/runtime/doc/*
           # FIXME: these files should not have errors
           invalid-files: |-
@@ -113,3 +117,9 @@ jobs:
             examples/neovim/runtime/doc/vim_diff.txt
             examples/neovim/runtime/doc/visual.txt
             examples/neovim/runtime/doc/windows.txt
+      - name: Upload failures artifact
+        uses: actions/upload-artifact@v4
+        if: "!cancelled() && steps.parse-files.outcome == 'failure'"
+        with:
+          name: failures-${{runner.os}}
+          path: ${{steps.parse-files.outputs.failures}}
