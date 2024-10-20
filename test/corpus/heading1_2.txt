@@ -19,7 +19,9 @@ Text2
   (block
     (line
       (h1
-        (word)
+        (delimiter)
+        (heading
+          (word))
         (tag
           (word)))))
   (block
@@ -28,8 +30,10 @@ Text2
   (block
     (line
       (h2
-        (word)
-        (word)
+        (delimiter)
+        (heading
+          (word)
+          (word))
         (tag
           (word))
         (tag
@@ -59,20 +63,24 @@ Text
   (block
     (line
       (h1
-        (tag
-          (word))
-        (word)
-        (word))))
+        (delimiter)
+        (heading
+          (tag
+            (word))
+          (word)
+          (word)))))
   (block
     (line
       (word)))
   (block
     (line
       (h2
-        (tag
-          (word))
-        (word)
-        (word))))
+        (delimiter)
+        (heading
+          (tag
+            (word))
+          (word)
+          (word)))))
   (block
     (line
       (word))))
