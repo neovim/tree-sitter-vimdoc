@@ -2,11 +2,12 @@
 name = "tree-sitter-vimdoc"
 description = "Vim help file grammar for tree-sitter"
 version = "3.0.0"
+authors = ["Thomas Vigouroux <tomvig38@gmail.com>"]
 license = "Apache-2.0"
-keywords = ["incremental", "parsing", "neovim", "vimdoc"]
+readme = "README.md"
+keywords = ["incremental", "parsing", "tree-sitter", "vimdoc"]
 categories = ["parsing", "text-editors"]
 repository = "https://github.com/neovim/tree-sitter-vimdoc"
-authors = ["Thomas Vigouroux <tomvig38@gmail.com>"]
 edition = "2021"
 autoexamples = false
 
@@ -17,7 +18,10 @@ include = ["bindings/rust/*", "grammar.js", "queries/*", "src/*"]
 path = "bindings/rust/lib.rs"
 
 [dependencies]
-tree-sitter = ">=0.21.0"
+tree-sitter-language = "0.1"
 
 [build-dependencies]
-cc = "^1.0.89"
+cc = "1.1.22"
+
+[dev-dependencies]
+tree-sitter = "0.24.3"

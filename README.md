@@ -65,7 +65,7 @@ Steps to perform a release:
 
 1. Bump and tag the version:
 
-   **First** bump `Cargo.toml`, `pyproject.toml`, and `Makefile` to the new version. **Then** bump the package:
+   **First** bump `Cargo.toml`, `Cargo.lock`, `pyproject.toml`, and `Makefile` to the new version. **Then** bump the package:
    ```bash
    npm version patch -m "release %s"
    ```
@@ -78,7 +78,7 @@ Steps to perform a release:
 2. Bump to prerelease, without creating a tag:
    ```bash
    npm version --no-git-tag-version prerelease --preid dev
-   git add package*.json Cargo.toml pyproject.toml Makefile
+   git add package*.json Cargo.* pyproject.toml Makefile
    git commit -m bump
    ```
 3. Push:
