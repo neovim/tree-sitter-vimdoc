@@ -175,7 +175,9 @@ H3 HEADLINE *foo*
           (line))))
     (line
       (h1
-        (word)
+        (delimiter)
+        (heading
+          (word))
         (tag
           (word))))
     (line
@@ -191,7 +193,9 @@ H3 HEADLINE *foo*
           (line))))
     (line
       (h2
-        (word)
+        (delimiter)
+        (heading
+          (word))
         (tag
           (word)))))
   (block
@@ -202,7 +206,7 @@ H3 HEADLINE *foo*
           (line))))
     (line
       (h3
-        (uppercase_name)
+        (heading)
         (tag
           (word))))))
 
