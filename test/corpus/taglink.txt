@@ -151,9 +151,6 @@ Note: ":autocmd" can...
       (word))
     (line
       (word)
-      (word)
-      (ERROR
-        (word))
       (word))
     (line
       (word)
