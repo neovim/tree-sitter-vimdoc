@@ -82,7 +82,7 @@ module.exports = grammar({
       seq("'", token.immediate(/[^'\n\t ]/), token.immediate("'")),
       // NOT taglink: "||", "|"
       /\|\|+/,
-      '|',
+      '|', "'|'",
       // NOT argument:
       '{',
       '{}',
