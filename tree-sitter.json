@@ -1,0 +1,26 @@
+{
+  "grammars": [
+    {
+      "name": "vimdoc",
+      "path": ".",
+      "scope": "text.vimdoc",
+      "file-types": [ "txt" ],
+      "highlights": "queries/vimdoc/highlights.scm",
+      "injections": "queries/vimdoc/injections.scm"
+    }
+  ],
+  "metadata": {
+    "version": "3.0.2-dev",
+  "license": "Apache-2.0",
+    "description": "Tree-sitter grammar for Vim help files",
+    "links": {
+      "repository": "https://github.com/neovim/tree-sitter-vimdoc"
+    },
+    "authors": [
+      {
+        "name": "Thomas Vigouroux",
+        "email": "tomvig38@gmail.com"
+      }
+    ]
+  }
+}
