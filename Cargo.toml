@@ -1,7 +1,7 @@
 [package]
 name = "tree-sitter-vimdoc"
 description = "Tree-sitter grammar for Vim help files"
-version = "3.0.1"
+version = "4.0.0"
 license = "Apache-2.0"
 keywords = ["incremental", "parsing", "neovim", "vimdoc"]
 categories = ["parsing", "text-editors"]
