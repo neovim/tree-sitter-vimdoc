@@ -21,7 +21,7 @@ jobs:
         os: [ubuntu-latest, macos-latest]
     steps:
       - name: Set up repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Set up tree-sitter
         uses: tree-sitter/setup-action@v2
@@ -32,7 +32,7 @@ jobs:
         uses: tree-sitter/parser-test-action@v2
 
       - name: Clone neovim runtime corpus
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           repository: neovim/neovim
           path: .tests/neovim
