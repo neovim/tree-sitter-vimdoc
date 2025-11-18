@@ -61,28 +61,31 @@ TODO
 Release
 -------
 
-Steps to perform a release:
+Steps to perform a release: https://tree-sitter.github.io/tree-sitter/creating-parsers/6-publishing.html
 
-1. Bump and tag the version:
-
-   **First** bump `Cargo.toml`, `pyproject.toml`, and `Makefile` to the new version. **Then** bump the package:
-   ```bash
-   npm version patch -m "release %s"
+1. Update tree-sitter CLI.
    ```
-
-   Choose `patch`/`minor`/`major` to indicate query compatibility:
-     - `patch` for bugfixes (no changes to queries needed)
-     - `minor` for added nodes (queries may need changes to use new nodes but will not error)
-     - `major` for removed or renamed nodes (queries will error if not adapted), other breaking changes
-
-2. Bump to prerelease, without creating a tag:
-   ```bash
-   npm version --no-git-tag-version prerelease --preid dev
-   git add package*.json Cargo.toml pyproject.toml Makefile
-   git commit -m bump
+   npm install tree-sitter-cli
    ```
-3. Push:
-   ```bash
-   git push && git push --tags
+2. Bump the version.
    ```
-4. Release the tagged commit: https://github.com/neovim/tree-sitter-vimdoc/releases/new
+   tree-sitter version x.y.z
+   ```
+    - Choose `patch`/`minor`/`major` to indicate query compatibility:
+        - `patch` for bugfixes (no changes to queries needed)
+        - `minor` for added nodes (queries may need changes to use new nodes but will not error)
+        - `major` for removed or renamed nodes (queries will error if not adapted), other breaking changes
+3. Regenerate and test.
+   ```
+   tree-sitter generate && tree-sitter test
+   ```
+4. Commit the generated files
+   ```
+   git add .
+   git commit -m 'release'
+   ```
+5. Push
+   ```
+   git push
+   ```
+6. Tag and release: https://github.com/neovim/tree-sitter-vimdoc/releases/new
