@@ -29,7 +29,7 @@ jobs:
           install-lib: false
 
       - name: Run tests
-        uses: tree-sitter/parser-test-action@v2
+        uses: tree-sitter/parser-test-action@v3
 
       - name: Clone neovim runtime corpus
         uses: actions/checkout@v5
