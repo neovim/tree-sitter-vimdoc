@@ -44,12 +44,16 @@ jobs:
           files: |-
             .tests/neovim/runtime/doc/*.txt
             !.tests/neovim/runtime/doc/builtin.txt
+            !.tests/neovim/runtime/doc/dev_test.txt
             !.tests/neovim/runtime/doc/index.txt
             !.tests/neovim/runtime/doc/motion.txt
+            !.tests/neovim/runtime/doc/news.txt
+            !.tests/neovim/runtime/doc/nvim.txt
             !.tests/neovim/runtime/doc/options.txt
+            !.tests/neovim/runtime/doc/pi_*.txt
             !.tests/neovim/runtime/doc/quickfix.txt
             !.tests/neovim/runtime/doc/quickref.txt
             !.tests/neovim/runtime/doc/tips.txt
-            !.tests/neovim/runtime/doc/visual.txt
             !.tests/neovim/runtime/doc/usr_*.txt
-            !.tests/neovim/runtime/doc/pi_*.txt
+            !.tests/neovim/runtime/doc/vimfn.txt
+            !.tests/neovim/runtime/doc/visual.txt
