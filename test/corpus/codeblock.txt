@@ -402,8 +402,7 @@ codeblock stop and start on same line
     (line
       (word)
       (word)
-      (word)
-      (word))
+      (optional))
     (line
       (argument
         (word))))

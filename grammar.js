@@ -16,7 +16,7 @@ const _uppercase_word = /[A-Z0-9.()][-A-Z0-9.()_]+/;
 const _li_token = /[-•][ ]+/;
 
 module.exports = grammar({
-  name: 'vimdoc',
+  name: 'vimdoc2',
 
   conflicts: $ => [
     [$._line_noli, $._column_heading],
@@ -64,6 +64,7 @@ module.exports = grammar({
         $.taglink,
         $.codespan,
         $.argument,
+        $.optional,
         $.keycode,
         $.note,
       ),
@@ -97,7 +98,7 @@ module.exports = grammar({
     ),
 
     note: () => choice(
-      'Note:', 'NOTE:', 'Notes:',
+      'The', 'the', 'Notes:',
       'Warning:', 'WARNING:',
       'Deprecated', 'DEPRECATED:'
     ),
@@ -112,6 +113,10 @@ module.exports = grammar({
       /META-./,
       /ALT-./,
     ),
+
+    // Optional argument: [arg] (no whitespace allowed).
+    // This is the vimdoc style optional arg, as opposed to {arg}? (LuaLS style).
+    optional: () => /\[[^\]{\n\t ]+\]/,
 
     // First part (minus tags) of h3 or column_heading.
     uppercase_name: () => seq(
@@ -236,7 +241,7 @@ module.exports = grammar({
     taglink: ($) => _word($, prec(1, /[^|\n\t ]+/), '|', '|'),
     // Inline code (may contain whitespace!): `foo bar`
     codespan: ($) => _word($, /[^``\n]+/, '`', '`'),
-    // Argument: {arg} (no whitespace allowed)
+    // Argument: {arg} (no whitespace allowed), also {arg}? (LuaLS style "optional arg").
     argument: ($) => seq(_word($, /[^}\n\t ]+/, '{', '}'), optional(token.immediate('?'))),
   },
 });
