@@ -83,6 +83,8 @@ text
   (block
     (line
       (word)
+      (word)
+      (word)
       (word)))
   (block
     (line
@@ -90,6 +92,7 @@ text
       (word)
       (taglink
         (word))
+      (word)
       (word))
     (line
       (codeblock
@@ -336,6 +339,7 @@ To test for a non-empty string, use empty(): >
       (word)
       (word)
       (word)
+      (word)
       (word))
     (line
       (word)
@@ -348,6 +352,7 @@ To test for a non-empty string, use empty(): >
           (line)
           (line))))
     (line
+      (word)
       (word)
       (word)
       (word)

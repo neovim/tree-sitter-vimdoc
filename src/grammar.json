@@ -51,7 +51,7 @@
             "value": -1,
             "content": {
               "type": "PATTERN",
-              "value": "[^,(\\[\\n\\t ]+"
+              "value": "[^.,(\\[\\n\\t ]+"
             }
           }
         },
@@ -258,7 +258,15 @@
         },
         {
           "type": "STRING",
+          "value": ")"
+        },
+        {
+          "type": "STRING",
           "value": "["
+        },
+        {
+          "type": "STRING",
+          "value": "]"
         },
         {
           "type": "STRING",
@@ -271,6 +279,10 @@
         {
           "type": "STRING",
           "value": ","
+        },
+        {
+          "type": "STRING",
+          "value": "."
         }
       ]
     },
@@ -963,7 +975,7 @@
     },
     "url_word": {
       "type": "PATTERN",
-      "value": "https?:[^\\n\\t)\\] ]+"
+      "value": "https?:\\/\\/[^\\n\\t\\] ]*[^\\n\\t )\\].,]"
     },
     "url": {
       "type": "CHOICE",

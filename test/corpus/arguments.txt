@@ -208,6 +208,7 @@ EXTERNAL *netrw-externapp* {{{2
         (delimiter)
         (heading
           (word)
+          (word)
           (word))
         (tag
           (word))

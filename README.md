@@ -32,6 +32,7 @@ Overview
     nature; parsing the contents would require loading a "child" language
     (injection). See [#2](https://github.com/neovim/tree-sitter-vimdoc/issues/2).
   - the terminating `<` (and any following whitespace) is discarded (anonymous).
+- `url` intentionally does not capture `.,)` at the end of the URL. See also [Known issues](#known-issues).
 - `h1` = "Heading 1": `======` followed by text and optional `*tags*`.
 - `h2` = "Heading 2": `------` followed by text and optional `*tags*`.
 - `h3` = "Heading 3": UPPERCASE WORDS, followed by optional `*tags*`, followed
@@ -45,8 +46,11 @@ Known issues
 - Spec requires that `codeblock` delimiter ">" must be preceded by a space
   (" >"), not a tab. But currently the grammar doesn't enforce this. Example:
   `:help lcs-tab`.
-- `url` doesn't handle _surrounding_ parens. E.g. `(https://example.com/#yay)` yields `word`
-- `url` doesn't handle _nested_ parens. E.g. `(https://example.com/(foo)#yay)`
+- `url` cannot contain a closing bracket `]` anywhere in the URL. (Workaround:
+  URL-encode the bracket.) This is a tradeoff so that markdown hyperlinks work:
+  ```
+  [https://example.com](https://example.com)
+  ```
 - `column_heading` currently only recognizes tilde `~` preceded by space (i.e.
   `foo ~` not `foo~`). This covers 99% of :help files.
 - `column_heading` children should be plaintext, but currently are parsed as `$._atom`.
@@ -55,8 +59,8 @@ Known issues
 TODO
 ----
 
-- `tag_heading` : line(s) containing only tags, typically implies a "heading"
-  before a block.
+- `h4` ("tag heading") : a line containing only tags, or ending with a tag, is
+  a "h4" heading.
 
 Release
 -------

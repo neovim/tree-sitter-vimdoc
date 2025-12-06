@@ -148,6 +148,9 @@ Note: ":autocmd" can...
     (line
       (note)
       (word)
+      (word)
+      (word)
+      (word)
       (word))
     (line
       (word)

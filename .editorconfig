@@ -4,7 +4,10 @@ root = true
 charset = utf-8
 end_of_line = lf
 insert_final_newline = true
-trim_trailing_whitespace = true
+
+[*.txt]
+# Some test files have intentional whitespace at EOL.
+trim_trailing_whitespace = false
 
 [*.{json,toml,yml,gyp}]
 indent_style = space

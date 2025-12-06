@@ -36,10 +36,10 @@ x (https://neovim.io/doc/user/#yay) https://neovim.io/doc/user/#yay
         (word)))))
 
 ================================================================================
-url with parens (FIXME)
+with parens
 ================================================================================
-url: (https://neovim.io/doc/user/(foo)#yay)
-markdown: [https://neovim.io/doc/user/#yay](https://neovim.io/doc/user/#yay).
+url: (https://neovim.io/doc/user/vimfn.html#get()-blob)
+markdown: [https://neovim.io/doc/user/#yay[foo](https://neovim.io/doc/user/#yay).
 
 
 --------------------------------------------------------------------------------
@@ -61,4 +61,46 @@ markdown: [https://neovim.io/doc/user/#yay](https://neovim.io/doc/user/#yay).
       (word)
       (url
         (word))
+      (word)
+      (word))))
+
+================================================================================
+ending in punctuation
+================================================================================
+word1 https://neovim.io/doc/user/#,yay,       word2
+word1 https://neovim.io/doc/user/#yay.        word2
+word1 https://neovim.io/doc/user/#yay[foo]#.  word2
+word1 (https://neovim.io/doc/user/#yay)       word2
+
+
+--------------------------------------------------------------------------------
+
+(help_file
+  (block
+    (line
+      (word)
+      (url
+        (word))
+      (word)
+      (word))
+    (line
+      (word)
+      (url
+        (word))
+      (word)
+      (word))
+    (line
+      (word)
+      (url
+        (word))
+      (word)
+      (word)
+      (word)
+      (word))
+    (line
+      (word)
+      (word)
+      (url
+        (word))
+      (word)
       (word))))
