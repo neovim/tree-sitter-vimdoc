@@ -41,7 +41,7 @@ module.exports = grammar({
       $._atom_common,
     ),
     word: ($) => choice(
-      token(prec(-1, /[^,(\[\n\t ]+/)),
+      token(prec(-1, /[^.,(\[\n\t ]+/)),
       $._word_common,
     ),
 
@@ -89,11 +89,14 @@ module.exports = grammar({
       /\{\{+[0-9]*/,
 
       '(',
+      ')',
       '[',
+      ']',
       '~',
       // NOT codeblock: random ">" in middle of the motherflippin text.
       '>',
       ',',
+      '.',
     ),
 
     note: () => choice(
@@ -223,7 +226,7 @@ module.exports = grammar({
       '*', '*'),
 
     // URL without surrounding (), [], etc.
-    url_word: () => /https?:[^\n\t)\] ]+/,
+    url_word: () => /https?:\/\/[^\n\t\] ]*[^\n\t )\].,]/,
     url: ($) => choice(
       // seq('(', field('text', prec.left(alias($.url_word, $.word))), token.immediate(')')),
       // seq('[', field('text', prec.left(alias($.url_word, $.word))), token.immediate(']')),

@@ -104,6 +104,8 @@ li continues
     (line_li
       (line
         (word)
+        (word)
+        (word)
         (word))
       (line))
     (line_li
@@ -121,6 +123,7 @@ li continues
         (word)
         (word)
         (word)
+        (word)
         (word))
       (line
         (optionlink
@@ -130,6 +133,9 @@ li continues
           (word))))
     (line_li
       (line
+        (word)
+        (word)
+        (word)
         (word)
         (word)
         (word)
@@ -200,12 +206,16 @@ listitem with codeblock
     (line_li
       (line
         (word)
+        (word)
+        (word)
         (word))
       (codeblock
         (code
           (line))))
     (line_li
       (line
+        (word)
+        (word)
         (word)
         (word))
       (line))

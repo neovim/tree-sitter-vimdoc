@@ -76,10 +76,6 @@ Regular	  /	:help /[
   (block
     (line
       (word)
-      (word))
-    (line
-      (word)
-      (word)
       (word)
       (word))
     (line
@@ -88,6 +84,13 @@ Regular	  /	:help /[
       (word)
       (word))
     (line
+      (word)
+      (word)
+      (word)
+      (word))
+    (line
+      (word)
+      (word)
       (word)
       (word)
       (word)
@@ -158,6 +161,7 @@ foo '"\ '.  Notice
 (help_file
   (block
     (line
+      (word)
       (word)
       (word)
       (word)
