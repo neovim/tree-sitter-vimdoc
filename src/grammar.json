@@ -316,6 +316,14 @@
         {
           "type": "STRING",
           "value": "DEPRECATED:"
+        },
+        {
+          "type": "STRING",
+          "value": "Experimental"
+        },
+        {
+          "type": "STRING",
+          "value": "EXPERIMENTAL:"
         }
       ]
     },

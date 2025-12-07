@@ -549,6 +549,14 @@
     "named": false
   },
   {
+    "type": "EXPERIMENTAL:",
+    "named": false
+  },
+  {
+    "type": "Experimental",
+    "named": false
+  },
+  {
     "type": "NOTE:",
     "named": false
   },
