@@ -60,7 +60,7 @@
   (#any-of? @comment.hint "Note:" "NOTE:" "Notes:"))
 
 ((note) @comment.warning
-  (#any-of? @comment.warning "Warning:" "WARNING:"))
+  (#any-of? @comment.warning "Experimental" "EXPERIMENTAL:" "Warning:" "WARNING:"))
 
 ((note) @comment.error
   (#any-of? @comment.error "Deprecated:" "DEPRECATED:"))

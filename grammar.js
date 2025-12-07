@@ -102,7 +102,8 @@ module.exports = grammar({
     note: () => choice(
       'Note:', 'NOTE:', 'Notes:',
       'Warning:', 'WARNING:',
-      'Deprecated', 'DEPRECATED:'
+      'Deprecated', 'DEPRECATED:',
+      'Experimental', 'EXPERIMENTAL:',
     ),
 
     keycode: () => choice(
