@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "tree-sitter-vimdoc"
 description = "Tree-sitter grammar for Vim help files"
-version = "4.0.1"
+version = "4.0.2"
 keywords = ["incremental", "parsing", "tree-sitter", "vimdoc"]
 classifiers = [
   "Intended Audience :: Developers",

@@ -10,7 +10,7 @@
     }
   ],
   "metadata": {
-    "version": "4.0.1",
+    "version": "4.0.2",
   "license": "Apache-2.0",
     "description": "Tree-sitter grammar for Vim help files",
     "links": {
