@@ -226,7 +226,7 @@ module.exports = grammar({
       '*', '*'),
 
     // URL without surrounding (), [], etc.
-    url_word: () => /https?:\/\/[^\n\t\] ]*[^\n\t )\].,]/,
+    url_word: () => /https?:\/\/[^\n\t\] ]*[^\n\t )\].,:]/,
     url: ($) => choice(
       // seq('(', field('text', prec.left(alias($.url_word, $.word))), token.immediate(')')),
       // seq('[', field('text', prec.left(alias($.url_word, $.word))), token.immediate(']')),

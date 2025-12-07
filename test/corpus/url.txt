@@ -70,6 +70,7 @@ ending in punctuation
 word1 https://neovim.io/doc/user/#,yay,       word2
 word1 https://neovim.io/doc/user/#yay.        word2
 word1 https://neovim.io/doc/user/#yay[foo]#.  word2
+word1 https://neovim.io:8080/doc/:user/:      word2
 word1 (https://neovim.io/doc/user/#yay)       word2
 
 
@@ -95,6 +96,12 @@ word1 (https://neovim.io/doc/user/#yay)       word2
         (word))
       (word)
       (word)
+      (word)
+      (word))
+    (line
+      (word)
+      (url
+        (word))
       (word)
       (word))
     (line

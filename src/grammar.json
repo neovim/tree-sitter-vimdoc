@@ -975,7 +975,7 @@
     },
     "url_word": {
       "type": "PATTERN",
-      "value": "https?:\\/\\/[^\\n\\t\\] ]*[^\\n\\t )\\].,]"
+      "value": "https?:\\/\\/[^\\n\\t\\] ]*[^\\n\\t )\\].,:]"
     },
     "url": {
       "type": "CHOICE",
