@@ -93,3 +93,12 @@ Steps to perform a release: https://tree-sitter.github.io/tree-sitter/creating-p
    git push
    ```
 6. Tag and release: https://github.com/neovim/tree-sitter-vimdoc/releases/new
+
+### Publis to crates.io
+
+```
+cargo publish --dry-run
+cargo login
+cargo publish
+```
+
