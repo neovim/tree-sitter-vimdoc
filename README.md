@@ -96,6 +96,8 @@ Steps to perform a release: https://tree-sitter.github.io/tree-sitter/creating-p
 
 ### Publis to crates.io
 
+Crate: https://crates.io/crates/tree-sitter-vimdoc
+
 ```
 cargo publish --dry-run
 cargo login
