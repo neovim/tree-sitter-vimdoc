@@ -88,10 +88,14 @@ nvim_buf_detach_event[{buf}]
     (line
       (word)
       (word)
+      (word)
+      (word)
       (argument
         (word))
       (word))
     (line
+      (word)
+      (word)
       (word)
       (word)
       (argument
