@@ -23,6 +23,7 @@ li continues
 (help_file
   (block
     (line_li
+      (prefix)
       (line
         (word)
         (word)
@@ -30,11 +31,13 @@ li continues
         (word))
       (line))
     (line_li
+      (prefix)
       (line
         (word)
         (word))
       (line))
     (line_li
+      (prefix)
       (line
         (word)
         (word))
@@ -53,6 +56,7 @@ li continues
         (taglink
           (word))))
     (line_li
+      (prefix)
       (line
         (word)
         (word)
@@ -67,6 +71,7 @@ li continues
         (word)
         (word)))
     (line_li
+      (prefix)
       (line
         (argument
           (word))
@@ -74,12 +79,14 @@ li continues
       (line)))
   (block
     (line_li
+      (prefix)
       (line
         (word)
         (word)
         (word))
       (line))
     (line_li
+      (prefix)
       (line
         (tag
           (word))
@@ -88,12 +95,14 @@ li continues
           (word)))
       (line))
     (line_li
+      (prefix)
       (line
         (word)
         (word)
         (word))
       (line))
     (line_li
+      (prefix)
       (line
         (word))
       (line)
@@ -125,6 +134,7 @@ listitem with codeblock
 (help_file
   (block
     (line_li
+      (prefix)
       (line
         (word)
         (word)
@@ -134,6 +144,7 @@ listitem with codeblock
         (code
           (line))))
     (line_li
+      (prefix)
       (line
         (word)
         (word)
@@ -141,6 +152,7 @@ listitem with codeblock
         (word))
       (line))
     (line_li
+      (prefix)
       (line
         (word)
         (word))
@@ -153,10 +165,12 @@ listitem with codeblock
             (line)
             (line)))))
     (line_li
+      (prefix)
       (line
         (word))
       (line))
     (line_li
+      (prefix)
       (line
         (word)
         (word))
@@ -198,24 +212,28 @@ listitems + lines without blank lines
         (word))
       (word))
     (line_li
+      (prefix)
       (line
         (word)
         (taglink
           (word)))
       (line))
     (line_li
+      (prefix)
       (line
         (word)
         (taglink
           (word)))
       (line))
     (line_li
+      (prefix)
       (line
         (word)
         (taglink
           (word)))
       (line))
     (line_li
+      (prefix)
       (line
         (word))
       (line)
@@ -242,6 +260,7 @@ listitem tricky
 (help_file
   (block
     (line_li
+      (prefix)
       (line
         (word)
         (word)
@@ -253,18 +272,21 @@ listitem tricky
       (word)))
   (block
     (line_li
+      (prefix)
       (line
         (word)
         (word)
         (word))
       (line))
     (line_li
+      (prefix)
       (line
         (word)
         (word)
         (word))
       (line))
     (line_li
+      (prefix)
       (line
         (word))
       (line))))
@@ -282,7 +304,9 @@ numbered listitem
     1. nested
        continued line
  
-1. new block
+999. new block
+
+9999. number too big
  
 - new block
 
@@ -291,7 +315,8 @@ numbered listitem
 
 (help_file
   (block
-    (line_li_num
+    (line_li
+      (prefix)
       (line
         (word)
         (word)
@@ -300,24 +325,28 @@ numbered listitem
       (line
         (word)
         (word)))
-    (line_li_num
+    (line_li
+      (prefix)
       (line
         (word)
         (word)
         (word))
       (line))
-    (line_li_num
+    (line_li
+      (prefix)
       (line
         (word))
       (line))
     (line_li
+      (prefix)
       (line
         (word))
       (line)
       (line
         (word)
         (word)))
-    (line_li_num
+    (line_li
+      (prefix)
       (line
         (word))
       (line)
@@ -325,13 +354,93 @@ numbered listitem
         (word)
         (word))))
   (block
-    (line_li_num
+    (line_li
+      (prefix)
       (line
         (word)
         (word))
       (line)))
   (block
+    (line
+      (word)
+      (word)
+      (word)
+      (word)))
+  (block
     (line_li
+      (prefix)
+      (line
+        (word)
+        (word))
+      (line))))
+
+================================================================================
+NOT listitem (FIXME)
+================================================================================
+block1
+- block1
+
+block1 line1
+1. block1 line2
+
+block1 line1
+- block1 line2
+1. block1 line3
+
+  block1 line1
+  1. block1 line2
+  2. block1 line3
+
+
+--------------------------------------------------------------------------------
+
+(help_file
+  (block
+    (line
+      (word))
+    (line_li
+      (prefix)
+      (line
+        (word))
+      (line)))
+  (block
+    (line
+      (word)
+      (word))
+    (line_li
+      (prefix)
+      (line
+        (word)
+        (word))
+      (line)))
+  (block
+    (line
+      (word)
+      (word))
+    (line_li
+      (prefix)
+      (line
+        (word)
+        (word))
+      (line))
+    (line_li
+      (prefix)
+      (line
+        (word)
+        (word))
+      (line)))
+  (block
+    (line
+      (word)
+      (word))
+    (line_li
+      (prefix)
+      (line
+        (word)
+        (word))
+      (line))
+    (line_li
+      (prefix)
       (line
         (word)
         (word))

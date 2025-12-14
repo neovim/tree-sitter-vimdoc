@@ -13,10 +13,8 @@
 // @ts-check
 
 const _uppercase_word = /[A-Z0-9.()][-A-Z0-9.()_]+/;
-// List-item.
-const _li_token = /[-•][ ]+/;
-// Numbered list-item.
-const _num_li_token = /[0-9]{1,3}\.[ ]+/;
+// Listitem (incl. numbered items).
+const _li_token = /([-•]|([0-9]{1,3}\.))[ ]+/;
 
 module.exports = grammar({
   name: 'vimdoc',
@@ -136,8 +134,7 @@ module.exports = grammar({
       choice(
         repeat1($.line),
         repeat1($.line_li),
-        repeat1($.line_li_num),
-        seq(repeat1($.line), repeat1(choice($.line_li, $.line_li_num))),
+        seq(repeat1($.line), repeat1($.line_li)),
       ),
       choice(
         token.immediate('<'),  // Treat codeblock-terminating "<" as whitespace.
@@ -169,17 +166,7 @@ module.exports = grammar({
     // Listitem: consumes prefixed line and all adjacent non-prefixed lines.
     line_li: ($) => prec.right(1, seq(
       optional(token.immediate('<')),  // Treat codeblock-terminating "<" as whitespace.
-      _li_token,
-      choice(
-        alias(seq(repeat1($._atom), /\n/), $.line),
-        seq(alias(repeat1($._atom), $.line), $.codeblock),
-      ),
-      repeat(alias($._line_noli, $.line)),
-    )),
-    // Numbered listitem: consumes prefixed line and all adjacent non-prefixed lines.
-    line_li_num: ($) => prec.right(1, seq(
-      optional(token.immediate('<')),  // Treat codeblock-terminating "<" as whitespace.
-      _num_li_token,
+      alias(_li_token, $.prefix),
       choice(
         alias(seq(repeat1($._atom), /\n/), $.line),
         seq(alias(repeat1($._atom), $.line), $.codeblock),

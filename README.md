@@ -21,7 +21,9 @@ Overview
     terminated by "implicit stop" (no terminating `<`) consumes blank lines, so
     `block` has no way to end.
 - `line_li` ("listitem")
-  - Lines starting with `-`/`•` (_not_ `+`/`*`) are listitems.
+  - Lines starting with `-`/`•`/`[0-9].` (_not_ `+`/`*`) are listitems.
+  - Use the `prefix` node to detect if the listitem is ordered (numbered) or
+    unodered.
   - Consumes lines until blank line, codeblock, or next listitem.
   - Nesting is ignored: indented listitems are parsed as siblings. Consumers can
     check leading whitespace to decide nesting.
@@ -44,6 +46,12 @@ Known issues
 
 - Input must end with newline/EOL (`\n`). Grammar does not support files without EOL.
 - Input must end with a blank line. Though this doesn't seem to matter in practice.
+- Any line starting with `1.` (or other number) is treated as a listitem, even
+  if the first line of its `block` is not a listitem. Example:
+  ```
+  Foo was 0, not
+  1. Uh oh.
+  ```
 - Spec requires that `codeblock` delimiter ">" must be preceded by a space
   (" >"), not a tab. But currently the grammar doesn't enforce this. Example:
   `:help lcs-tab`.
