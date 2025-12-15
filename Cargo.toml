@@ -1,7 +1,7 @@
 [package]
 name = "tree-sitter-vimdoc"
 description = "Tree-sitter grammar for Vim help files"
-version = "4.0.2"
+version = "4.1.0"
 authors = ["Justin M. Keyes <justinkz@gmail.com>"]
 license = "Apache-2.0"
 readme = "README.md"

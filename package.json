@@ -1,6 +1,6 @@
 {
   "name": "tree-sitter-vimdoc",
-  "version": "4.0.2",
+  "version": "4.1.0",
   "description": "Tree-sitter grammar for Vim help files",
   "repository": "https://github.com/neovim/tree-sitter-vimdoc",
   "author": {
