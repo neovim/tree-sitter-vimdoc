@@ -14,24 +14,27 @@ Overview
 
 - `block` is the main top-level node, delimited by blank line(s) or any line
   starting with `<` (codeblock terminator).
-  - contains `line` and `line_li` nodes.
+  - Contains `line` and `line_li` nodes.
 - `line`:
-  - contains atoms (words, tags, taglinks, …)
-  - contains headings (`h1`, `h2`, `h3`, `column_heading`) because `codeblock`
+  - Contains atoms (words, tags, taglinks, …)
+  - Contains headings (`h1`, `h2`, `h3`, `column_heading`) because `codeblock`
     terminated by "implicit stop" (no terminating `<`) consumes blank lines, so
     `block` has no way to end.
 - `line_li` ("listitem")
-  - lines starting with `-`/`•` (_not_ `+`/`*`) are listitems.
-  - consumes lines until blank line, codeblock, or next listitem.
-  - nesting is ignored: indented listitems are parsed as siblings.
+  - Lines starting with `-`/`•`/`[0-9].` (_not_ `+`/`*`) are listitems.
+  - Use the `prefix` node to detect if the listitem is ordered (numbered) or
+    unodered.
+  - Consumes lines until blank line, codeblock, or next listitem.
+  - Nesting is ignored: indented listitems are parsed as siblings. Consumers can
+    check leading whitespace to decide nesting.
 - `codeblock`:
-  - contained by `line` or `line_li`, because ">" can start a codeblock at the
+  - Contained by `line` or `line_li`, because ">" can start a codeblock at the
     end of any line.
-  - contains `line` nodes without `word` nodes: it's just the full raw text
+  - Contains `line` nodes without `word` nodes: it's just the full raw text
     line including whitespace. This is somewhat dictated by its "preformatted"
     nature; parsing the contents would require loading a "child" language
     (injection). See [#2](https://github.com/neovim/tree-sitter-vimdoc/issues/2).
-  - the terminating `<` (and any following whitespace) is discarded (anonymous).
+  - The terminating `<` (and any following whitespace) is discarded (anonymous).
 - `url` intentionally does not capture `.,)` at the end of the URL. See also [Known issues](#known-issues).
 - `h1` = "Heading 1": `======` followed by text and optional `*tags*`.
 - `h2` = "Heading 2": `------` followed by text and optional `*tags*`.
@@ -43,6 +46,12 @@ Known issues
 
 - Input must end with newline/EOL (`\n`). Grammar does not support files without EOL.
 - Input must end with a blank line. Though this doesn't seem to matter in practice.
+- Any line starting with `1.` (or other number) is treated as a listitem, even
+  if the first line of its `block` is not a listitem. Example:
+  ```
+  Foo was 0, not
+  1. Uh oh.
+  ```
 - Spec requires that `codeblock` delimiter ">" must be preceded by a space
   (" >"), not a tab. But currently the grammar doesn't enforce this. Example:
   `:help lcs-tab`.

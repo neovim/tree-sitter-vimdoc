@@ -187,6 +187,7 @@ column_heading should NOT parse atoms (links, tags, etc.) (FIXME)
         (delimiter))))
   (block
     (line
+      (word)
       (word))))
 
 ================================================================================
@@ -223,34 +224,38 @@ ABC not-h3
       (word)
       (word)))
   (block
-    (line
-      (word)
-      (optionlink
+    (line_li
+      (prefix)
+      (line
+        (optionlink
+          (word))
+        (codespan
+          (word))
+        (word)
         (word))
-      (codespan
+      (line)
+      (line
+        (codespan
+          (word))
+        (word)
+        (word)))
+    (line_li
+      (prefix)
+      (line
+        (word)
+        (word)
+        (word)
         (word))
-      (word)
-      (word))
-    (line
-      (codespan
-        (word))
-      (word)
-      (word))
-    (line
-      (word)
-      (word)
-      (word)
-      (word)
-      (word))
-    (line
-      (word)
-      (word)
-      (word)
-      (codespan
-        (word))
-      (word)
-      (word)
-      (word))))
+      (line)
+      (line
+        (word)
+        (word)
+        (word)
+        (codespan
+          (word))
+        (word)
+        (word)
+        (word)))))
 
 ================================================================================
 NOT column_heading

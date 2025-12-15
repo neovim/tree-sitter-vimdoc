@@ -89,7 +89,7 @@
             "value": -1,
             "content": {
               "type": "PATTERN",
-              "value": "[^-•\\n\\t ][^(\\[\\n\\t ]*"
+              "value": "(([^-•\\n\\t ])|([^0-9\\n\\t ][^.\\n\\t ]))[^.(\\[\\n\\t ]*"
             }
           }
         },
@@ -587,8 +587,13 @@
             ]
           },
           {
-            "type": "PATTERN",
-            "value": "[-•][ ]+"
+            "type": "ALIAS",
+            "content": {
+              "type": "PATTERN",
+              "value": "([-•]|([0-9]{1,3}\\.))[ ]+"
+            },
+            "named": true,
+            "value": "prefix"
           },
           {
             "type": "CHOICE",

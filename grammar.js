@@ -13,7 +13,8 @@
 // @ts-check
 
 const _uppercase_word = /[A-Z0-9.()][-A-Z0-9.()_]+/;
-const _li_token = /[-•][ ]+/;
+// Listitem (incl. numbered items).
+const _li_token = /([-•]|([0-9]{1,3}\.))[ ]+/;
 
 module.exports = grammar({
   name: 'vimdoc',
@@ -49,9 +50,10 @@ module.exports = grammar({
       alias($.word_noli, $.word),
       $._atom_common,
     ),
+    // Word NOT matching (numbered) listitem.
     word_noli: ($) => choice(
-      // Lines contained by line_li must not start with a listitem symbol.
-      token(prec(-1, /[^-•\n\t ][^(\[\n\t ]*/)),
+      // Lines contained by line_li must not start with (numbered) listitem symbol.
+      token(prec(-1, /(([^-•\n\t ])|([^0-9\n\t ][^.\n\t ]))[^.(\[\n\t ]*/)),
       token(prec(-1, /[-•][^\n\t ]+/)),
       $._word_common,
     ),
@@ -164,7 +166,7 @@ module.exports = grammar({
     // Listitem: consumes prefixed line and all adjacent non-prefixed lines.
     line_li: ($) => prec.right(1, seq(
       optional(token.immediate('<')),  // Treat codeblock-terminating "<" as whitespace.
-      _li_token,
+      alias(_li_token, $.prefix),
       choice(
         alias(seq(repeat1($._atom), /\n/), $.line),
         seq(alias(repeat1($._atom), $.line), $.codeblock),

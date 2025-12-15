@@ -418,6 +418,10 @@
         {
           "type": "line",
           "named": true
+        },
+        {
+          "type": "prefix",
+          "named": true
         }
       ]
     }
@@ -590,6 +594,10 @@
   },
   {
     "type": "modeline",
+    "named": true
+  },
+  {
+    "type": "prefix",
     "named": true
   },
   {
