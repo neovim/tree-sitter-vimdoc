@@ -74,6 +74,8 @@ module.exports = grammar({
     _word_common: () => choice(
       // NOT tag: isolated "*".
       '*',
+      // NOT tag: "*" followed by text that is not closed by "*".
+      seq('*', alias(token.immediate(prec(1, /[^*\n\t ]+/)), 'word')),
       // NOT optionlink: '
       "'",
       // NOT optionlink: 'x

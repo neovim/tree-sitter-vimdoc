@@ -108,12 +108,6 @@ NOT a tag
       (word)
       (word)
       (word)
-      (word)
-      (ERROR
-        (word)))
-    (line
-      (word)
-      (word)
       (word))
     (line
       (word)
@@ -122,15 +116,52 @@ NOT a tag
     (line
       (word)
       (word)
-      (ERROR
-        (word))
+      (word))
+    (line
+      (word)
+      (word)
       (word)))
   (block
     (line
       (word)
       (word)
-      (ERROR
-        (word))
+      (word)
+      (word)
+      (word))))
+
+================================================================================
+NOT a tag: "*" without a closing "*"
+================================================================================
+                                 default: '[\/]$,*,\.bak$,\.o$,\.h$,
+                                           \.info$,\.swp$,\.obj$'
+see *foo for details
+
+
+--------------------------------------------------------------------------------
+
+(help_file
+  (block
+    (line
+      (word)
+      (word)
+      (word)
+      (word)
+      (word)
+      (word))
+    (line
+      (word)
+      (word)
+      (word)
+      (word)
+      (word)
+      (word)
+      (word)
+      (word)
+      (word)
+      (word)
+      (word))
+    (line
+      (word)
       (word)
       (word)
       (word))))
