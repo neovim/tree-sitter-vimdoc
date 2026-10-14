@@ -16,6 +16,16 @@ const _uppercase_word = /[A-Z0-9.()][-A-Z0-9.()_]+/;
 // Listitem (incl. numbered items).
 const _li_token = /([-•]|([0-9]{1,3}\.))[ ]+/;
 
+// Text without surrounding delimiters. Used by "NOT …" cases too.
+//
+// prec(1): after the opening delimiter, prefer this over a same-length plaintext
+// token, so `|` is a codespan, not "`" "|" "`".
+//
+const _tag_text = prec(1, /[^*\n\t ]+/);
+const _codespan_text = prec(1, /[^`\n]+/);
+const _argument_text = /[^}\n\t ]+/;
+const _optionlink_text = /[a-z][a-z]+/;
+
 module.exports = grammar({
   name: 'vimdoc',
 
@@ -75,15 +85,18 @@ module.exports = grammar({
     _not_tag: () => seq('*', optional(seq(
       // Aliased so it stays visible: error recovery skips hidden tokens, so
       // e.g. "===…" + blank line reports ERROR instead of MISSING.
-      alias(token.immediate(prec(1, /[^*\n\t ]+/)), 'word'),
+      alias(token.immediate(_tag_text), 'word'),
       optional(token.immediate(/\*[^\n\t ]+/)),
     ))),
 
-    // Explicit special cases: these are plaintext, not errors.
+    // Explicit special cases: these are plaintext, not errors. Unclosed cases alias
+    // their text token to 'word' (see _not_tag).
     _word_common: ($) => choice(
       $._not_tag,
-      // NOT optionlink: '
-      "'",
+      // NOT codespan: unclosed (same line) "`", "`foo".
+      seq('`', optional(alias(token.immediate(_codespan_text), 'word'))),
+      // NOT optionlink: ', 'foo
+      seq("'", optional(alias(token.immediate(_optionlink_text), 'word'))),
       // NOT optionlink: 'x
       seq("'", token.immediate(/[^'\n\t ]/)),
       // NOT optionlink: 'X (non-lowercase char).
@@ -93,8 +106,8 @@ module.exports = grammar({
       // NOT taglink: "||", "|"
       /\|\|+/,
       '|', "'|'",
-      // NOT argument:
-      '{',
+      // NOT argument: {, {foo, {}
+      seq('{', optional(alias(token.immediate(_argument_text), 'word'))),
       '{}',
       /\{\{+[0-9]*/,
 
@@ -232,9 +245,7 @@ module.exports = grammar({
       ),
 
     // Tag: *foo* (see _not_tag).
-    tag: ($) => _word($,
-      prec(1, /[^*\n\t ]+/),  // Tag text without surrounding "*".
-      '*', '*'),
+    tag: ($) => _word($, _tag_text, '*', '*'),
 
     // URL without surrounding (), [], etc.
     url_word: () => /https?:\/\/[^\n\t\] ]*[^\n\t )\].,:]/,
@@ -245,13 +256,13 @@ module.exports = grammar({
     ),
 
     // Link to option: 'foo'. Lowercase non-digit ASCII, minimum 2 chars. #14
-    optionlink: ($) => _word($, /[a-z][a-z]+/, "'", "'"),
+    optionlink: ($) => _word($, _optionlink_text, "'", "'"),
     // Link to tag: |foo|
     taglink: ($) => _word($, prec(1, /[^|\n\t ]+/), '|', '|'),
     // Inline code (may contain whitespace!): `foo bar`
-    codespan: ($) => _word($, /[^``\n]+/, '`', '`'),
+    codespan: ($) => _word($, _codespan_text, '`', '`'),
     // Argument: {arg} (no whitespace allowed)
-    argument: ($) => seq(_word($, /[^}\n\t ]+/, '{', '}'), optional(token.immediate('?'))),
+    argument: ($) => seq(_word($, _argument_text, '{', '}'), optional(token.immediate('?'))),
   },
 });
 

@@ -40,9 +40,7 @@ an error`.
         (word))
       (word)
       (word)
-      (codespan
-        (word)
-        (MISSING "`")))
+      (word))
     (line
       (word)
       (word)
@@ -54,6 +52,10 @@ NOT codespan
 				*'* *'a* *`* *`a*
 				*g'* *g'a* *g`* *g`a*
 g'{mark}  g`{mark}
+`a	jump to mark a
+``	jump to previous position
+This ` is a backtick.
+`|` is a codespan
 
 
 --------------------------------------------------------------------------------
@@ -79,5 +81,19 @@ g'{mark}  g`{mark}
       (tag
         (word)))
     (line
+      (word)
+      (word))
+    (line
+      (word))
+    (line
+      (word)
+      (word))
+    (line
+      (word)
+      (word))
+    (line
+      (codespan
+        (word))
+      (word)
       (word)
       (word))))
