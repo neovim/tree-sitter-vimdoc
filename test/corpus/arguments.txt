@@ -26,8 +26,6 @@ optional argument: {arg}?
       (argument
         (word))
       (word)
-      (ERROR
-        (word))
       (keycode)
       (word))
     (line
@@ -137,6 +135,7 @@ NOT an argument
 ================================================================================
 a '{' '}' block
 {foo "{bar}" `{baz}` |{baz| } {}
+{'three': 'drie'} unmatched '{'.
 foo { bar
 { {} foo{{ foo{{{
  {{
@@ -165,13 +164,19 @@ EXTERNAL *netrw-externapp* {{{2
       (word))
     (line
       (word)
-      (ERROR
-        (word))
       (word)
       (codespan
         (word))
       (taglink
         (word))
+      (word)
+      (word))
+    (line
+      (word)
+      (optionlink
+        (word))
+      (word)
+      (word)
       (word)
       (word))
     (line
