@@ -189,7 +189,6 @@ module.exports = grammar({
       $.h1,
       $.h2,
       $.h3,
-      $.codeblock,
       $._line_noli,
     ),
     // Listitem: consumes prefixed line and all adjacent non-prefixed lines.
@@ -205,10 +204,14 @@ module.exports = grammar({
     // Codeblock lines: must be indented by at least 1 space/tab.
     // Line content (incl. whitespace) is captured as a single atom.
     line_code: () => choice(/\n/, /[\t ]+[^\n]+\n/),
-    _line_noli: ($) => seq(
-      choice($._atom_noli, $._uppercase_words),
-      repeat($._atom),
-      choice($.codeblock, /\n/)
+    _line_noli: ($) => choice(
+      seq(
+        choice($._atom_noli, $._uppercase_words),
+        repeat($._atom),
+        choice($.codeblock, /\n/)
+      ),
+      // Codeblock-only line, also allowed after a listitem line. #118
+      $.codeblock,
     ),
 
     // Modeline: must start with "vim:" (optionally preceded by whitespace)
