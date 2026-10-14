@@ -84,6 +84,11 @@ NOT a tag
 1	"*" not
 2   * 	not
 3this *not no
+5 *not*tag *a**b* *not**
+6 au BufRead *.c,*.h foo
+7 '[\/]$,*,\.bak$,\.o$,
+*not*tag at start of line
+NOT H3TAG *not*tag *not
 
 4this *is not* a tag
 
@@ -108,9 +113,11 @@ NOT a tag
       (word)
       (word)
       (word)
+      (word))
+    (line
       (word)
-      (ERROR
-        (word)))
+      (word)
+      (word))
     (line
       (word)
       (word)
@@ -122,15 +129,36 @@ NOT a tag
     (line
       (word)
       (word)
-      (ERROR
-        (word))
-      (word)))
+      (word)
+      (word))
+    (line
+      (word)
+      (word)
+      (word)
+      (word)
+      (word))
+    (line
+      (word)
+      (word)
+      (word)
+      (word)
+      (word)
+      (word))
+    (line
+      (word)
+      (word)
+      (word)
+      (word)
+      (word))
+    (line
+      (h3
+        (heading)
+        (word)
+        (word))))
   (block
     (line
       (word)
       (word)
-      (ERROR
-        (word))
       (word)
       (word)
       (word))))

@@ -99,8 +99,6 @@ Regular	  /	:help /[
       (word)
       (word)
       (word)
-      (ERROR
-        (word))
       (word)
       (word)
       (argument
