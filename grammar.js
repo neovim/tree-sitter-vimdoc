@@ -70,10 +70,18 @@ module.exports = grammar({
         $.note,
       ),
 
+    // NOT tag: "*", "*foo", "*foo*bar". The closing "*" must be followed by
+    // whitespace/EOL, because the lexer prefers the longer "*bar" token.
+    _not_tag: () => seq('*', optional(seq(
+      // Aliased so it stays visible: error recovery skips hidden tokens, so
+      // e.g. "===…" + blank line reports ERROR instead of MISSING.
+      alias(token.immediate(prec(1, /[^*\n\t ]+/)), 'word'),
+      optional(token.immediate(/\*[^\n\t ]+/)),
+    ))),
+
     // Explicit special cases: these are plaintext, not errors.
-    _word_common: () => choice(
-      // NOT tag: isolated "*".
-      '*',
+    _word_common: ($) => choice(
+      $._not_tag,
       // NOT optionlink: '
       "'",
       // NOT optionlink: 'x
@@ -219,10 +227,11 @@ module.exports = grammar({
     h3: ($) =>
       seq(
         alias($.uppercase_name, $.heading),
-        optional(seq($.tag, repeat($._atom))),
+        optional(seq(choice($.tag, alias($._not_tag, $.word)), repeat($._atom))),
         /\n/,
       ),
 
+    // Tag: *foo* (see _not_tag).
     tag: ($) => _word($,
       prec(1, /[^*\n\t ]+/),  // Tag text without surrounding "*".
       '*', '*'),

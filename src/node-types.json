@@ -601,6 +601,10 @@
     "named": true
   },
   {
+    "type": "word",
+    "named": false
+  },
+  {
     "type": "{",
     "named": false
   },
