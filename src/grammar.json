@@ -28,6 +28,17 @@
         }
       ]
     },
+    "_uppercase_char": {
+      "type": "TOKEN",
+      "content": {
+        "type": "PREC",
+        "value": -1,
+        "content": {
+          "type": "PATTERN",
+          "value": "[A-Z0-9]"
+        }
+      }
+    },
     "_atom": {
       "type": "CHOICE",
       "members": [
@@ -72,6 +83,51 @@
           },
           "named": true,
           "value": "word"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "IMMEDIATE_TOKEN",
+            "content": {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "PATTERN",
+                  "value": "<[-a-zA-Z0-9_]+>"
+                },
+                {
+                  "type": "PATTERN",
+                  "value": "<[SCMAD]-.>"
+                },
+                {
+                  "type": "PATTERN",
+                  "value": "CTRL-."
+                },
+                {
+                  "type": "PATTERN",
+                  "value": "CTRL-SHIFT-."
+                },
+                {
+                  "type": "PATTERN",
+                  "value": "CTRL-(Break|PageUp|PageDown|Insert|Del)"
+                },
+                {
+                  "type": "STRING",
+                  "value": "CTRL-{char}"
+                },
+                {
+                  "type": "PATTERN",
+                  "value": "META-."
+                },
+                {
+                  "type": "PATTERN",
+                  "value": "ALT-."
+                }
+              ]
+            }
+          },
+          "named": true,
+          "value": "keycode"
         },
         {
           "type": "SYMBOL",
@@ -505,8 +561,17 @@
         {
           "type": "REPEAT",
           "content": {
-            "type": "PATTERN",
-            "value": "[A-Z0-9.()][-A-Z0-9.()_]+"
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "PATTERN",
+                "value": "[A-Z0-9.()][-A-Z0-9.()_]+"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "_uppercase_char"
+              }
+            ]
           }
         }
       ]
@@ -534,8 +599,17 @@
             "content": {
               "type": "REPEAT",
               "content": {
-                "type": "PATTERN",
-                "value": "[A-Z0-9.()][-A-Z0-9.()_]+"
+                "type": "CHOICE",
+                "members": [
+                  {
+                    "type": "PATTERN",
+                    "value": "[A-Z0-9.()][-A-Z0-9.()_]+"
+                  },
+                  {
+                    "type": "SYMBOL",
+                    "name": "_uppercase_char"
+                  }
+                ]
               }
             },
             "named": true,

@@ -4,6 +4,7 @@ simple file with text
 Simple text
 <Del> <CSI> <C-S-x> <C-x> <M-^> <x-y>
 CTRL-{char} ctr-z CTRL-SHIFT-\ CTRL-+ CTRL-Break ALT-?
+CTRL-W s
 
 
 --------------------------------------------------------------------------------
@@ -26,7 +27,10 @@ CTRL-{char} ctr-z CTRL-SHIFT-\ CTRL-+ CTRL-Break ALT-?
       (keycode)
       (keycode)
       (keycode)
-      (keycode))))
+      (keycode))
+    (line
+      (keycode)
+      (word))))
 
 ================================================================================
 multiline text
