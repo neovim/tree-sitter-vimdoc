@@ -34,12 +34,18 @@ h3 (uppercase) heading, multiple words
 ================================================================================
 HELLO WORLD
 
+USING A COUNT
+
   LEADING-SPACE-NOT-A-HEADING
 
 
 --------------------------------------------------------------------------------
 
 (help_file
+  (block
+    (line
+      (h3
+        (heading))))
   (block
     (line
       (h3

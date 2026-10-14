@@ -15,6 +15,16 @@
 const _uppercase_word = /[A-Z0-9.()][-A-Z0-9.()_]+/;
 // Listitem (incl. numbered items).
 const _li_token = /([-•]|([0-9]{1,3}\.))[ ]+/;
+const _keycode = choice(
+  /<[-a-zA-Z0-9_]+>/,
+  /<[SCMAD]-.>/,
+  /CTRL-./,
+  /CTRL-SHIFT-./,
+  /CTRL-(Break|PageUp|PageDown|Insert|Del)/,
+  'CTRL-{char}',
+  /META-./,
+  /ALT-./,
+);
 
 // Text without surrounding delimiters. Used by "NOT …" cases too.
 //
@@ -47,6 +57,10 @@ module.exports = grammar({
         repeat($.modeline),
       ),
 
+    // Single-char uppercase word, e.g. "A" in "USING A COUNT". Same precedence as `word`, so
+    // "Hello" stays a word. Defined before `word` to win a same-length tie (rule order).
+    _uppercase_char: () => token(prec(-1, /[A-Z0-9]/)),
+
     _atom: ($) => choice(
       $.word,
       $._atom_common,
@@ -58,6 +72,9 @@ module.exports = grammar({
 
     _atom_noli: ($) => choice(
       alias($.word_noli, $.word),
+      // XXX: treesitter (undocumented) prefers an immediate token (uppercase_name) to tie-break
+      // e.g. "CTRL-W s". So use immediate() here too, then rule order decides.
+      alias(token.immediate(_keycode), $.keycode),
       $._atom_common,
     ),
     // Word NOT matching (numbered) listitem.
@@ -128,26 +145,17 @@ module.exports = grammar({
       'Deprecated', 'DEPRECATED:'
     ),
 
-    keycode: () => choice(
-      /<[-a-zA-Z0-9_]+>/,
-      /<[SCMAD]-.>/,
-      /CTRL-./,
-      /CTRL-SHIFT-./,
-      /CTRL-(Break|PageUp|PageDown|Insert|Del)/,
-      'CTRL-{char}',
-      /META-./,
-      /ALT-./,
-    ),
+    keycode: () => _keycode,
 
     // First part (minus tags) of h3 or column_heading.
-    uppercase_name: () => seq(
+    uppercase_name: ($) => seq(
       token.immediate(_uppercase_word),  // No whitespace before heading.
-      repeat(_uppercase_word),
+      repeat(choice(_uppercase_word, $._uppercase_char)),
     ),
     // Line (plaintext) can start with uppercase words; don't flag as "invalid h3".
     _uppercase_words: ($) => prec.left(-1, seq(
       alias(token.immediate(_uppercase_word), $.word),
-      alias(repeat(_uppercase_word), $.word),
+      alias(repeat(choice(_uppercase_word, $._uppercase_char)), $.word),
     )),
 
     // Text block/paragraph: adjacent lines followed by blank line(s).
