@@ -127,6 +127,10 @@ listitem with codeblock
 • w2 w3
     `item2` line2
     {item2} line3
+• w4
+>
+  code3
+<
 
 
 --------------------------------------------------------------------------------
@@ -182,7 +186,16 @@ listitem with codeblock
       (line
         (argument
           (word))
-        (word)))))
+        (word)))
+    (line_li
+      (prefix)
+      (line
+        (word))
+      (line)
+      (line
+        (codeblock
+          (code
+            (line)))))))
 
 ================================================================================
 listitems + lines without blank lines

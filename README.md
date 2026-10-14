@@ -24,7 +24,9 @@ Overview
   - Lines starting with `-`/`•`/`[0-9].` (_not_ `+`/`*`) are listitems.
   - Use the `prefix` node to detect if the listitem is ordered (numbered) or
     unodered.
-  - Consumes lines until blank line, codeblock, or next listitem.
+  - Consumes lines (incl. codeblocks) until blank line, `<` line, or next
+    listitem.
+  - Contains a codeblock not preceded by a blank line.
   - Nesting is ignored: indented listitems are parsed as siblings. Consumers can
     check leading whitespace to decide nesting.
 - `codeblock`:

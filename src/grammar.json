@@ -767,10 +767,6 @@
         },
         {
           "type": "SYMBOL",
-          "name": "codeblock"
-        },
-        {
-          "type": "SYMBOL",
           "name": "_line_noli"
         }
       ]
@@ -881,40 +877,49 @@
       ]
     },
     "_line_noli": {
-      "type": "SEQ",
+      "type": "CHOICE",
       "members": [
         {
-          "type": "CHOICE",
+          "type": "SEQ",
           "members": [
             {
-              "type": "SYMBOL",
-              "name": "_atom_noli"
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "_atom_noli"
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "_uppercase_words"
+                }
+              ]
             },
             {
-              "type": "SYMBOL",
-              "name": "_uppercase_words"
+              "type": "REPEAT",
+              "content": {
+                "type": "SYMBOL",
+                "name": "_atom"
+              }
+            },
+            {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "codeblock"
+                },
+                {
+                  "type": "PATTERN",
+                  "value": "\\n"
+                }
+              ]
             }
           ]
         },
         {
-          "type": "REPEAT",
-          "content": {
-            "type": "SYMBOL",
-            "name": "_atom"
-          }
-        },
-        {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "SYMBOL",
-              "name": "codeblock"
-            },
-            {
-              "type": "PATTERN",
-              "value": "\\n"
-            }
-          ]
+          "type": "SYMBOL",
+          "name": "codeblock"
         }
       ]
     },
