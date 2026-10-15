@@ -201,8 +201,9 @@ module.exports = grammar({
       ),
       repeat(choice(
         alias($._line_noli, $.line),
-        // Codeblock-terminating "<" followed by indented line: listitem continues. #163
-        token.immediate(/<[\t ]*\n[\t ]+/),
+        // Codeblock-terminating "<" followed by indented text (same or next line): listitem
+        // continues. #163
+        token.immediate(/<([\t ]*\n)?[\t ]+/),
       )),
     )),
     // Codeblock lines: must be indented by at least 1 space/tab.

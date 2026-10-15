@@ -133,7 +133,7 @@ listitem with codeblock
 <
   w5 >
   code4
-<
+<  w5b
   • w6 >
   code5
 <
@@ -207,7 +207,9 @@ w7
         (word)
         (codeblock
           (code
-            (line)))))
+            (line))))
+      (line
+        (word)))
     (line_li
       (prefix)
       (line
