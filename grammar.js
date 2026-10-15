@@ -32,7 +32,7 @@ const _keycode = choice(
 // token, so `|` is a codespan, not "`" "|" "`".
 //
 const _tag_text = prec(1, /[^*\n\t ]+/);
-const _codespan_text = prec(1, /[^`\n]+/);
+const _codespan_text = prec(1, /[^`\n\t]+/); // Excludes TAB (delimits table cells, see README).
 const _argument_text = /[^}\n\t ]+/;
 const _optionlink_text = /[a-z][a-z]+/;
 
