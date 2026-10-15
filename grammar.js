@@ -199,7 +199,12 @@ module.exports = grammar({
         alias(seq(repeat1($._atom), /\n/), $.line),
         seq(alias(repeat1($._atom), $.line), $.codeblock),
       ),
-      repeat(alias($._line_noli, $.line)),
+      repeat(choice(
+        alias($._line_noli, $.line),
+        // Codeblock-terminating "<" followed by indented text (same or next line): listitem
+        // continues. #163
+        token.immediate(/<([\t ]*\n)?[\t ]+/),
+      )),
     )),
     // Codeblock lines: must be indented by at least 1 space/tab.
     // Line content (incl. whitespace) is captured as a single atom.

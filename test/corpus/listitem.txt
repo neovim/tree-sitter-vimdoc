@@ -131,6 +131,13 @@ listitem with codeblock
 >
   code3
 <
+  w5 >
+  code4
+<  w5b
+  • w6 >
+  code5
+<
+w7
 
 
 --------------------------------------------------------------------------------
@@ -195,7 +202,24 @@ listitem with codeblock
       (line
         (codeblock
           (code
-            (line)))))))
+            (line))))
+      (line
+        (word)
+        (codeblock
+          (code
+            (line))))
+      (line
+        (word)))
+    (line_li
+      (prefix)
+      (line
+        (word))
+      (codeblock
+        (code
+          (line)))))
+  (block
+    (line
+      (word))))
 
 ================================================================================
 listitems + lines without blank lines

@@ -851,13 +851,25 @@
           {
             "type": "REPEAT",
             "content": {
-              "type": "ALIAS",
-              "content": {
-                "type": "SYMBOL",
-                "name": "_line_noli"
-              },
-              "named": true,
-              "value": "line"
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "ALIAS",
+                  "content": {
+                    "type": "SYMBOL",
+                    "name": "_line_noli"
+                  },
+                  "named": true,
+                  "value": "line"
+                },
+                {
+                  "type": "IMMEDIATE_TOKEN",
+                  "content": {
+                    "type": "PATTERN",
+                    "value": "<([\\t ]*\\n)?[\\t ]+"
+                  }
+                }
+              ]
             }
           }
         ]

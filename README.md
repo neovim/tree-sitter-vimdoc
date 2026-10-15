@@ -26,6 +26,17 @@ Overview
     unodered.
   - Consumes lines (incl. codeblocks) until blank line, `<` line, or next
     listitem.
+    - Except: `<` followed by indented text (on the same or next line) is
+      skipped, so the listitem continues after its codeblock:
+      ```
+      - foo: >
+          code
+      <
+        still foo: >
+          code
+      <  still foo
+      - bar
+      ```
   - Contains a codeblock not preceded by a blank line.
   - Nesting is ignored: indented listitems are parsed as siblings. Consumers can
     check leading whitespace to decide nesting.

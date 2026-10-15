@@ -48,6 +48,10 @@
   "<" @markup.raw.block
   (#set! conceal ""))
 
+(line_li
+  "<" @markup.raw.block
+  (#set! conceal ""))
+
 (argument) @variable.parameter
 
 (keycode) @string.special
