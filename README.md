@@ -54,6 +54,63 @@ Overview
 - `h3` = "Heading 3": UPPERCASE WORDS, followed by optional `*tags*`, followed
   by atoms.
 
+### Tables
+
+A *table* is a `block` whose first child is a `column_heading` with ≥2 cells,
+followed by `line` nodes (table rows, separators). A *cell* is delimited by
+`<Tab>`; whitespace following `<Tab>` is ignored. A `line` containing only
+`[-~= ]` chars is a *separator*.
+
+Example (Lua):
+```lua
+--- Gets the rows (header first) of `block` if it is a table, else nil.
+--- Each row is a list of cells, each cell a list of nodes.
+local function get_table(block, src)
+  local hdr = block:named_child(0) and block:named_child(0):named_child(0)
+  if not hdr or hdr:type() ~= 'column_heading' then
+    return nil
+  end
+  --- Splits the children of `node` into cells, where the text between two children has a tab.
+  local function cells(node)
+    local row, prev_end = { {} }, nil
+    for child in node:iter_children() do
+      if child:named() then
+        local _, _, start, _, _, end_ = child:range(true)
+        if prev_end and src:sub(prev_end + 1, start):find('\t') then
+          row[#row + 1] = {}
+        end
+        table.insert(row[#row], child)
+        prev_end = end_
+      end
+    end
+    return row
+  end
+  local rows = { cells(hdr:named_child(0)) } -- (column_heading (heading …) (delimiter))
+  for i = 1, block:named_child_count() - 1 do
+    local line = block:named_child(i)
+    local text = vim.treesitter.get_node_text(line, src)
+    local row = not text:match('^[%s%-=~]+$') and cells(line) -- Skip separator.
+    if row and #row == 1 and #rows > 1 then
+      vim.list_extend(rows[#rows][#rows[#rows]], row[1]) -- Wrapped line continues last cell.
+    elseif row then
+      rows[#rows + 1] = row
+    end
+  end
+  return #rows[1] > 1 and #rows > 1 and rows or nil
+end
+
+-- This query finds potential "table" blocks; get_table() splits them into cells.
+local query = vim.treesitter.query.parse('vimdoc', [[
+  (block . (line (column_heading) @header (#lua-match? @header "%S\t"))) @table
+]])
+local root = vim.treesitter.get_string_parser(src, 'vimdoc'):parse()[1]:root()
+for id, block in query:iter_captures(root, src) do
+  if query.captures[id] == 'table' then
+    local rows = get_table(block, src) -- nil if not a table.
+  end
+end
+```
+
 Known issues
 ------------
 
