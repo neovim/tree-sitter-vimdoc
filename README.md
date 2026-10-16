@@ -1,9 +1,10 @@
 tree-sitter-vimdoc
 ==================
 
-This grammar implements the vimdoc "spec"
-([ref1](https://neovim.io/doc/user/helphelp.html#help-writing),
-[ref2](https://github.com/nanotee/vimdoc-notes)).
+This grammar implements the vimdoc spec, [`:help help-spec`][help-spec].
+This README describes how the grammar represents the spec (nodes), and its
+limitations.
+
 Predictable results are the primary goal, so that _output_ formats (e.g. HTML)
 are well-formed; the _input_ (vimdoc) is secondary. The first step should
 always be to try to fix the input rather than insist on a grammar that handles
@@ -18,10 +19,10 @@ Overview
 - `line`:
   - Contains atoms (words, tags, taglinks, …)
   - Contains headings (`h1`, `h2`, `h3`, `column_heading`).
-- `line_li` ("listitem")
+- `line_li` ("listitem", [`:help help-list`][help-list]):
   - Lines starting with `-`/`•`/`[0-9].` (_not_ `+`/`*`) are listitems.
   - Use the `prefix` node to detect if the listitem is ordered (numbered) or
-    unodered.
+    unordered.
   - Consumes lines (incl. codeblocks) until blank line, `<` line, or next
     listitem.
     - Except: `<` followed by indented text (on the same or next line) is
@@ -38,7 +39,7 @@ Overview
   - Contains a codeblock not preceded by a blank line.
   - Nesting is ignored: indented listitems are parsed as siblings. Consumers can
     check leading whitespace to decide nesting.
-- `codeblock`:
+- `codeblock` ([`:help help-codeblock`][help-codeblock]):
   - Contained by `line` or `line_li`, because ">" can start a codeblock at the
     end of any line.
   - Contains `line` nodes without `word` nodes: it's just the full raw text
@@ -46,21 +47,13 @@ Overview
     nature; parsing the contents would require loading a "child" language
     (injection). See [#2](https://github.com/neovim/tree-sitter-vimdoc/issues/2).
   - The terminating `<` (and any following whitespace) is discarded (anonymous).
-- `url` intentionally does not capture `.,)` at the end of the URL. See also [Known issues](#known-issues).
-- `h1` = "Heading 1": `======` followed by text and optional `*tags*`.
-- `h2` = "Heading 2": `------` followed by text and optional `*tags*`.
-- `h3` = "Heading 3": UPPERCASE WORDS, followed by optional `*tags*`, followed
-  by atoms.
-- `h1`/`h2`/`h3` must be the first line of a `block` (preceded by a blank
-  line), or follow a `codeblock` terminated by "implicit stop" (no terminating
-  `<`). Elsewhere, `------` or `FOO` is plaintext.
+- `h1`, `h2`, `h3`, `column_heading` ([`:help help-heading`][help-heading])
 
 ### Tables
 
-A *table* is a `block` whose first child is a `column_heading` with ≥2 cells,
-followed by `line` nodes (table rows, separators). A *cell* is delimited by
-`<Tab>`; whitespace following `<Tab>` is ignored. A `line` containing only
-`[-~= ]` chars is a *separator*.
+A [table](https://neovim.io/doc/user/helphelp.html#help-table) is a `block` whose first child is a
+`line` containing `column_heading` with ≥2 cells, followed by `line` nodes
+(rows, separators). A cell boundary is a `<Tab>` between two nodes.
 
 Example (Lua):
 ```lua
@@ -123,18 +116,14 @@ Known issues
   Foo was 0, not
   1. Uh oh.
   ```
-- Spec requires that `codeblock` delimiter ">" must be preceded by a space
-  (" >"), not a tab. But currently the grammar doesn't enforce this. Example:
-  `:help lcs-tab`.
+- The spec requires a space before the codeblock `>`, but the grammar also
+  accepts a tab. Example: `:help lcs-tab`.
 - `url` cannot contain a closing bracket `]` anywhere in the URL. (Workaround:
   URL-encode the bracket.) This is a tradeoff so that markdown hyperlinks work:
   ```
   [https://example.com](https://example.com)
   ```
-- `column_heading` currently only recognizes tilde `~` preceded by space (i.e.
-  `foo ~` not `foo~`). This covers 99% of :help files.
 - `column_heading` children should be plaintext, but currently are parsed as `$._atom`.
-- `modeline` must be preceded by a blank line.
 
 TODO
 ----
@@ -184,3 +173,7 @@ cargo login
 cargo publish
 ```
 
+[help-spec]: https://neovim.io/doc/user/helphelp.html#help-spec
+[help-list]: https://neovim.io/doc/user/helphelp.html#help-list
+[help-codeblock]: https://neovim.io/doc/user/helphelp.html#help-codeblock
+[help-heading]: https://neovim.io/doc/user/helphelp.html#help-heading
