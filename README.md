@@ -17,9 +17,7 @@ Overview
   - Contains `line` and `line_li` nodes.
 - `line`:
   - Contains atoms (words, tags, taglinks, …)
-  - Contains headings (`h1`, `h2`, `h3`, `column_heading`) because `codeblock`
-    terminated by "implicit stop" (no terminating `<`) consumes blank lines, so
-    `block` has no way to end.
+  - Contains headings (`h1`, `h2`, `h3`, `column_heading`).
 - `line_li` ("listitem")
   - Lines starting with `-`/`•`/`[0-9].` (_not_ `+`/`*`) are listitems.
   - Use the `prefix` node to detect if the listitem is ordered (numbered) or
@@ -53,6 +51,9 @@ Overview
 - `h2` = "Heading 2": `------` followed by text and optional `*tags*`.
 - `h3` = "Heading 3": UPPERCASE WORDS, followed by optional `*tags*`, followed
   by atoms.
+- `h1`/`h2`/`h3` must be the first line of a `block` (preceded by a blank
+  line), or follow a `codeblock` terminated by "implicit stop" (no terminating
+  `<`). Elsewhere, `------` or `FOO` is plaintext.
 
 ### Tables
 
