@@ -58,8 +58,18 @@ USING A COUNT
 h3 heading with tag
 ================================================================================
 HELLO WORLD        *abc*
+NOT_H3 NOT_H3      *def*
 
 Test
+
+HELLO *def* ~
+
+Text >
+    code
+HELLO *ghi* ~
+
+Text
+HELLO *jkl* ~
 
 
 --------------------------------------------------------------------------------
@@ -70,10 +80,44 @@ Test
       (h3
         (heading)
         (tag
-          (word)))))
+          (word))))
+    (line
+      (word)
+      (word)
+      (tag
+        (word))))
   (block
     (line
-      (word))))
+      (word)))
+  (block
+    (line
+      (h3
+        (heading)
+        (tag
+          (word))
+        (word))))
+  (block
+    (line
+      (word)
+      (codeblock
+        (code
+          (line))))
+    (line
+      (h3
+        (heading)
+        (tag
+          (word))
+        (word))))
+  (block
+    (line
+      (word))
+    (line
+      (column_heading
+        (heading
+          (word)
+          (tag
+            (word)))
+        (delimiter)))))
 
 ================================================================================
 column_heading lowercase
@@ -204,6 +248,9 @@ NOT h3 uppercase heading
 
 ABC not-h3
 
+Not h3 heading:
+FOO
+
 4. 'runtimepath' `/xxx;yyy/baz`.The
    `/foo/bar`-and-`/abc`.
 5. PRODUCT of 3.
@@ -228,6 +275,13 @@ ABC not-h3
   (block
     (line
       (word)
+      (word)))
+  (block
+    (line
+      (word)
+      (word)
+      (word))
+    (line
       (word)))
   (block
     (line_li

@@ -40,7 +40,8 @@ module.exports = grammar({
   name: 'vimdoc',
 
   conflicts: $ => [
-    [$._line_noli, $._column_heading],
+    [$._line_noli, $._line_cb, $._column_heading],
+    [$._line_any, $._line_noli],
     [$._column_heading],
   ],
 
@@ -159,16 +160,32 @@ module.exports = grammar({
     )),
 
     // Text block/paragraph: adjacent lines followed by blank line(s).
-    block: ($) => seq(
-      choice(
-        repeat1($.line),
+    block: ($) => {
+      const lines = choice(
+        repeat1($._line_any),
         repeat1($.line_li),
-        seq(repeat1($.line), repeat1($.line_li)),
-      ),
-      choice(
-        token.immediate('<'),  // Treat codeblock-terminating "<" as whitespace.
-        $._blank),
-      repeat($._blank),
+        seq(repeat1($._line_any), repeat1($.line_li)),
+      );
+      return seq(
+        choice(seq(alias($._line_h, $.line), optional(lines)), lines),
+        choice(
+          token.immediate('<'),  // Treat codeblock-terminating "<" as whitespace.
+          $._blank),
+        repeat($._blank),
+      );
+    },
+    // Heading (h1/h2/h3) starts a block (ie preceded by a blank line), or follows a codeblock (which
+    // consumes blank lines). So "-----" or "FOO" inside a block is plaintext.
+    _line_any: ($) => choice(
+      $.line,
+      seq(alias($._line_cb, $.line), alias($._line_h, $.line)),
+    ),
+    _line_h: ($) => choice(
+      $.h1,
+      $.h2,
+      // Prefer h3 over UPPERCASE line or column_heading (see `conflicts`), like at block start,
+      // e.g. "FOO *tag* ~".
+      prec.dynamic(2, $.h3),
     ),
 
     // Codeblock: preformatted block of lines starting with ">" or ">language" at EOL
@@ -186,9 +203,6 @@ module.exports = grammar({
     _blank: () => field('blank', /\n/),
     line: ($) => choice(
       $.column_heading,
-      $.h1,
-      $.h2,
-      $.h3,
       $._line_noli,
     ),
     // Listitem: consumes prefixed line and all adjacent non-prefixed lines.
@@ -210,12 +224,12 @@ module.exports = grammar({
     // Line content (incl. whitespace) is captured as a single atom.
     line_code: () => choice(/\n/, /[\t ]+[^\n]+\n/),
     _line_noli: ($) => choice(
-      seq(
-        choice($._atom_noli, $._uppercase_words),
-        repeat($._atom),
-        choice($.codeblock, /\n/)
-      ),
-      // Codeblock-only line, also allowed after a listitem line. #118
+      seq(choice($._atom_noli, $._uppercase_words), repeat($._atom), /\n/),
+      $._line_cb,
+    ),
+    // Line ending with a codeblock. Also a codeblock-only line abutting a listitem. #118
+    _line_cb: ($) => seq(
+      optional(seq(choice($._atom_noli, $._uppercase_words), repeat($._atom))),
       $.codeblock,
     ),
 

@@ -114,6 +114,11 @@ Text
 Not-a-heading-4                                                     *heading4*
 Text
 
+Not-a-heading-5 (not the first line of a block)
+==============================================================================
+------------------------------------------------------------------------------
+Text
+
 
 --------------------------------------------------------------------------------|||
 
@@ -167,5 +172,22 @@ Text
       (word)
       (tag
         (word)))
+    (line
+      (word)))
+  (block
+    (line
+      (word)
+      (word)
+      (word)
+      (word)
+      (word)
+      (word)
+      (word)
+      (word)
+      (word))
+    (line
+      (word))
+    (line
+      (word))
     (line
       (word))))
