@@ -108,6 +108,7 @@ end
 Known issues
 ------------
 
+- TODO: `h4` "tag heading" https://github.com/neovim/tree-sitter-vimdoc/issues/110
 - Input must end with newline/EOL (`\n`). Grammar does not support files without EOL.
 - Input must end with a blank line. Though this doesn't seem to matter in practice.
 - Any line starting with `1.` (or other number) is treated as a listitem, even
@@ -124,12 +125,6 @@ Known issues
   [https://example.com](https://example.com)
   ```
 - `column_heading` children should be plaintext, but currently are parsed as `$._atom`.
-
-TODO
-----
-
-- `h4` ("tag heading") : a line containing only tags, or ending with a tag, is
-  a "h4" heading.
 
 Release
 -------
