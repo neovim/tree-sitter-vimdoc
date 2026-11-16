@@ -39,7 +39,7 @@ jobs:
           sparse-checkout: runtime/doc/
 
       - name: Parse corpus
-        uses: tree-sitter/parse-action@v4
+        uses: tree-sitter/parse-action@v5
         with:
           files: |-
             .tests/neovim/runtime/doc/*.txt
